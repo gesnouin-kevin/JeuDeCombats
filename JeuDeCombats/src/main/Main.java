@@ -9,7 +9,8 @@ public class Main {
 	public static void main( String[] args ) throws SlickException
 	{
 		app = new AppGameContainer( new Game() );
-		app.setDisplayMode( 1920, 1080, false );
+		app.setTargetFrameRate(60);
+		app.setDisplayMode( 1366, 768, false );
 		app.start();
 	}
 }
