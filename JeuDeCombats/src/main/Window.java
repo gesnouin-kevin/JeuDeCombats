@@ -11,7 +11,7 @@ import org.newdawn.slick.Animation;
 
 public class Window extends BasicGame  {
 	
-	public static int NB_BACKGROUND = 3;
+	public static int NB_BACKGROUND = 5;
 	public static int NB_FRAMES_BACKGROUND = 8;
 
 	private GameContainer gc;
@@ -30,7 +30,10 @@ public class Window extends BasicGame  {
 	{
 		for(int j=0; j<NB_BACKGROUND; j++){
 			 Animation animation = new Animation();
-			 for(int i=0; i<NB_FRAMES_BACKGROUND;i++){
+			 int nbFrames = NB_BACKGROUND;
+			 if(j==3)
+				 nbFrames = 24;
+			 for(int i=0; i<nbFrames;i++){
 				    animation.addFrame(new SpriteSheet("ressources/background/background"+(j+1)+"frame"+i+".png", 800, 336), 100); 
 			 }
 			 this.animationsBackground[j] = animation;

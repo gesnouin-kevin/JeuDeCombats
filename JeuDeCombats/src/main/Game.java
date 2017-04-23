@@ -10,7 +10,7 @@ public class Game{
 	static private AppGameContainer app;
 	private Window window;
 
-	private int currentBackground = 2;
+	private int currentBackground = 3;
 
 	public Game() {
 		this.window = new Window(this);
