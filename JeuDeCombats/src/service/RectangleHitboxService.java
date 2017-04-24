@@ -27,11 +27,5 @@ public interface RectangleHitboxService extends HitboxService {
 	 */
 	public void init(int x, int y, int w, int h);
 
-	/** Operators */
-	/**
-	* post: getPositionX() == x
-	* post: getPositionY() == y
-	* post: \forall u, v: int x int { belongsTo(u, v) == belongsTo(u-(x-getPositionX()@pre), v-(y-getPositionY()@pre)) }
-	*/
 
 }
