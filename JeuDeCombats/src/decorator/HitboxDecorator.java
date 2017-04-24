@@ -10,6 +10,10 @@ public abstract class HitboxDecorator implements HitboxService {
 		this.delegateHitbox = hs;
 	}
 	
+	protected HitboxService getDelegate() {
+		return delegateHitbox;
+	}
+	
 	@Override
 	public int getPositionX() {
 		return this.delegateHitbox.getPositionX();
