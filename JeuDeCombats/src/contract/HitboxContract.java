@@ -1,5 +1,6 @@
 package contract;
 
+import implementation.HitboxImpl;
 import decorator.HitboxDecorator;
 import error.InvariantError;
 import error.PostConditionError;
@@ -7,34 +8,27 @@ import service.HitboxService;
 
 public class HitboxContract extends HitboxDecorator{
 
-	private HitboxDecorator hs1,hs2;
-
 	public HitboxContract(HitboxService hs) {
 		super(hs);
 	}
 
-
-	/**
-	 * A DEMANDER/MODIF POUR LES LIMITES de i et j
-	 * 
-	 **/
-
 	public void checkInvariant(){
 
-		// \inv : isCollidesWith(H1) == \exist x,y { H.isBelongsTo(x,y) and H1.isBelongsTo(x,y) }
-		int compt=0;
-		for(int i=0; i<1000;i++)
-			for(int j=0;j<1000;j++)
-				if(hs1.isCollidesWith(hs2) == hs1.isBelongsTo(i,j) && hs1.isCollidesWith(hs2) == hs2.isBelongsTo(i,j))
-					compt++;
-		if(compt>0)
-			throw new InvariantError("Error checkInvariant : collidesWith");
-
-		// \inv : isEqualsTo(H1) == \forall x,y { H.isBelongsTo(x,y) == H1.isBelongsTo(x,y) }
-		for(int i=0; i<1000;i++)
-			for(int j=0;j<1000;j++)
-				if(!(hs1.isBelongsTo(i, j)==hs2.isBelongsTo(i, j)))
-					throw new InvariantError("Error checkInvariant : equalsTo");
+		try {
+			HitboxImpl hb1 = (HitboxImpl) this.clone();
+			HitboxImpl hb2 = (HitboxImpl) this.clone();
+			
+			// \inv : isCollidesWith(H1) == \exist x,y { H.isBelongsTo(x,y) and H1.isBelongsTo(x,y) }
+			if(!(hb1.isCollidesWith(hb2) == hb1.isBelongsTo(0,0) && hb1.isCollidesWith(hb2) == hb2.isBelongsTo(0,0)))
+				throw new InvariantError("Error checkInvariant : collidesWith");
+			
+			// \inv : isEqualsTo(H1) == \forall x,y { H.isBelongsTo(x,y) == H1.isBelongsTo(x,y) }
+			if(!(hb1.isBelongsTo(0, 0)==hb2.isBelongsTo(0, 0)))
+				throw new InvariantError("Error checkInvariant : equalsTo");
+			
+			
+			
+		} catch (CloneNotSupportedException e) {e.printStackTrace();}		
 	}
 
 
