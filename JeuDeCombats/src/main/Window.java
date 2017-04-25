@@ -7,59 +7,81 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Animation;
 
-public class Window extends BasicGame  {
+public class Window extends StateBasedGame {
 	
-	public static int NB_BACKGROUND = 5;
-	public static int NB_FRAMES_BACKGROUND = 8;
+
 
 	private GameContainer gc;
 	private Game game;
+	private int windowWidth;
+	private int windowHeight;
+
+	private SpriteSheet cursorSelectCharacter;
+	private SpriteSheet iconCharacter;
+	private SpriteSheet selectionCharacter;
 	
-	private Animation[] animationsBackground;
+	private int numeroCharacterPlayer1;
+	private int numeroCharacterPlayer2;
+	private int currentBackground = 3;
 	
-	public Window(Game game)
+	public Window(Game game, int windowWidth, int windowHeight)
 	{
 		super("GameWindow");
 		this.game = game;
-		this.animationsBackground = new Animation[NB_BACKGROUND];
-	}
-	
-	public void loadImage() throws SlickException
-	{
-		for(int j=0; j<NB_BACKGROUND; j++){
-			 Animation animation = new Animation();
-			 int nbFrames = NB_BACKGROUND;
-			 if(j==3)
-				 nbFrames = 24;
-			 for(int i=0; i<nbFrames;i++){
-				    animation.addFrame(new SpriteSheet("ressources/background/background"+(j+1)+"frame"+i+".png", 800, 336), 100); 
-			 }
-			 this.animationsBackground[j] = animation;
-		}
+		this.windowWidth = windowWidth;
+		this.windowHeight = windowHeight;
 	}
 
 	@Override
-	public void render(GameContainer arg0, Graphics arg1) throws SlickException {
-		this.animationsBackground[this.game.getCurrentBackground()].draw(0,0, 1366, 768);
-		/*g.setColor(new Color(255, 0, 0, 65));
-		g.fillRect(5, 5, 1000, 1000);
-		g.setColor(new Color(0, 255, 0, 65));
-		g.fillRect(500, 500, 1000, 1000);*/
+	public void initStatesList(GameContainer gc) throws SlickException {
+		addState(new Menu(this));
+	    addState(new SelectionCharacter(this));
+	    addState(new Fighting(this));
 	}
 
-	@Override
-	public void init(GameContainer gc) throws SlickException {
-
-		this.gc = gc;
-		loadImage();
-		
+	public SpriteSheet getCursorSelectCharacter() {
+		return cursorSelectCharacter;
 	}
 
-	@Override
-	public void update(GameContainer arg0, int arg1) throws SlickException {
-		
+	public SpriteSheet getIconCharacter() {
+		return iconCharacter;
+	}
+	public SpriteSheet getSelectionCharacter() {
+		return selectionCharacter;
 	}
 
+	public int getWindowWidth() {
+		return windowWidth;
+	}
+
+	public int getWindowHeight() {
+		return windowHeight;
+	}
+
+	public int getNumeroCharacterPlayer1() {
+		return numeroCharacterPlayer1;
+	}
+
+	public void setNumeroCharacterPlayer1(int numeroCharacterPlayer1) {
+		this.numeroCharacterPlayer1 = numeroCharacterPlayer1;
+	}
+
+	public int getNumeroCharacterPlayer2() {
+		return numeroCharacterPlayer2;
+	}
+
+	public void setNumeroCharacterPlayer2(int numeroCharacterPlayer2) {
+		this.numeroCharacterPlayer2 = numeroCharacterPlayer2;
+	}
+
+	public int getCurrentBackground() {
+		return currentBackground;
+	}
+
+	public void setCurrentBackground(int currentBackground) {
+		this.currentBackground = currentBackground;
+	}
 }
