@@ -71,8 +71,10 @@ public class Fighting extends BasicGameState {
 
 		//right bar life
 		g.setColor(new Color(255, 255, 255));
-		g.fillRect(gc.getWidth()/2+(40/2)*scaleX+2, 10*scaleY-2, 502, 13*scaleY);
+		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY-2, 502, 13*scaleY);
 		g.setColor(new Color(255, 0, 0));
+		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, 502, 10*scaleY);
+		g.setColor(new Color(255, 255, 0));
 		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, 502, 10*scaleY);
 
 	}

@@ -1,5 +1,6 @@
 package main;
 
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -11,11 +12,14 @@ import org.newdawn.slick.state.StateBasedGame;
 public class SelectionCharacter extends BasicGameState {
 
 	public static final int ID = 2;
+	public static int NB_BACKGROUND = 5;
 	private StateBasedGame game;
 	private Window window;
 	private SpriteSheet cursorSelectCharacter;
 	private SpriteSheet iconCharacter;
 	private SpriteSheet selectionCharacter;
+	private SpriteSheet[] background;
+	private int currentBackground = 1;
 	
 
 	// numero of character 0 -> 17  -warning- 0 and 5 place for 1P and 2P
@@ -27,6 +31,7 @@ public class SelectionCharacter extends BasicGameState {
 
 	public SelectionCharacter(Window window) {
 		this.window = window;
+		this.background = new SpriteSheet[NB_BACKGROUND];
 	}
 
 	@Override
@@ -35,6 +40,8 @@ public class SelectionCharacter extends BasicGameState {
 		this.cursorSelectCharacter = new SpriteSheet("ressources/menu/cursorSelectCharacter.png", 42, 64);
 		this.iconCharacter = new SpriteSheet("ressources/menu/iconCharacter2.png", 976, 194);
 		this.selectionCharacter = new SpriteSheet("ressources/menu/selectionCharacter.png", 256, 193);
+		for(int i=0; i<NB_BACKGROUND;i++)
+			this.background[i] = new SpriteSheet("ressources/background/background"+(i+1)+"frame0.png", 800, 336);
 	}
 
 	@Override
@@ -93,10 +100,30 @@ public class SelectionCharacter extends BasicGameState {
 		
 		// draw head player2
 		this.iconCharacter.draw(192*scaleX, 14*scaleY , 192*scaleX+61*scaleX, 14*scaleY+97*scaleY, (15-cursor2)*61, 97, (15-cursor2)*61+61, 194);
+	
+	
+		// draw map choice
+		this.background[this.currentBackground].draw(gc.getWidth()/2-(80/2)*scaleX, 135*scaleY, gc.getWidth()/2+(80/2)*scaleX, 135*scaleY+40*scaleY, 0, 0, 800, 336);
 	}
 
 	@Override
 	public void keyPressed(int key, char c) {
+		
+		if(key == Input.KEY_U)
+		{
+			if(this.currentBackground-1>=0)
+				this.currentBackground--;
+			else
+				this.currentBackground = 4;
+		}
+		if(key == Input.KEY_I)
+		{
+			if(this.currentBackground+1<=4)
+				this.currentBackground++;
+			else
+				this.currentBackground = 0;
+		}
+		
 		if(!this.character2Select){
 			if (key == Input.KEY_RIGHT){
 				if((this.cursorPlayer2%6)+1<=5)
@@ -214,8 +241,10 @@ public class SelectionCharacter extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame window, int delta) throws SlickException {
-		if(this.character1Select && this.character2Select)
+		if(this.character1Select && this.character2Select){
+			this.window.setCurrentBackground(this.currentBackground);
 			game.enterState(Fighting.ID);
+		}
 
 	}
 
