@@ -16,6 +16,7 @@ public class SelectionCharacter extends BasicGameState {
 	private SpriteSheet cursorSelectCharacter;
 	private SpriteSheet iconCharacter;
 	private SpriteSheet selectionCharacter;
+	
 
 	// numero of character 0 -> 17  -warning- 0 and 5 place for 1P and 2P
 	private int cursorPlayer1 = 1;

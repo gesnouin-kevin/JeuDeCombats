@@ -19,6 +19,7 @@ public class Game{
 			app = new AppGameContainer(this.window);
 			app.setTargetFrameRate(60);
 			app.setDisplayMode(WINDOW_WIDTH, WINDOW_HEIGHT, false);
+			app.setShowFPS(false);
 			app.start();
 		}
 		catch(Exception e){System.out.println(e);}
