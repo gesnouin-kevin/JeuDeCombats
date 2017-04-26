@@ -282,12 +282,12 @@ public class CharacterContract extends CharacterDecorator {
 				throw new PostConditionError("Error Precondition: step(LEFT) == moveLeft()");
 
 		//post: step(RIGHT) == moveRight()
-		if(c==Commande.LEFT)
+		if(c==Commande.RIGHT)
 			if(!(getPositionX()>positionX_atPre))
 				throw new PostConditionError("Error Precondition: step(RIGHT) == moveRight()");
 
 		//post: step(NEUTRAL) == this
-		if(c==Commande.LEFT)
+		if(c==Commande.NEUTRAL)
 			if(!(getPositionX()==positionX_atPre))
 				throw new PostConditionError("Error Precondition: step(NEUTRAL) == this");
 	}

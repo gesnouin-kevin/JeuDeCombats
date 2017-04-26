@@ -14,7 +14,7 @@ public class CharacterImpl implements CharacterService {
 	private int life;
 	private int speed;
 	private boolean faceRight;
-	private boolean dead = true;
+	private boolean dead;
 	
 	@Override
 	public int getPositionX() {
