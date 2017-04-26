@@ -99,7 +99,7 @@ public class SelectionCharacter extends BasicGameState {
 		this.iconCharacter.draw(8*scaleX, 14*scaleY , 8*scaleX+61*scaleX, 14*scaleY+97*scaleY, cursor1*61, 0, cursor1*61+61, 97);
 		
 		// draw head player2
-		this.iconCharacter.draw(192*scaleX, 14*scaleY , 192*scaleX+61*scaleX, 14*scaleY+97*scaleY, (15-cursor2)*61, 97, (15-cursor2)*61+61, 194);
+		this.iconCharacter.draw(192*scaleX, 14*scaleY , 192*scaleX+61*scaleX, 14*scaleY+97*scaleY, cursor2*61, 97, cursor2*61+61, 194);
 	
 	
 		// draw map choice

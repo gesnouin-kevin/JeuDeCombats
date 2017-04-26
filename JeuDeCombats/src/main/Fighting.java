@@ -56,7 +56,7 @@ public class Fighting extends BasicGameState {
 		// draw head player1
 		this.iconCharacter.draw(5*scaleX, 0, 8*scaleX+61*scaleX, 14*scaleY+97*scaleY, this.window.getNumeroCharacterPlayer1()*61, 0, this.window.getNumeroCharacterPlayer1()*61+61, 97);
 		// draw head player2
-		this.iconCharacter.draw(gc.getWidth()-61*scaleX, 0 , gc.getWidth(), 97*scaleY, (15-this.window.getNumeroCharacterPlayer2())*61, 97, (15-this.window.getNumeroCharacterPlayer2())*61+61, 194);
+		this.iconCharacter.draw(gc.getWidth()-61*scaleX, 0 , gc.getWidth(), 97*scaleY, this.window.getNumeroCharacterPlayer2()*61, 97, this.window.getNumeroCharacterPlayer2()*61+61, 194);
 
 
 		this.iconKO.draw(gc.getWidth()/2-(40/2)*scaleX, 5*scaleY, gc.getWidth()/2+(40/2)*scaleX, 5*scaleY+20*scaleY, 0, 0, 40, 31);
