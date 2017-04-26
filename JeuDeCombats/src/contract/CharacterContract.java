@@ -80,7 +80,7 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 	@Override
-	public void init(int l, int s, boolean f, EngineService e) {
+	public void init(int l, int s, boolean f) {
 
 		// pre: l > 0
 		if (!(l > 0))
@@ -93,7 +93,7 @@ public class CharacterContract extends CharacterDecorator {
 
 		checkInvariant();
 
-		super.init(l, s, f, e);
+		super.init(l, s, f);
 
 		checkInvariant();
 
@@ -109,12 +109,20 @@ public class CharacterContract extends CharacterDecorator {
 		if (!(isFaceRight() == f))
 			throw new PostConditionError("Error PostCondition: isfaceRight() == f");
 
-		// post: getEngine() == e
-		if (!(getEngine() == e))
-			throw new PostConditionError("Error PostCondition: getEngine() == e");
-
 		// post: \exists h: HitboxService { getCharBox() == h }
 
+	}
+
+
+
+	@Override
+	public void init(EngineService es) {
+		checkInvariant();
+		super.init(es);
+		checkInvariant();
+		// post: getEngine() == e
+		if (!(getEngine() == es))
+			throw new PostConditionError("Error PostCondition: getEngine() == e");
 	}
 
 	@Override
@@ -136,7 +144,7 @@ public class CharacterContract extends CharacterDecorator {
 		//		 				=> getPositionX() == getPositionX()@Pre }
 		int compt=0;
 		for (int i = 0; i < 2; i++) {
-			if(getEngine().getChar(i)!= this && getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
+			if(getEngine().getPlayer(i).getCharacter()!= this && getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
 				if(!(getPositionX()==getPositionX_atPre))
 					compt++;
 		}
@@ -148,8 +156,8 @@ public class CharacterContract extends CharacterDecorator {
 		//		 					=> getPositionX() == getPositionX()@Pre - getSpeed() }
 		if(getPositionX_atPre<=getSpeed_atPre)
 			for (int i = 0; i < 2; i++) {
-				if(getEngine().getChar(i)!=this)
-					if(getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
+				if(getEngine().getPlayer(i).getCharacter()!=this)
+					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == getPositionX_atPre - getSpeed()))
 						throw new PostConditionError("Error PostCondition: getPositionX() == getPositionX()@Pre - getSpeed()");
@@ -162,8 +170,8 @@ public class CharacterContract extends CharacterDecorator {
 
 		if(getPositionX_atPre>getSpeed_atPre){
 			for (int i = 0; i < 2; i++) {
-				if(getEngine().getChar(i)!=this)
-					if(getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
+				if(getEngine().getPlayer(i).getCharacter()!=this)
+					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == 0))
 						throw new PostConditionError("Error PostCondition: getPositionX() == 0");
@@ -198,7 +206,7 @@ public class CharacterContract extends CharacterDecorator {
 		//		 				=> getPositionX() == getPositionX()@Pre }
 		int compt=0;
 		for (int i = 0; i < 2; i++) {
-			if(getEngine().getChar(i)!= this && getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
+			if(getEngine().getPlayer(i).getCharacter()!= this && getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
 				if(!(getPositionX()==getPositionX_atPre))
 					compt++;
 		}
@@ -210,8 +218,8 @@ public class CharacterContract extends CharacterDecorator {
 		//		 					=> getPositionX() == getPositionX()@Pre + getSpeed() }
 		if(getPositionX_atPre<=getSpeed_atPre)
 			for (int i = 0; i < 2; i++) {
-				if(getEngine().getChar(i)!=this)
-					if(getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
+				if(getEngine().getPlayer(i).getCharacter()!=this)
+					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == getPositionX_atPre + getSpeed()))
 						throw new PostConditionError("Error PostCondition: getPositionX() == getPositionX()@Pre - getSpeed()");
@@ -224,8 +232,8 @@ public class CharacterContract extends CharacterDecorator {
 
 		if(getPositionX_atPre>getSpeed_atPre){
 			for (int i = 0; i < 2; i++) {
-				if(getEngine().getChar(i)!=this)
-					if(getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
+				if(getEngine().getPlayer(i).getCharacter()!=this)
+					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == 0))
 						throw new PostConditionError("Error PostCondition: getPositionX() == 0");
@@ -342,6 +350,7 @@ public class CharacterContract extends CharacterDecorator {
 		if (!(isFaceRight() == fr))
 			throw new PostConditionError("Error PostCondition: isFaceRight() == fr");
 	}
+
 
 
 }

@@ -14,7 +14,7 @@ public class CharacterImplBug implements CharacterService {
 	private int life;
 	private int speed;
 	private boolean faceRight;
-	private boolean dead = true;
+	private boolean dead;
 	
 	@Override
 	public int getPositionX() {
@@ -58,12 +58,11 @@ public class CharacterImplBug implements CharacterService {
 	
 	//modif dead
 	@Override
-	public void init(int l, int s, boolean f, EngineService e) {
+	public void init(int l, int s, boolean f) {
 		this.life = l;
-		this.dead = true;
+		this.dead = false;
 		this.speed = s;
 		this.faceRight = f;
-		this.engine = e;
 	}
 
 	@Override
@@ -76,32 +75,33 @@ public class CharacterImplBug implements CharacterService {
 		this.positionX+=this.positionX+speed;
 	}
 
-	//modif
 	@Override
 	public void switchSide() {
-		this.faceRight = this.faceRight;
+		this.faceRight = !this.faceRight;
 	}
 	
 	//modif
 	@Override
 	public void step(Commande c) {
-		// TODO Auto-generated method stub
 		
 	}
 	
-	//modif
 	public void setPositionX(int x){
-		this.positionX=-x;
+		this.positionX=x;
 	}
 	
-	//modif
 	public void setPositionY(int y){
-		this.positionY=-y;
+		this.positionY=y;
 	}
 	
-	//modif
 	public void setFaceRight(boolean fr){
-		this.faceRight=!fr;
+		this.faceRight=fr;
+	}
+	
+	@Override
+	public void init(EngineService es) {
+		this.engine = es;
+		
 	}
 
 }

@@ -32,7 +32,7 @@ public class Window extends StateBasedGame {
 
 	@Override
 	public void initStatesList(GameContainer gc) throws SlickException {
-		addState(new Menu(this));
+		addState(new Menu());
 	    addState(new SelectionCharacter(this));
 	    addState(new Fighting(this));
 	}
@@ -78,5 +78,9 @@ public class Window extends StateBasedGame {
 
 	public void setCurrentBackground(int currentBackground) {
 		this.currentBackground = currentBackground;
+	}
+	
+	public Game getGame() {
+		return this.game;
 	}
 }

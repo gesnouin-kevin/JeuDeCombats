@@ -24,11 +24,6 @@ public class EngineImpl implements EngineService{
 	}
 
 	@Override
-	public CharacterService getChar(int i) {
-		return this.character[i];
-	}
-
-	@Override
 	public PlayerService getPlayer(int i) {
 		return this.player[i];
 	}

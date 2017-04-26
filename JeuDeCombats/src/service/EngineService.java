@@ -6,7 +6,6 @@ public interface EngineService {
 
 	public int getHeight();
 	public int getWidth();
-	public CharacterService getChar(int i);
 	public PlayerService getPlayer(int i);
 	public boolean isGameOver();
 

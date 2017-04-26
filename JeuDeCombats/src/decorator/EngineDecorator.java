@@ -1,6 +1,5 @@
 package decorator;
 
-import service.CharacterService;
 import service.Commande;
 import service.EngineService;
 import service.PlayerService;
@@ -21,11 +20,6 @@ public abstract class EngineDecorator implements EngineService {
 	@Override
 	public int getWidth() {
 		return this.delegateEnfine.getWidth();
-	}
-
-	@Override
-	public CharacterService getChar(int i) {
-		return this.delegateEnfine.getChar(i);
 	}
 
 	@Override

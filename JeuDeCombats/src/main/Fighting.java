@@ -4,6 +4,7 @@ import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
@@ -20,6 +21,7 @@ public class Fighting extends BasicGameState {
 	private Animation[] animationsBackground;
 	private SpriteSheet iconCharacter;
 	private SpriteSheet iconKO;
+	private boolean modeDebug;
 
 	public Fighting(Window window) {
 		this.window = window;
@@ -30,6 +32,7 @@ public class Fighting extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
 		this.game = game;
+		this.modeDebug = false;
 
 		//load background images
 		for(int j=0; j<NB_BACKGROUND; j++){
@@ -77,10 +80,19 @@ public class Fighting extends BasicGameState {
 		g.setColor(new Color(255, 255, 0));
 		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, 502, 10*scaleY);
 
+		if(this.modeDebug)
+		{
+			g.drawString("Vie du joueur 1: "+this.window.getGame().getEngine().getPlayer(0).getCharacter().getLife(), 0, gc.getHeight()-40);
+			g.drawString("Vie du joueur 2: "+this.window.getGame().getEngine().getPlayer(1).getCharacter().getLife(), 0, gc.getHeight()-20);
+			g.drawString("Position du joueur 1: X: "+this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionX()+" Y: "+this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionY(), 0, gc.getHeight()-80);
+			g.drawString("Position du joueur 2: X: "+this.window.getGame().getEngine().getPlayer(1).getCharacter().getPositionX()+" Y: "+this.window.getGame().getEngine().getPlayer(1).getCharacter().getPositionY(), 0, gc.getHeight()-60);
+		}
 	}
 
 	@Override
 	public void keyReleased(int key, char c) {
+		if(key == Input.KEY_P)
+			this.modeDebug = !this.modeDebug;
 	}
 
 	@Override

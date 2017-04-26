@@ -57,12 +57,11 @@ public class CharacterImpl implements CharacterService {
 	}
 
 	@Override
-	public void init(int l, int s, boolean f, EngineService e) {
+	public void init(int l, int s, boolean f) {
 		this.life = l;
 		this.dead = false;
 		this.speed = s;
 		this.faceRight = f;
-		this.engine = e;
 	}
 
 	@Override
@@ -108,6 +107,12 @@ public class CharacterImpl implements CharacterService {
 	
 	public void setFaceRight(boolean fr){
 		this.faceRight=fr;
+	}
+
+	@Override
+	public void init(EngineService es) {
+		this.engine = es;
+		
 	}
 
 }

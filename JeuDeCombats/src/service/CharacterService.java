@@ -30,7 +30,9 @@ public interface CharacterService {
 	  * post: getEngine() = e
 	  * post: \exist h :HitboxService { getCharbox() = h }
 	  */
-	public void init(int l, int s, boolean f, EngineService e);
+	public void init(int l, int s, boolean f);
+	
+	public void init(EngineService es);
 	
 	
 	/** Operators */

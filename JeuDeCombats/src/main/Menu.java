@@ -12,11 +12,9 @@ public class Menu extends BasicGameState {
 	public static final int ID = 1;
 
 	private StateBasedGame game;
-	private Window window;
 	private SpriteSheet titleMenu;
 
-	public Menu(Window window) {
-		this.window = window;
+	public Menu() {
 	}
 
 	@Override

@@ -54,8 +54,13 @@ public abstract class CharacterDecorator implements CharacterService {
 	}
 
 	@Override
-	public void init(int l, int s, boolean f, EngineService e) {
-		this.delegateCharacter.init(l, s, f, e);		
+	public void init(int l, int s, boolean f) {
+		this.delegateCharacter.init(l, s, f);		
+	}
+	
+	@Override
+	public void init(EngineService es) {
+		this.delegateCharacter.init(es);		
 	}
 
 	@Override

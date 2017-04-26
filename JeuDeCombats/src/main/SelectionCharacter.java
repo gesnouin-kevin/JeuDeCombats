@@ -1,6 +1,5 @@
 package main;
 
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -9,10 +8,13 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import personnages.Personnage;
+
 public class SelectionCharacter extends BasicGameState {
 
 	public static final int ID = 2;
 	public static int NB_BACKGROUND = 5;
+	public Personnage infosPerso = new Personnage();
 	private StateBasedGame game;
 	private Window window;
 	private SpriteSheet cursorSelectCharacter;
@@ -104,6 +106,15 @@ public class SelectionCharacter extends BasicGameState {
 	
 		// draw map choice
 		this.background[this.currentBackground].draw(gc.getWidth()/2-(80/2)*scaleX, 135*scaleY, gc.getWidth()/2+(80/2)*scaleX, 135*scaleY+40*scaleY, 0, 0, 800, 336);
+	
+		//draw keys help
+		g.drawString("-- Player 1 --", 130, gc.getHeight()-300);
+		g.drawString("Q, Z, S and D for move cursor  --> E for lock", 20, gc.getHeight()-280);
+		g.drawString("-- Player 2 --", gc.getWidth()-320, gc.getHeight()-300);
+		g.drawString("Arrow keys for move cursor  --> Enter for lock", gc.getWidth() -450, gc.getHeight()-280);
+		
+		g.drawString("-- U and I for switch Arena --", gc.getWidth()/2-100, gc.getHeight()-50);
+	
 	}
 
 	@Override
@@ -243,6 +254,10 @@ public class SelectionCharacter extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame window, int delta) throws SlickException {
 		if(this.character1Select && this.character2Select){
 			this.window.setCurrentBackground(this.currentBackground);
+			this.window.getGame().getEngine().getPlayer(0).getCharacter().init(infosPerso.getLife(this.cursorPlayer1), 
+					infosPerso.getSpeed(this.cursorPlayer1), true);
+			this.window.getGame().getEngine().getPlayer(1).getCharacter().init(infosPerso.getLife(this.cursorPlayer2), 
+					infosPerso.getSpeed(this.cursorPlayer2), false);
 			game.enterState(Fighting.ID);
 		}
 
