@@ -15,10 +15,6 @@ public class EngineContract extends EngineDecorator{
 		super(es);
 	}
 
-	/**
-	 * A demander w//2 etc ...
-	 * */
-	
 	public void checkInvariant(){
 		//inv:  isGameOver() == \exist i in {1,2} Character::getChar(i).isDead()
 		if(!(isGameOver()== getChar(1).isDead() || isGameOver()== getChar(2).isDead()))
@@ -92,11 +88,11 @@ public class EngineContract extends EngineDecorator{
 			throw new PostConditionError("Error PostCondition : getPlayer(2)");
 		
 		// post: Character::getPositionX(), char(1).getPositionX() == w//2 - s//2
-		if(!(getChar(1).getPositionX()== w/2 - s/2))
+		if(!(getChar(1).getPositionX()== (int) w/2 - (int) s/2))
 			throw new PostConditionError("Error PostCondition: getChar(1).getPositionX()== w/2 - s/2");
 		
 		// post: Character::getPositionX(), char(2).getPositionX() == w//2 + s//2
-		if(!(getChar(2).getPositionX()== w/2 + s/2))
+		if(!(getChar(2).getPositionX()== (int) w/2 + (int) s/2))
 			throw new PostConditionError("Error PostCondition: getChar(2).getPositionX()== w/2 + s/2");
 		
 		// post: Character::getPositionY(), char(1).getPositionY() == 0

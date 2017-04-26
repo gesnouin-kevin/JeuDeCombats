@@ -4,6 +4,7 @@ import decorator.CharacterDecorator;
 import error.InvariantError;
 import error.PostConditionError;
 import error.PreConditionError;
+import implementation.CharacterImpl;
 import service.CharacterService;
 import service.Commande;
 import service.EngineService;
@@ -15,10 +16,6 @@ public class CharacterContract extends CharacterDecorator {
 		super(cs);
 	}
 
-	/**
-	 * A completer init le dernier post
-	 * step
-	 */
 
 	public void checkInvariant() {
 
@@ -149,7 +146,7 @@ public class CharacterContract extends CharacterDecorator {
 		//post: getPositionX()<=getSpeed() and
 		//		 		\forall i { getEngine().getChar(i)!=this => not getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()@Pre)
 		//		 					=> getPositionX() == getPositionX()@Pre - getSpeed() }
-		if(getPositionX()<=getSpeed())
+		if(getPositionX_atPre<=getSpeed_atPre)
 			for (int i = 0; i < 2; i++) {
 				if(getEngine().getChar(i)!=this)
 					if(getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
@@ -163,7 +160,7 @@ public class CharacterContract extends CharacterDecorator {
 		//		 		\forall i { getEngine().getChar(i)!=this => not getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()@Pre)
 		//		 				=> getPositionX() == 0 }
 
-		if(getPositionX()>getSpeed()){
+		if(getPositionX_atPre>getSpeed_atPre){
 			for (int i = 0; i < 2; i++) {
 				if(getEngine().getChar(i)!=this)
 					if(getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
@@ -211,7 +208,7 @@ public class CharacterContract extends CharacterDecorator {
 		//post: getPositionX()<=getSpeed() and
 		//		 		\forall i { getEngine().getChar(i)!=this => not getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()@Pre)
 		//		 					=> getPositionX() == getPositionX()@Pre + getSpeed() }
-		if(getPositionX()<=getSpeed())
+		if(getPositionX_atPre<=getSpeed_atPre)
 			for (int i = 0; i < 2; i++) {
 				if(getEngine().getChar(i)!=this)
 					if(getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
@@ -225,7 +222,7 @@ public class CharacterContract extends CharacterDecorator {
 		//		 		\forall i { getEngine().getChar(i)!=this => not getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()@Pre)
 		//		 				=> getPositionX() == 0 }
 
-		if(getPositionX()>getSpeed()){
+		if(getPositionX_atPre>getSpeed_atPre){
 			for (int i = 0; i < 2; i++) {
 				if(getEngine().getChar(i)!=this)
 					if(getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()))
@@ -268,6 +265,7 @@ public class CharacterContract extends CharacterDecorator {
 	@Override
 	public void step(Commande c) {
 
+		int positionX_atPre = getPositionX();
 		// pre: !isDead()
 		if (!(!isDead()))
 			throw new PreConditionError("Error Precondition: !isDead()");
@@ -279,11 +277,19 @@ public class CharacterContract extends CharacterDecorator {
 		checkInvariant();
 
 		//post: step(LEFT) == moveLeft()
-
+		if(c==Commande.LEFT)
+			if(!(getPositionX()<positionX_atPre))
+				throw new PostConditionError("Error Precondition: step(LEFT) == moveLeft()");
 
 		//post: step(RIGHT) == moveRight()
+		if(c==Commande.LEFT)
+			if(!(getPositionX()>positionX_atPre))
+				throw new PostConditionError("Error Precondition: step(RIGHT) == moveRight()");
 
 		//post: step(NEUTRAL) == this
+		if(c==Commande.LEFT)
+			if(!(getPositionX()==positionX_atPre))
+				throw new PostConditionError("Error Precondition: step(NEUTRAL) == this");
 	}
 
 	@Override

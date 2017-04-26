@@ -42,8 +42,8 @@ public class HitboxImpl implements HitboxService {
 
 	@Override
 	public void moveTo(int x, int y) {
-		this.positionX+=x;
-		this.positionY+=y;
+		this.positionX=x;
+		this.positionY=y;
 	}
 
 }

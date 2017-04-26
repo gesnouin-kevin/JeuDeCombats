@@ -82,7 +82,19 @@ public class CharacterImpl implements CharacterService {
 
 	@Override
 	public void step(Commande c) {
-		// TODO Auto-generated method stub
+
+		switch (c) {
+		case LEFT:
+				this.moveLeft();
+			break;
+		case RIGHT:
+			    this.moveRight();
+			break;
+		case NEUTRAL:
+			//do nothing
+			break;
+		}
+		
 		
 	}
 	
