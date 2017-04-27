@@ -105,6 +105,15 @@ public class HitboxContract extends HitboxDecorator{
 		// TODO Auto-generated method stub
 		return super.isCollidesWith(hs);
 	}
+
+	public void setPosX(int posX) {
+		super.setPosX(posX);
+	}
+
+	public void setPosY(int posY) {
+		super.setPosY(posY);
+		
+	}
 	
 	
 }

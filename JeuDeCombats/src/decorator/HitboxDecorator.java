@@ -48,4 +48,13 @@ public abstract class HitboxDecorator implements HitboxService {
 	public boolean isCollidesWith(HitboxService hs) {
 		return this.delegateHitbox.isCollidesWith(hs);
 	}
+
+	public void setPosX(int posX) {
+		this.delegateHitbox.setPosX(posX);
+		
+	}
+
+	public void setPosY(int posY) {
+		this.delegateHitbox.setPosY(posY);
+	}
 }

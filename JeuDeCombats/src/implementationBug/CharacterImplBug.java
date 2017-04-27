@@ -4,17 +4,19 @@ import service.CharacterService;
 import service.Commande;
 import service.EngineService;
 import service.HitboxService;
+import service.RectangleHitboxService;
 
 public class CharacterImplBug implements CharacterService {
 
 	private int positionX;
 	private int positionY;
 	private EngineService engine;
-	private HitboxService charBox;
+	private RectangleHitboxService charBox;
 	private int life;
 	private int speed;
 	private boolean faceRight;
 	private boolean dead;
+	private int numeroPlayer;
 	
 	@Override
 	public int getPositionX() {
@@ -32,7 +34,7 @@ public class CharacterImplBug implements CharacterService {
 	}
 
 	@Override
-	public HitboxService getCharBox() {
+	public RectangleHitboxService getCharBox() {
 		return this.charBox;
 	}
 
@@ -54,15 +56,6 @@ public class CharacterImplBug implements CharacterService {
 	@Override
 	public boolean isDead() {
 		return this.dead;
-	}
-	
-	//modif dead
-	@Override
-	public void init(int l, int s, boolean f) {
-		this.life = l;
-		this.dead = false;
-		this.speed = s;
-		this.faceRight = f;
 	}
 
 	@Override
@@ -102,6 +95,40 @@ public class CharacterImplBug implements CharacterService {
 	public void init(EngineService es) {
 		this.engine = es;
 		
+	}
+
+	@Override
+	public void init(int l, int s, boolean f, int numeroPlayer) {
+		this.life = l;
+		this.dead = false;
+		this.speed = s;
+		this.faceRight = f;
+		this.numeroPlayer = numeroPlayer;
+		
+	}
+
+	@Override
+	public int getNumeroPlayer() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setNumeroPlayer(int numeroPlayer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public RectangleHitboxService getRectangleHitboxService() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

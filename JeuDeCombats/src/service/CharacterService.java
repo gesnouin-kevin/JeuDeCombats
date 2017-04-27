@@ -7,7 +7,7 @@ public interface CharacterService {
 	public int getPositionX();
 	public int getPositionY();
 	public EngineService getEngine();
-	public HitboxService getCharBox();
+	public RectangleHitboxService getCharBox();
 	public int getLife();
 	public int getSpeed();
 	public boolean isFaceRight();
@@ -30,7 +30,7 @@ public interface CharacterService {
 	  * post: getEngine() = e
 	  * post: \exist h :HitboxService { getCharbox() = h }
 	  */
-	public void init(int l, int s, boolean f);
+	public void init(int l, int s, boolean f, int numeroPlayer);
 	
 	public void init(EngineService es);
 	
@@ -110,4 +110,12 @@ public interface CharacterService {
 	 */
 	public void setFaceRight(boolean fr);
 	
+	
+	public int getNumeroPlayer() ;
+
+	public void setNumeroPlayer(int numeroPlayer);
+	
+	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox);
+	
+	public RectangleHitboxService getRectangleHitboxService();
 }

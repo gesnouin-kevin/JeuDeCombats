@@ -29,6 +29,11 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 	public boolean isEqualsTo(RectangleHitboxService rhs) {
 		return rhs.getPositionX() == getPositionX() && rhs.getPositionY() == getPositionY() && rhs.getHeight() == height && rhs.getWidth() == width;
 	}
+	
+	public void init(int w, int h){
+		this.width = w;
+		this.height = h;
+	}
 
 	@Override
 	public void init(int x, int y, int w, int h) {
@@ -41,6 +46,16 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 	@Override
 	public boolean isBelongsTo(int x, int y) {
 		return y >= getPositionY() && y <= getPositionY() + height && x >= getPositionX() - width / 2 && x <= getPositionX() + width / 2;
+	}
+
+	@Override
+	public int getPosX() {
+		return this.getPositionX();
+	}
+
+	@Override
+	public int getPosY() {
+		return this.getPositionY();
 	}
 	
 	

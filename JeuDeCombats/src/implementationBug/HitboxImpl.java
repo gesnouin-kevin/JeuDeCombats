@@ -46,4 +46,15 @@ public class HitboxImpl implements HitboxService {
 		this.positionY+=y;
 	}
 
+	@Override
+	public void setPosX(int posX) {
+		this.positionX = posX;
+		
+	}
+
+	@Override
+	public void setPosY(int posY) {
+		this.positionY = posY;
+	}
+
 }

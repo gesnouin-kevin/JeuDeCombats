@@ -4,6 +4,7 @@ import service.CharacterService;
 import service.Commande;
 import service.EngineService;
 import service.HitboxService;
+import service.RectangleHitboxService;
 
 public abstract class CharacterDecorator implements CharacterService {
 
@@ -29,7 +30,7 @@ public abstract class CharacterDecorator implements CharacterService {
 	}
 
 	@Override
-	public HitboxService getCharBox() {
+	public RectangleHitboxService getCharBox() {
 		return this.delegateCharacter.getCharBox();
 	}
 
@@ -54,8 +55,8 @@ public abstract class CharacterDecorator implements CharacterService {
 	}
 
 	@Override
-	public void init(int l, int s, boolean f) {
-		this.delegateCharacter.init(l, s, f);		
+	public void init(int l, int s, boolean f, int numeroPlayer) {
+		this.delegateCharacter.init(l, s, f, numeroPlayer);		
 	}
 	
 	@Override

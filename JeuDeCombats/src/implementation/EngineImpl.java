@@ -46,6 +46,14 @@ public class EngineImpl implements EngineService{
 		this.player[1].getCharacter().setPositionY(0);
 		this.player[0].getCharacter().setFaceRight(true);
 		this.player[1].getCharacter().setFaceRight(false);
+		
+		this.player[0].getCharacter().setRectangleHitboxService(new RectangleHitboxImpl());
+		this.player[1].getCharacter().setRectangleHitboxService(new RectangleHitboxImpl());
+		
+		this.player[0].getCharacter().getCharBox().setPosX(w/2 - s/2);
+		this.player[1].getCharacter().getCharBox().setPosX(w/2 + s/2);
+		this.player[0].getCharacter().getCharBox().setPosY(0);
+		this.player[1].getCharacter().getCharBox().setPosY(0);
 	}
 
 	@Override

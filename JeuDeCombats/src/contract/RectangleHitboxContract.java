@@ -85,6 +85,26 @@ public class RectangleHitboxContract extends HitboxContract implements Rectangle
 		    throw new PostConditionError("Error PostConditions : getHeight()");
 	}
 
+	@Override
+	public int getPosX() {
+		return super.getPositionX();
+	}
+
+	@Override
+	public void setPosX(int posX) {
+		super.setPosX(posX);
+	}
+
+	@Override
+	public int getPosY() {
+		return super.getPositionY();
+	}
+
+	@Override
+	public void setPosY(int posY) {
+		super.setPosY(posY);
+	}
+
 	
 
 }

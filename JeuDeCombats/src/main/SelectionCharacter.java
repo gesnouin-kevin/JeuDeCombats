@@ -8,13 +8,12 @@ import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import personnages.Personnage;
+import personnages.InformationsCharacter;
 
 public class SelectionCharacter extends BasicGameState {
 
 	public static final int ID = 2;
 	public static int NB_BACKGROUND = 5;
-	public Personnage infosPerso = new Personnage();
 	private StateBasedGame game;
 	private Window window;
 	private SpriteSheet cursorSelectCharacter;
@@ -253,11 +252,24 @@ public class SelectionCharacter extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame window, int delta) throws SlickException {
 		if(this.character1Select && this.character2Select){
+			int numPlayer1 = this.window.getNumeroCharacterPlayer1();
+			int numPlayer2 = this.window.getNumeroCharacterPlayer2();
+			
 			this.window.setCurrentBackground(this.currentBackground);
-			this.window.getGame().getEngine().getPlayer(0).getCharacter().init(infosPerso.getLife(this.cursorPlayer1), 
-					infosPerso.getSpeed(this.cursorPlayer1), true);
-			this.window.getGame().getEngine().getPlayer(1).getCharacter().init(infosPerso.getLife(this.cursorPlayer2), 
-					infosPerso.getSpeed(this.cursorPlayer2), false);
+			this.window.getGame().getEngine().getPlayer(0).getCharacter().init(InformationsCharacter.getLife(numPlayer1), 
+					InformationsCharacter.getSpeed(numPlayer1), true, numPlayer1);
+			this.window.getGame().getEngine().getPlayer(1).getCharacter().init(InformationsCharacter.getLife(numPlayer2), 
+					InformationsCharacter.getSpeed(numPlayer2), false, numPlayer2);
+
+			
+			this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().init(
+					InformationsCharacter.getWidthSpritePersoIdle(numPlayer1),
+					InformationsCharacter.getHeightSpritePersoIdle(numPlayer1));
+			
+			this.window.getGame().getEngine().getPlayer(1).getCharacter().getCharBox().init(
+					InformationsCharacter.getWidthSpritePersoIdle(numPlayer2),
+					InformationsCharacter.getHeightSpritePersoIdle(numPlayer2));
+			
 			game.enterState(Fighting.ID);
 		}
 

@@ -26,6 +26,8 @@ public interface RectangleHitboxService extends HitboxService {
 	 * post: getHeight() == h
 	 */
 	public void init(int x, int y, int w, int h);
+	
+	public void init(int w, int h);
 
 	/** Operators */
 	/**
@@ -33,5 +35,14 @@ public interface RectangleHitboxService extends HitboxService {
 	* post: getPositionY() == y
 	* post: \forall u, v: int x int { belongsTo(u, v) == belongsTo(u-(x-getPositionX()@pre), v-(y-getPositionY()@pre)) }
 	*/
+	
+	public int getPosX();
+	
+	public void setPosX(int posX);
+	
+	public int getPosY();
+	
+	public void setPosY(int posY);
+	
 
 }

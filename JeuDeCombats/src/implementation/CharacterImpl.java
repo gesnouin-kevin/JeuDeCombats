@@ -4,17 +4,19 @@ import service.CharacterService;
 import service.Commande;
 import service.EngineService;
 import service.HitboxService;
+import service.RectangleHitboxService;
 
 public class CharacterImpl implements CharacterService {
 
 	private int positionX;
 	private int positionY;
 	private EngineService engine;
-	private HitboxService charBox;
+	private RectangleHitboxService rectangleHitbox;
 	private int life;
 	private int speed;
 	private boolean faceRight;
 	private boolean dead;
+	private int numeroPlayer;
 	
 	@Override
 	public int getPositionX() {
@@ -32,8 +34,8 @@ public class CharacterImpl implements CharacterService {
 	}
 
 	@Override
-	public HitboxService getCharBox() {
-		return this.charBox;
+	public RectangleHitboxService getCharBox() {
+		return this.rectangleHitbox;
 	}
 
 	@Override
@@ -54,14 +56,6 @@ public class CharacterImpl implements CharacterService {
 	@Override
 	public boolean isDead() {
 		return this.dead;
-	}
-
-	@Override
-	public void init(int l, int s, boolean f) {
-		this.life = l;
-		this.dead = false;
-		this.speed = s;
-		this.faceRight = f;
 	}
 
 	@Override
@@ -113,6 +107,33 @@ public class CharacterImpl implements CharacterService {
 	public void init(EngineService es) {
 		this.engine = es;
 		
+	}
+
+	@Override
+	public void init(int l, int s, boolean f, int numeroPlayer) {
+		this.life = l;
+		this.dead = false;
+		this.speed = s;
+		this.faceRight = f;
+		this.numeroPlayer = numeroPlayer;
+	}
+
+	public int getNumeroPlayer() {
+		return numeroPlayer;
+	}
+
+	public void setNumeroPlayer(int numeroPlayer) {
+		this.numeroPlayer = numeroPlayer;
+	}
+	
+	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox)
+	{
+		this.rectangleHitbox = rectangleHitbox;
+	}
+	
+	public RectangleHitboxService getRectangleHitboxService()
+	{
+		return this.rectangleHitbox;
 	}
 
 }

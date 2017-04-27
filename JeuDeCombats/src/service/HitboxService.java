@@ -24,4 +24,6 @@ public interface HitboxService {
 	// \post : moveTo(x,y).getPositionY() == y
 	// \post : \forall u,v { moveTo(x,y).isBelongsTo(u,v) == isBelongsTo(u-(x-getPositionX()),v-(y-getPositionY(H)) }
 	public void moveTo(int x, int y);
+	public void setPosX(int posX);
+	public void setPosY(int posY);
 }

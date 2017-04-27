@@ -9,6 +9,7 @@ import service.CharacterService;
 import service.Commande;
 import service.EngineService;
 import service.HitboxService;
+import service.RectangleHitboxService;
 
 public class CharacterContract extends CharacterDecorator {
 
@@ -56,7 +57,7 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 	@Override
-	public HitboxService getCharBox() {
+	public RectangleHitboxService getCharBox() {
 		// TODO Auto-generated method stub
 		return super.getCharBox();
 	}
@@ -78,42 +79,6 @@ public class CharacterContract extends CharacterDecorator {
 		// TODO Auto-generated method stub
 		return super.isDead();
 	}
-
-	@Override
-	public void init(int l, int s, boolean f) {
-
-		// pre: l > 0
-		if (!(l > 0))
-			throw new PreConditionError("Error PreCondition : l>0");
-
-		// pre: s > 0
-		if (!(s > 0))
-			throw new PreConditionError("Error PreCondition : s>0");
-
-
-		checkInvariant();
-
-		super.init(l, s, f);
-
-		checkInvariant();
-
-		// post: getLife() == l
-		if (!(getLife() == l))
-			throw new PostConditionError("Error PostCondition: getLife() == l");
-
-		// post: getSpeed() == s
-		if (!(getSpeed() == s))
-			throw new PostConditionError("Error PostCondition: getSpeed() == s");
-
-		// post: isfaceRight() == f
-		if (!(isFaceRight() == f))
-			throw new PostConditionError("Error PostCondition: isfaceRight() == f");
-
-		// post: \exists h: HitboxService { getCharBox() == h }
-
-	}
-
-
 
 	@Override
 	public void init(EngineService es) {
@@ -352,5 +317,64 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 
+	@Override
+	public void init(int l, int s, boolean f, int numeroPlayer) {
 
+		// pre: l > 0
+		if (!(l > 0))
+			throw new PreConditionError("Error PreCondition : l>0");
+
+		// pre: s > 0
+		if (!(s > 0))
+			throw new PreConditionError("Error PreCondition : s>0");
+
+
+		checkInvariant();
+
+		super.init(l, s, f, numeroPlayer);
+
+		checkInvariant();
+
+		// post: getLife() == l
+		if (!(getLife() == l))
+			throw new PostConditionError("Error PostCondition: getLife() == l");
+
+		// post: getSpeed() == s
+		if (!(getSpeed() == s))
+			throw new PostConditionError("Error PostCondition: getSpeed() == s");
+
+		// post: isfaceRight() == f
+		if (!(isFaceRight() == f))
+			throw new PostConditionError("Error PostCondition: isfaceRight() == f");
+
+		// post: \exists h: HitboxService { getCharBox() == h }
+	}
+
+
+	@Override
+	public int getNumeroPlayer() {
+		// TODO Auto-generated method stub
+		return super.getPositionX();
+	}
+
+
+	@Override
+	public void setNumeroPlayer(int numeroPlayer) {
+		// TODO Auto-generated method stub
+		this.setNumeroPlayer(numeroPlayer);
+	}
+
+
+	@Override
+	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox) {
+		this.setRectangleHitboxService(rectangleHitbox);
+		
+	}
+
+
+	@Override
+	public RectangleHitboxService getRectangleHitboxService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
