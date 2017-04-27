@@ -2,6 +2,7 @@ package contract;
 
 import decorator.PlayerDecorator;
 import implementation.CharacterImpl;
+import service.EngineService;
 import service.PlayerService;
 
 public class PlayerContrat extends PlayerDecorator{
@@ -10,7 +11,7 @@ public class PlayerContrat extends PlayerDecorator{
 		super(ps);
 	}
 
-	public void init(CharacterImpl cs, int numeroPlayer) {
-		super.init(cs, numeroPlayer);
+	public void init(EngineService es, int numeroPlayer) {
+		super.init(es, numeroPlayer);
 	}
 }

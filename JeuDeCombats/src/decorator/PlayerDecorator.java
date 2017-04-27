@@ -1,6 +1,7 @@
 package decorator;
 
 import service.CharacterService;
+import service.EngineService;
 import service.PlayerService;
 
 public abstract class PlayerDecorator implements PlayerService{
@@ -22,8 +23,8 @@ public abstract class PlayerDecorator implements PlayerService{
 	}
 
 	@Override
-	public void init(CharacterService cs, int numero) {
-		this.delegateService.init(cs, numero);
+	public void init(EngineService es, int numero) {
+		this.delegateService.init(es, numero);
 	}
 	
 	

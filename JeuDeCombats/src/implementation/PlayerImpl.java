@@ -1,6 +1,7 @@
 package implementation;
 
 import service.CharacterService;
+import service.EngineService;
 import service.PlayerService;
 
 public class PlayerImpl implements PlayerService {
@@ -9,8 +10,9 @@ public class PlayerImpl implements PlayerService {
 	private int numeroPlayer;
 
 	@Override
-	public void init(CharacterService cs, int numeroPlayer) {
-		this.character = cs;
+	public void init(EngineService es,int numeroPlayer) {
+		this.character = new CharacterImpl();
+		this.character.init(es);
 		this.numeroPlayer = numeroPlayer;
 	}
 

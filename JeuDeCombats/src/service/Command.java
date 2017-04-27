@@ -15,5 +15,6 @@ public enum Command {
 	KICK,
 	BLOCK,
 	
-	NEUTRAL
+	NEUTRAL,
+	OTHERPLAYER
 }

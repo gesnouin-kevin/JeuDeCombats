@@ -391,4 +391,10 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 
+	@Override
+	public boolean isRunning() {
+		return super.isRunning();
+	}
+
+
 }

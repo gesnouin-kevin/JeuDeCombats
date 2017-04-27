@@ -1,6 +1,7 @@
 package implementationBug;
 
 import implementation.CharacterImpl;
+import implementation.RectangleHitboxImpl;
 import service.CharacterService;
 import service.Command;
 import service.EngineService;
@@ -37,16 +38,29 @@ public class EngineImpl implements EngineService{
 	public void init(int h, int w, int s, PlayerService p1, PlayerService p2) {
 		this.height=h;
 		this.width=w;
+		
+		
+		
+		p1.init(this, 0);
+		p2.init(this, 1);
+		
+		
 		this.player[0] = p1;
 		this.player[1] = p2;
-		this.player[0].init(new CharacterImpl(),1);
-		this.player[1].init(new CharacterImpl(),2);
 		this.player[0].getCharacter().setPositionX(w/2 - s/2);
 		this.player[1].getCharacter().setPositionX(w/2 + s/2);
 		this.player[0].getCharacter().setPositionY(0);
 		this.player[1].getCharacter().setPositionY(0);
 		this.player[0].getCharacter().setFaceRight(true);
 		this.player[1].getCharacter().setFaceRight(false);
+		
+		this.player[0].getCharacter().setRectangleHitboxService(new RectangleHitboxImpl());
+		this.player[1].getCharacter().setRectangleHitboxService(new RectangleHitboxImpl());
+		
+		this.player[0].getCharacter().getCharBox().setPosX(w/2 - s/2);
+		this.player[1].getCharacter().getCharBox().setPosX(w/2 + s/2);
+		this.player[0].getCharacter().getCharBox().setPosY(0);
+		this.player[1].getCharacter().getCharBox().setPosY(0);
 	}
 
 	@Override

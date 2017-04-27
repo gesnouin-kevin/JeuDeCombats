@@ -12,6 +12,7 @@ public interface CharacterService {
 	public int getSpeed();
 	public boolean isFaceRight();
 	public boolean isDead();
+	public boolean isRunning();
 	
 	
 	/** Invariant */

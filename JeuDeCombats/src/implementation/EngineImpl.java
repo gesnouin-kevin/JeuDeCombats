@@ -35,8 +35,12 @@ public class EngineImpl implements EngineService{
 	public void init(int h, int w, int s, PlayerService p1, PlayerService p2) {
 		this.height=h;
 		this.width=w;
-		p1.init(new CharacterImpl(), 1);
-		p2.init(new CharacterImpl(), 2);
+		
+		
+		
+		p1.init(this, 0);
+		p2.init(this, 1);
+		
 		
 		this.player[0] = p1;
 		this.player[1] = p2;
@@ -60,6 +64,21 @@ public class EngineImpl implements EngineService{
 	public void step(Command c1, Command c2) {
 		this.player[0].getCharacter().step(c1);
 		this.player[1].getCharacter().step(c2);
+		
+	}
+	// A SPECIFIER
+	public void updateFace() {
+		if(this.getPlayer(0).getCharacter().getPositionX()>this.getPlayer(1).getCharacter().getPositionX())
+		{
+			this.getPlayer(0).getCharacter().setFaceRight(false);
+			this.getPlayer(1).getCharacter().setFaceRight(true);
+			
+		}
+		else
+		{
+			this.getPlayer(0).getCharacter().setFaceRight(true);
+			this.getPlayer(1).getCharacter().setFaceRight(false);
+		}
 		
 	}
 

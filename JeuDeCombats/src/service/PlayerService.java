@@ -2,7 +2,7 @@ package service;
 
 public interface PlayerService {
 
-	public void init(CharacterService cs, int numeroPlayer); 
+	public void init(EngineService es, int numeroPlayer); 
 	public CharacterService getCharacter();
 	public int getNumeroPlayer();
 }

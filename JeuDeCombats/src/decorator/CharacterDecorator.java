@@ -134,4 +134,9 @@ public abstract class CharacterDecorator implements CharacterService {
 		
 	}
 
+	@Override
+	public boolean isRunning() {
+		return this.delegateCharacter.isRunning();
+	}
+
 }
