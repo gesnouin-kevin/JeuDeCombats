@@ -270,6 +270,14 @@ public class SelectionCharacter extends BasicGameState {
 					InformationsCharacter.getWidthSpritePersoIdle(numPlayer2),
 					InformationsCharacter.getHeightSpritePersoIdle(numPlayer2));
 			
+			// décaler p1 sur les x pour centrer
+			int posXp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionX();
+			int widthp1 = InformationsCharacter.getWidthSpritePersoIdle(numPlayer1);
+			
+			this.window.getGame().getEngine().getPlayer(0).getCharacter().setPositionX(posXp1-widthp1);
+			this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().setPosX(posXp1-widthp1);
+			
+			
 			game.enterState(Fighting.ID);
 		}
 

@@ -18,7 +18,7 @@ public class Game{
 
 	public Game() {
 		this.engine = new EngineImpl();
-		this.engine.init(WINDOW_HEIGHT, WINDOW_HEIGHT, 300, new PlayerImpl(), new PlayerImpl());
+		this.engine.init(WINDOW_HEIGHT, WINDOW_WIDTH, 600, new PlayerImpl(), new PlayerImpl());
 		this.window = new Window(this, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 		try{

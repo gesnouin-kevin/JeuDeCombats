@@ -23,9 +23,11 @@ public class Fighting extends BasicGameState {
 	private Animation[] animationsBackground;
 	private SpriteSheet iconCharacter;
 	private SpriteSheet iconKO;
-	private Animation animationPlayer1;
-	private Animation animationPlayer2;
-	
+	private Animation animationPlayer1IdleRight;
+	private Animation animationPlayer1IdleLeft;
+	private Animation animationPlayer2IdleRight;
+	private Animation animationPlayer2IdleLeft;
+
 	private boolean modeDebug;
 
 	public Fighting(Window window) {
@@ -52,20 +54,26 @@ public class Fighting extends BasicGameState {
 		}
 		this.iconKO = new SpriteSheet("ressources/fight/iconKO.png", 40, 31);
 		this.iconCharacter = new SpriteSheet("ressources/menu/iconCharacter2.png", 976, 194);
+
+		SpriteSheet s = new SpriteSheet("ressources/fight/ryu.png", 1413, 2096);
+
+		this.animationPlayer1IdleLeft = new Animation();
+		this.animationPlayer2IdleLeft = new Animation();
 		
-		SpriteSheet s = new SpriteSheet("ressources/fight/ryu.png", 1031, 1605);
-		
-		this.animationPlayer1 = new Animation();
-		this.animationPlayer2 = new Animation();
-		
+		this.animationPlayer1IdleRight = new Animation();
+		this.animationPlayer2IdleRight = new Animation();
+
 		int numPlayer1 = this.window.getNumeroCharacterPlayer1();
 		int numPlayer2 = this.window.getNumeroCharacterPlayer2();
-		for(int i=0; i<InformationsCharacter.getNbSpritePersoIdle(numPlayer1);i++)
-			animationPlayer1.addFrame(s.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer1)*i, 0, InformationsCharacter.getWidthSpritePersoIdle(numPlayer1), InformationsCharacter.getHeightSpritePersoIdle(numPlayer1)), 500);
-		
-		for(int i=0; i<InformationsCharacter.getNbSpritePersoIdle(numPlayer2);i++)
-			animationPlayer2.addFrame(s.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer2)*i, 0, InformationsCharacter.getWidthSpritePersoIdle(numPlayer2), InformationsCharacter.getHeightSpritePersoIdle(numPlayer2)), 500);
-		
+		for(int i=0; i<InformationsCharacter.getNbSpritePersoIdle(numPlayer1);i++){
+			animationPlayer1IdleRight.addFrame(s.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer1)*i, 0, InformationsCharacter.getWidthSpritePersoIdle(numPlayer1), InformationsCharacter.getHeightSpritePersoIdle(numPlayer1)), 500);
+			animationPlayer1IdleLeft.addFrame(s.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer1)*i, InformationsCharacter.getHeightSpritePersoIdle(numPlayer1), InformationsCharacter.getWidthSpritePersoIdle(numPlayer1), InformationsCharacter.getHeightSpritePersoIdle(numPlayer1)), 500);
+			
+		}
+		for(int i=0; i<InformationsCharacter.getNbSpritePersoIdle(numPlayer2);i++){
+			animationPlayer2IdleRight.addFrame(s.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer2)*i, 0, InformationsCharacter.getWidthSpritePersoIdle(numPlayer2), InformationsCharacter.getHeightSpritePersoIdle(numPlayer2)), 500);
+			animationPlayer2IdleLeft.addFrame(s.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer2)*i, InformationsCharacter.getHeightSpritePersoIdle(numPlayer2), InformationsCharacter.getWidthSpritePersoIdle(numPlayer2), InformationsCharacter.getHeightSpritePersoIdle(numPlayer2)), 500);
+		}
 	}
 
 	@Override
@@ -99,42 +107,50 @@ public class Fighting extends BasicGameState {
 		g.setColor(new Color(255, 255, 0));
 		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, 502, 10*scaleY);
 
-		// draw character
-		
-		g.drawAnimation(this.animationPlayer1, 300, 300);
-		
-		
+		int posXp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionX();
+		int posYp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionY();
+		int posXp2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getPositionX();
+		int posYp2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getPositionY();
+
+		int posXp1hitbox = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getPositionX();
+		int posYp1hitbox = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getPositionY();
+		int widthHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getWidth();
+		int heightHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getHeight();
+
+		int posXp2hitbox = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getPositionX();
+		int posYp2hitbox = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getPositionY();
+		int widthHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getWidth();	
+		int heightHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getHeight();
+
 		if(this.modeDebug)
-		{
-			int posXp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionX();
-			int posYp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionY();
-			int posXp2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getPositionX();
-			int posYp2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getPositionY();
-			
-			int posXp1hitbox = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getPositionX();
-			int posYp1hitbox = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getPositionY();
-			int widthHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getWidth();
-			int heightHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getHeight();
-			
-			int posXp2hitbox = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getPositionX();
-			int posYp2hitbox = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getPositionY();
-			int widthHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getWidth();	
-			int heightHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getHeight();
-			
+		{	
 			g.drawString("Vie j1: "+this.window.getGame().getEngine().getPlayer(0).getCharacter().getLife(), 0, gc.getHeight()-40);
 			g.drawString("Vie j2: "+this.window.getGame().getEngine().getPlayer(1).getCharacter().getLife(), 0, gc.getHeight()-20);
 			g.drawString("Position j1: X: "+posXp1+" Y: "+posYp1, 0, gc.getHeight()-80);
 			g.drawString("Position j2: X: "+posXp2+" Y: "+posYp2, 0, gc.getHeight()-60);
 			g.drawString("Position hitbox j1: X: "+posXp1hitbox+" Y: "+posYp1hitbox+" Width: "+widthHitboxP1+" Height: "+heightHitboxP1, 0, gc.getHeight()-120);
 			g.drawString("Position hitbox j2: X: "+posXp2hitbox+" Y: "+posYp2hitbox+" Width: "+widthHitboxP2+" Height: "+heightHitboxP2, 0, gc.getHeight()-100);
-			
+
+			// draw boudingbox player 1
 			g.setColor(new Color(0,255,0,60));
-			g.fillRect(this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().getPositionX(),
-					this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().getPositionX(),
-					this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().getWidth(), 
-					this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().getHeight());
-		
+			g.fillRect(posXp1hitbox, posYp1hitbox, widthHitboxP1, heightHitboxP1);
+			
+			// draw boudingbox player 2
+			g.setColor(new Color(255,0,0,60));
+			g.fillRect(posXp2hitbox, posYp2hitbox, widthHitboxP2, heightHitboxP2);
 		}
+
+		// draw player1
+		if(this.window.getGame().getEngine().getPlayer(0).getCharacter().isFaceRight())
+			g.drawAnimation(this.animationPlayer1IdleRight, posXp1, posYp1);
+		else
+			g.drawAnimation(this.animationPlayer1IdleLeft, posXp1, posYp1);
+		
+		// draw player2
+		if(this.window.getGame().getEngine().getPlayer(1).getCharacter().isFaceRight())
+			g.drawAnimation(this.animationPlayer2IdleRight, posXp2, posYp2);
+		else
+			g.drawAnimation(this.animationPlayer2IdleLeft, posXp1, posYp1);
 	}
 
 	@Override
