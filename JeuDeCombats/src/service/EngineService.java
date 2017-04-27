@@ -39,5 +39,5 @@ public interface EngineService {
 	 * post: getChar(1) == getChar(1)@Pre.step(C1)
 	 * post: getChar(2) == getChar(2)@Pre.step(C2)
 	 */
-	public void step(Commande c1, Commande c2);
+	public void step(Command c1, Command c2);
 }

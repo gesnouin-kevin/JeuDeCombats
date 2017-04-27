@@ -1,7 +1,7 @@
 package decorator;
 
 import service.CharacterService;
-import service.Commande;
+import service.Command;
 import service.EngineService;
 import service.HitboxService;
 import service.RectangleHitboxService;
@@ -80,7 +80,7 @@ public abstract class CharacterDecorator implements CharacterService {
 	}
 
 	@Override
-	public void step(Commande c) {
+	public void step(Command c) {
 		this.delegateCharacter.step(c);		
 	}
 
@@ -97,6 +97,41 @@ public abstract class CharacterDecorator implements CharacterService {
 	@Override
 	public void setFaceRight(boolean b) {
 		this.delegateCharacter.setFaceRight(b);
+	}
+
+	@Override
+	public int getNumeroPlayer() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setNumeroPlayer(int numeroPlayer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public RectangleHitboxService getRectangleHitboxService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getNumeroCharacter() {
+		return this.delegateCharacter.getNumeroCharacter();
+	}
+
+	@Override
+	public void setNumeroCharacter(int numeroCharacter) {
+		this.delegateCharacter.setNumeroCharacter(numeroCharacter);
+		
 	}
 
 }

@@ -1,7 +1,7 @@
 package implementation;
 
 import service.CharacterService;
-import service.Commande;
+import service.Command;
 import service.EngineService;
 import service.HitboxService;
 import service.RectangleHitboxService;
@@ -17,6 +17,7 @@ public class CharacterImpl implements CharacterService {
 	private boolean faceRight;
 	private boolean dead;
 	private int numeroPlayer;
+	private int numeroCharacter;
 	
 	@Override
 	public int getPositionX() {
@@ -74,7 +75,7 @@ public class CharacterImpl implements CharacterService {
 	}
 
 	@Override
-	public void step(Commande c) {
+	public void step(Command c) {
 
 		switch (c) {
 		case LEFT:
@@ -134,6 +135,14 @@ public class CharacterImpl implements CharacterService {
 	public RectangleHitboxService getRectangleHitboxService()
 	{
 		return this.rectangleHitbox;
+	}
+
+	public int getNumeroCharacter() {
+		return numeroCharacter;
+	}
+
+	public void setNumeroCharacter(int numeroCharacter) {
+		this.numeroCharacter = numeroCharacter;
 	}
 
 }

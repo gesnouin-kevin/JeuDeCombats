@@ -88,7 +88,7 @@ public interface CharacterService {
 	 * post: step(RIGHT) == moveRight()
 	 * post: step(NEUTRAL) == this
 	 */
-	public void step(Commande c);
+	public void step(Command c);
 	
 	
 	/**
@@ -118,4 +118,8 @@ public interface CharacterService {
 	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox);
 	
 	public RectangleHitboxService getRectangleHitboxService();
+	
+	public int getNumeroCharacter();
+
+	public void setNumeroCharacter(int numeroCharacter);
 }

@@ -1,6 +1,6 @@
 package service;
 
-public enum Commande {
+public enum Command {
 
 	LEFT,
 	RIGHT,
@@ -10,10 +10,10 @@ public enum Commande {
 	UPLEFT,
 	
 	DOWN,
-	DOWNRIGHT,
-	DOWNLEFT,
 	
-	ATTACK,
+	PUNCH,
+	KICK,
+	BLOCK,
 	
 	NEUTRAL
 }

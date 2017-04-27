@@ -186,7 +186,7 @@ public class SelectionCharacter extends BasicGameState {
 					cursor2 = this.cursorPlayer2-1;
 				else
 					cursor2 = this.cursorPlayer2-2;
-				this.window.setNumeroCharacterPlayer2(cursor2);
+				this.window.getGame().getEngine().getPlayer(1).getCharacter().setNumeroCharacter(cursor2);
 			}
 		}
 
@@ -243,7 +243,7 @@ public class SelectionCharacter extends BasicGameState {
 					cursor1 = this.cursorPlayer1-1;
 				else
 					cursor1 = this.cursorPlayer1-2;
-				this.window.setNumeroCharacterPlayer1(cursor1);
+				this.window.getGame().getEngine().getPlayer(0).getCharacter().setNumeroCharacter(cursor1);
 			}
 		}
 
@@ -252,8 +252,8 @@ public class SelectionCharacter extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame window, int delta) throws SlickException {
 		if(this.character1Select && this.character2Select){
-			int numPlayer1 = this.window.getNumeroCharacterPlayer1();
-			int numPlayer2 = this.window.getNumeroCharacterPlayer2();
+			int numPlayer1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter();
+			int numPlayer2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter();
 			
 			this.window.setCurrentBackground(this.currentBackground);
 			this.window.getGame().getEngine().getPlayer(0).getCharacter().init(InformationsCharacter.getLife(numPlayer1), 
@@ -277,8 +277,8 @@ public class SelectionCharacter extends BasicGameState {
 			this.window.getGame().getEngine().getPlayer(0).getCharacter().setPositionX(posXp1-widthp1);
 			this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().setPosX(posXp1-widthp1);
 			
-			
-			game.enterState(Fighting.ID);
+			this.window.getState(Fighting.ID).init(gc, window);
+			this.game.enterState(Fighting.ID);
 		}
 
 	}

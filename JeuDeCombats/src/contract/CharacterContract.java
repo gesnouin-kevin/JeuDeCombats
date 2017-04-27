@@ -6,7 +6,7 @@ import error.PostConditionError;
 import error.PreConditionError;
 import implementation.CharacterImpl;
 import service.CharacterService;
-import service.Commande;
+import service.Command;
 import service.EngineService;
 import service.HitboxService;
 import service.RectangleHitboxService;
@@ -236,7 +236,7 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 	@Override
-	public void step(Commande c) {
+	public void step(Command c) {
 
 		int positionX_atPre = getPositionX();
 		// pre: !isDead()
@@ -250,17 +250,17 @@ public class CharacterContract extends CharacterDecorator {
 		checkInvariant();
 
 		//post: step(LEFT) == moveLeft()
-		if(c==Commande.LEFT)
+		if(c==Command.LEFT)
 			if(!(getPositionX()<positionX_atPre))
 				throw new PostConditionError("Error Precondition: step(LEFT) == moveLeft()");
 
 		//post: step(RIGHT) == moveRight()
-		if(c==Commande.RIGHT)
+		if(c==Command.RIGHT)
 			if(!(getPositionX()>positionX_atPre))
 				throw new PostConditionError("Error Precondition: step(RIGHT) == moveRight()");
 
 		//post: step(NEUTRAL) == this
-		if(c==Commande.NEUTRAL)
+		if(c==Command.NEUTRAL)
 			if(!(getPositionX()==positionX_atPre))
 				throw new PostConditionError("Error Precondition: step(NEUTRAL) == this");
 	}
@@ -377,4 +377,18 @@ public class CharacterContract extends CharacterDecorator {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public int getNumeroCharacter() {
+		return super.getNumeroCharacter();
+	}
+
+
+	@Override
+	public void setNumeroCharacter(int numeroCharacter) {
+		super.setNumeroCharacter(numeroCharacter);
+	}
+
+
 }

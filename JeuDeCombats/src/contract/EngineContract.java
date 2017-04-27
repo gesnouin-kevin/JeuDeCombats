@@ -5,7 +5,7 @@ import error.InvariantError;
 import error.PostConditionError;
 import error.PreConditionError;
 import service.CharacterService;
-import service.Commande;
+import service.Command;
 import service.EngineService;
 import service.PlayerService;
 
@@ -21,7 +21,7 @@ public class EngineContract extends EngineDecorator{
 			throw new InvariantError("Error checkInvariant : isGameOver() with isDead()");
 	}
 	
-	public void step(Commande c1, Commande c2){
+	public void step(Command c1, Command c2){
 		// pre: not isGameOver()
 		if(isGameOver())
 			throw new PreConditionError("Error Precondition : isGameOver()");

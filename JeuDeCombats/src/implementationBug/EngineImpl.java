@@ -2,7 +2,7 @@ package implementationBug;
 
 import implementation.CharacterImpl;
 import service.CharacterService;
-import service.Commande;
+import service.Command;
 import service.EngineService;
 import service.PlayerService;
 
@@ -50,7 +50,7 @@ public class EngineImpl implements EngineService{
 	}
 
 	@Override
-	public void step(Commande c1, Commande c2) {
+	public void step(Command c1, Command c2) {
 		this.player[0].getCharacter().step(c1);
 		this.player[1].getCharacter().step(c2);
 		

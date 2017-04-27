@@ -6,9 +6,9 @@ public abstract class InformationsCharacter {
 	private static int speed[]={3,2,4,3,4,4,1,1,3,3,4,5,3,5,3,4};
 	private static int damage[]={8,10,6,8,6,4,10,6,8,8,8,6,8,6,10,10};
 	
-	private static int widthSpritePersoIdle[]={183};
-	private static int heightSpritePersoIdle[]={349};
-	private static int nbSpritePersoIdle[]={4};
+	private static int widthSpritePersoIdle[]={183,0,0,0,0,206};
+	private static int heightSpritePersoIdle[]={349,0,0,0,0,350};
+	private static int nbSpritePersoIdle[]={4,0,0,0,0,4};
 
 	public static int getLife(int numeroPerso)
 	{

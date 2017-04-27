@@ -1,6 +1,6 @@
 package decorator;
 
-import service.Commande;
+import service.Command;
 import service.EngineService;
 import service.PlayerService;
 
@@ -38,7 +38,7 @@ public abstract class EngineDecorator implements EngineService {
 	}
 
 	@Override
-	public void step(Commande c1, Commande c2) {
+	public void step(Command c1, Command c2) {
 		this.delegateEnfine.step(c1, c2);
 	}
 

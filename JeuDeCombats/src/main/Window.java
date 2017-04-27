@@ -14,12 +14,6 @@ public class Window extends StateBasedGame {
 	private int windowWidth;
 	private int windowHeight;
 
-	private SpriteSheet cursorSelectCharacter;
-	private SpriteSheet iconCharacter;
-	private SpriteSheet selectionCharacter;
-	
-	private int numeroCharacterPlayer1;
-	private int numeroCharacterPlayer2;
 	private int currentBackground = 3;
 	
 	public Window(Game game, int windowWidth, int windowHeight)
@@ -37,39 +31,12 @@ public class Window extends StateBasedGame {
 	    addState(new Fighting(this));
 	}
 
-	public SpriteSheet getCursorSelectCharacter() {
-		return cursorSelectCharacter;
-	}
-
-	public SpriteSheet getIconCharacter() {
-		return iconCharacter;
-	}
-	public SpriteSheet getSelectionCharacter() {
-		return selectionCharacter;
-	}
-
 	public int getWindowWidth() {
 		return windowWidth;
 	}
 
 	public int getWindowHeight() {
 		return windowHeight;
-	}
-
-	public int getNumeroCharacterPlayer1() {
-		return numeroCharacterPlayer1;
-	}
-
-	public void setNumeroCharacterPlayer1(int numeroCharacterPlayer1) {
-		this.numeroCharacterPlayer1 = numeroCharacterPlayer1;
-	}
-
-	public int getNumeroCharacterPlayer2() {
-		return numeroCharacterPlayer2;
-	}
-
-	public void setNumeroCharacterPlayer2(int numeroCharacterPlayer2) {
-		this.numeroCharacterPlayer2 = numeroCharacterPlayer2;
 	}
 
 	public int getCurrentBackground() {

@@ -1,7 +1,7 @@
 package implementationBug;
 
 import service.CharacterService;
-import service.Commande;
+import service.Command;
 import service.EngineService;
 import service.HitboxService;
 import service.RectangleHitboxService;
@@ -75,7 +75,7 @@ public class CharacterImplBug implements CharacterService {
 	
 	//modif
 	@Override
-	public void step(Commande c) {
+	public void step(Command c) {
 		
 	}
 	
@@ -129,6 +129,18 @@ public class CharacterImplBug implements CharacterService {
 	public RectangleHitboxService getRectangleHitboxService() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int getNumeroCharacter() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setNumeroCharacter(int numeroCharacter) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
