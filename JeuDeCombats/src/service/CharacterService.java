@@ -13,6 +13,8 @@ public interface CharacterService {
 	public boolean isFaceRight();
 	public boolean isDead();
 	public boolean isRunning();
+	public boolean isCrouching();
+	public boolean isJumping();
 	
 	
 	/** Invariant */
@@ -82,7 +84,7 @@ public interface CharacterService {
 	 * */
 	public void switchSide();
 	
-	
+	/** AJOUTER LES NOUVEAUX MOVE AUX PRE DE STEP */
 	/**
 	 * pre: not isDead()
 	 * post: step(LEFT) == moveLeft()
@@ -123,4 +125,8 @@ public interface CharacterService {
 	public int getNumeroCharacter();
 
 	public void setNumeroCharacter(int numeroCharacter);
+	
+	public void moveDown();
+	
+	public void moveUp();
 }

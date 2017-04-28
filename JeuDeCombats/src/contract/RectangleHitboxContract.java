@@ -105,6 +105,12 @@ public class RectangleHitboxContract extends HitboxContract implements Rectangle
 		super.setPosY(posY);
 	}
 
+	@Override
+	public void setHeight(int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

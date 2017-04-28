@@ -397,4 +397,32 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 
+	@Override
+	public boolean isCrouching() {
+		// TODO Auto-generated method stub
+		return super.isCrouching();
+	}
+
+
+	@Override
+	public void moveDown() {
+		// TODO Auto-generated method stub
+		super.moveDown();
+	}
+
+
+	@Override
+	public boolean isJumping() {
+		return super.isJumping();
+	}
+
+
+	@Override
+	public void moveUp() {
+		// TODO Auto-generated method stub
+		super.moveUp();
+	}
+
+	
+
 }

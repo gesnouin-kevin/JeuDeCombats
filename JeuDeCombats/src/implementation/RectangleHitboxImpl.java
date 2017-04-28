@@ -57,6 +57,11 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 	public int getPosY() {
 		return this.getPositionY();
 	}
+
+	@Override
+	public void setHeight(int height) {
+		this.height=height;
+	}
 	
 	
 	

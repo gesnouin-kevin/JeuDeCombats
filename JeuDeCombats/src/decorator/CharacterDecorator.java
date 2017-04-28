@@ -139,4 +139,26 @@ public abstract class CharacterDecorator implements CharacterService {
 		return this.delegateCharacter.isRunning();
 	}
 
+	@Override
+	public boolean isCrouching() {
+		return this.delegateCharacter.isCrouching();
+	}
+
+	@Override
+	public void moveDown() {
+		this.delegateCharacter.moveDown();
+	}
+
+	@Override
+	public boolean isJumping() {
+		return this.delegateCharacter.isJumping();
+	}
+
+	@Override
+	public void moveUp() {
+		this.delegateCharacter.moveUp();
+	}
+
+	
+	
 }
