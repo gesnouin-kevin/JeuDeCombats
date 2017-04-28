@@ -20,6 +20,7 @@ public class Fighting extends BasicGameState {
 	public static final int ID = 3;
 	public static int NB_BACKGROUND = 5;
 	public static int NB_FRAMES_BACKGROUND = 8;
+	public static int NB_MAX_ANIMATION = 4;
 	public static int GROUND = 50;
 
 	private Game game;
@@ -63,38 +64,8 @@ public class Fighting extends BasicGameState {
 		this.iconCharacter = new SpriteSheet("ressources/menu/iconCharacter2.png", 976, 194);
 
 		// load animations characters
-		for(int i=0; i<11; i++){
-			this.animationsPlayer1.add(new Animation());
-			this.animationsPlayer2.add(new Animation());
-		}
-		
-		int numPlayer1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter();
-		int numPlayer2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter();
-		
-		SpriteSheet s1 = new SpriteSheet("ressources/fight/"+numPlayer1+".png", 1413, 2096);
-		SpriteSheet s2 = new SpriteSheet("ressources/fight/"+numPlayer2+".png", 1413, 2096);
-		
-		// animation player 1
-		for(int i=0; i<InformationsCharacter.getNbSpritePersoIdle(numPlayer1);i++){
-			this.animationsPlayer1.get(0).addFrame(s1.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer1)*i, 0, InformationsCharacter.getWidthSpritePersoIdle(numPlayer1), InformationsCharacter.getHeightSpritePersoIdle(numPlayer1)), 500);
-			this.animationsPlayer1.get(1).addFrame(s1.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer1)*i, InformationsCharacter.getHeightSpritePersoIdle(numPlayer1), InformationsCharacter.getWidthSpritePersoIdle(numPlayer1), InformationsCharacter.getHeightSpritePersoIdle(numPlayer1)), 500);
-
-		}
-		for(int i=0; i<InformationsCharacter.getNbSpritePersoRun(numPlayer1);i++){
-			this.animationsPlayer1.get(2).addFrame(s1.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer1)*i, 2*InformationsCharacter.getHeightSpritePersoIdle(numPlayer1), InformationsCharacter.getWidthSpritePersoIdle(numPlayer1), InformationsCharacter.getHeightSpritePersoIdle(numPlayer1)), 500);
-			this.animationsPlayer1.get(3).addFrame(s1.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer1)*i, 3*InformationsCharacter.getHeightSpritePersoIdle(numPlayer1), InformationsCharacter.getWidthSpritePersoIdle(numPlayer1), InformationsCharacter.getHeightSpritePersoIdle(numPlayer1)), 500);
-
-		}
-		
-		// animation player 2
-		for(int i=0; i<InformationsCharacter.getNbSpritePersoIdle(numPlayer2);i++){
-			this.animationsPlayer2.get(0).addFrame(s2.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer2)*i, 0, InformationsCharacter.getWidthSpritePersoIdle(numPlayer2), InformationsCharacter.getHeightSpritePersoIdle(numPlayer2)), 500);
-			this.animationsPlayer2.get(1).addFrame(s2.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer2)*i, InformationsCharacter.getHeightSpritePersoIdle(numPlayer2), InformationsCharacter.getWidthSpritePersoIdle(numPlayer2), InformationsCharacter.getHeightSpritePersoIdle(numPlayer2)), 500);
-		}
-		for(int i=0; i<InformationsCharacter.getNbSpritePersoRun(numPlayer2);i++){
-			this.animationsPlayer2.get(2).addFrame(s2.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer2)*i, 2*InformationsCharacter.getHeightSpritePersoIdle(numPlayer1), InformationsCharacter.getWidthSpritePersoIdle(numPlayer2), InformationsCharacter.getHeightSpritePersoIdle(numPlayer2)), 500);
-			this.animationsPlayer2.get(3).addFrame(s2.getSubImage(InformationsCharacter.getWidthSpritePersoIdle(numPlayer2)*i, 3*InformationsCharacter.getHeightSpritePersoIdle(numPlayer2), InformationsCharacter.getWidthSpritePersoIdle(numPlayer2), InformationsCharacter.getHeightSpritePersoIdle(numPlayer2)), 500);
-		}
+		loadAnimationsPlayers(0);
+		loadAnimationsPlayers(1);
 		
 		
 	}
@@ -270,6 +241,77 @@ public class Fighting extends BasicGameState {
 	@Override
 	public int getID() {
 		return ID;
+	}
+	
+	public void loadAnimationsPlayers(int player) throws SlickException
+	{
+		if(player==0)
+			this.animationsPlayer1 = new ArrayList<Animation>();
+		else
+			this.animationsPlayer2 = new ArrayList<Animation>();
+		
+		int numPlayer = this.window.getGame().getEngine().getPlayer(player).getCharacter().getNumeroCharacter();
+		SpriteSheet s = new SpriteSheet("ressources/fight/"+numPlayer+".png", 1413, 2096);
+		
+		int heightSrc = 0;
+		
+		for(int i=0; i<NB_MAX_ANIMATION;  i++)
+		{
+			Animation anim = new Animation();
+			int currentXsrc;
+			
+			if(i%2==0)//i est pair
+			{
+				currentXsrc = 0;
+				for(int j=0;j<getNbAnimations(i, numPlayer);j++)
+				{
+					anim.addFrame(s.getSubImage(getWidthAnimations(i, numPlayer)*j, heightSrc, getWidthAnimations(i, numPlayer), getHeightAnimations(i, numPlayer)), 100);
+					
+					currentXsrc+=getWidthAnimations(i, numPlayer);
+				}
+			}
+			else
+			{
+				currentXsrc = (getNbAnimations(i, numPlayer)-1) * getWidthAnimations(i, numPlayer);
+				for(int j=getNbAnimations(i, numPlayer)-1;j>=0;j--)
+				{
+					anim.addFrame(s.getSubImage(getWidthAnimations(i, numPlayer)*j, heightSrc, getWidthAnimations(i, numPlayer), getHeightAnimations(i, numPlayer)), 100);
+					
+					currentXsrc-=getWidthAnimations(i, numPlayer);
+				}
+			}
+			
+			if(player==0)
+				this.animationsPlayer1.add(anim);
+			else
+				this.animationsPlayer2.add(anim);
+			
+			heightSrc += getHeightAnimations(i, numPlayer);
+		}
+	}
+	
+	public int getNbAnimations(int animation, int numPlayer)
+	{
+		if(animation == 0 || animation ==1) return InformationsCharacter.getNbSpritePersoIdle(numPlayer);
+		if(animation == 2 || animation ==3) return InformationsCharacter.getNbSpritePersoWalking(numPlayer);
+		
+		return 0;
+	}
+	
+	public int getWidthAnimations(int animation, int numPlayer)
+	{
+		if(animation == 0 || animation ==1) return InformationsCharacter.getWidthSpritePersoIdle(numPlayer);
+		if(animation == 2 || animation ==3) return InformationsCharacter.getWidthSpritePersoWalking(numPlayer);
+		
+		return 0;
+	}
+	
+	public int getHeightAnimations(int animation, int numPlayer)
+	{
+		if(animation == 0 || animation ==1) return InformationsCharacter.getHeightSpritePersoIdle(numPlayer);
+		if(animation == 2 || animation ==3) return InformationsCharacter.getHeightSpritePersoWalking(numPlayer);
+		
+		return 0;
 	}
 
 }
