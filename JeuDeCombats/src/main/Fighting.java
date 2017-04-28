@@ -20,7 +20,7 @@ public class Fighting extends BasicGameState {
 	public static final int ID = 3;
 	public static int NB_BACKGROUND = 5;
 	public static int NB_FRAMES_BACKGROUND = 8;
-	public static int NB_MAX_ANIMATION = 4;
+	public static int NB_MAX_ANIMATION = 22;
 	public static int GROUND = 50;
 
 	private Game game;
@@ -28,7 +28,7 @@ public class Fighting extends BasicGameState {
 	private Animation[] animationsBackground;
 	private SpriteSheet iconCharacter;
 	private SpriteSheet iconKO;
-	
+
 	private ArrayList<Animation> animationsPlayer1;
 	private ArrayList<Animation> animationsPlayer2;
 
@@ -58,7 +58,7 @@ public class Fighting extends BasicGameState {
 			}
 			this.animationsBackground[j] = animation;
 		}
-		
+
 		// load icon and image KO
 		this.iconKO = new SpriteSheet("ressources/fight/iconKO.png", 40, 31);
 		this.iconCharacter = new SpriteSheet("ressources/menu/iconCharacter2.png", 976, 194);
@@ -66,8 +66,8 @@ public class Fighting extends BasicGameState {
 		// load animations characters
 		loadAnimationsPlayers(0);
 		loadAnimationsPlayers(1);
-		
-		
+
+
 	}
 
 	@Override
@@ -133,22 +133,42 @@ public class Fighting extends BasicGameState {
 			g.fillRect(posXp2hitbox, gc.getHeight()-posYp2hitbox-GROUND-heightHitboxP2, widthHitboxP2, heightHitboxP2);
 		}
 
-
 		// draw player1
 		int animPlayer1 =0;
-		if(this.window.getGame().getEngine().getPlayer(0).getCharacter().isRunning())
+		int heightPlayer1 =InformationsCharacter.getHeightSpritePersoIdle(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
+		if(this.window.getGame().getEngine().getPlayer(0).getCharacter().isRunning()){
 			animPlayer1 = 2;
+			heightPlayer1 = InformationsCharacter.getHeightSpritePersoWalking(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
+		}
+		else if(this.window.getGame().getEngine().getPlayer(0).getCharacter().isCrouching()){
+			animPlayer1 = 6;
+			heightPlayer1 = InformationsCharacter.getHeightSpritePersoCrouch(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
+		}
+
 		if(!this.window.getGame().getEngine().getPlayer(0).getCharacter().isFaceRight())
 			animPlayer1 += 1;
-		g.drawAnimation(this.animationsPlayer1.get(animPlayer1), posXp1, gc.getHeight()-posYp1-InformationsCharacter.getHeightSpritePersoIdle(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter())-GROUND);
 		
+		System.out.println("size1"+this.animationsPlayer1.size());
+		System.out.println("size2"+this.animationsPlayer2.size());
+		
+		g.drawAnimation(this.animationsPlayer1.get(animPlayer1), posXp1, gc.getHeight()-(posYp1+heightPlayer1-GROUND));
+
 		// draw player2
 		int animPlayer2 =0;
+		int heightPlayer2=InformationsCharacter.getHeightSpritePersoIdle(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
 		if(this.window.getGame().getEngine().getPlayer(1).getCharacter().isRunning())
+		{
 			animPlayer2 = 2;
+			heightPlayer2 = InformationsCharacter.getHeightSpritePersoWalking(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
+		}
+		else if(this.window.getGame().getEngine().getPlayer(1).getCharacter().isCrouching())
+		{
+			animPlayer2 = 6;
+			heightPlayer2 = InformationsCharacter.getHeightSpritePersoWalking(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
+		}
 		if(!this.window.getGame().getEngine().getPlayer(1).getCharacter().isFaceRight())
 			animPlayer2 += 1;
-		g.drawAnimation(this.animationsPlayer2.get(animPlayer2), posXp2, gc.getHeight()-posYp1-InformationsCharacter.getHeightSpritePersoIdle(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter())-GROUND);
+		g.drawAnimation(this.animationsPlayer2.get(animPlayer2), posXp2, gc.getHeight()-(posYp2+heightPlayer2-GROUND));
 	}
 
 	@Override
@@ -192,7 +212,7 @@ public class Fighting extends BasicGameState {
 		//player 1
 
 		if (key == Input.KEY_D && key == Input.KEY_Z){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.UPRIGHT);
 
 		}
 		else if (key == Input.KEY_Q && key == Input.KEY_Z){
@@ -221,7 +241,7 @@ public class Fighting extends BasicGameState {
 			this.window.getGame().getEngine().setCommandPlayer1(Command.BLOCK);
 		}
 	}
-	
+
 	@Override
 	public void keyReleased(int key, char c) {
 		if(key==Input.KEY_Z || key==Input.KEY_Q || key==Input.KEY_S || key==Input.KEY_D)
@@ -232,41 +252,39 @@ public class Fighting extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame window, int delta) throws SlickException {
-		synchronized(this){
 		this.window.getGame().getEngine().updateFace();
 		this.window.getGame().getEngine().step();
-		}
 	}
 
 	@Override
 	public int getID() {
 		return ID;
 	}
-	
+
 	public void loadAnimationsPlayers(int player) throws SlickException
 	{
 		if(player==0)
 			this.animationsPlayer1 = new ArrayList<Animation>();
 		else
 			this.animationsPlayer2 = new ArrayList<Animation>();
-		
+
 		int numPlayer = this.window.getGame().getEngine().getPlayer(player).getCharacter().getNumeroCharacter();
 		SpriteSheet s = new SpriteSheet("ressources/fight/"+numPlayer+".png", 1413, 2096);
-		
+
 		int heightSrc = 0;
-		
+
 		for(int i=0; i<NB_MAX_ANIMATION;  i++)
 		{
 			Animation anim = new Animation();
 			int currentXsrc;
-			
+
 			if(i%2==0)//i est pair
 			{
 				currentXsrc = 0;
 				for(int j=0;j<getNbAnimations(i, numPlayer);j++)
 				{
 					anim.addFrame(s.getSubImage(getWidthAnimations(i, numPlayer)*j, heightSrc, getWidthAnimations(i, numPlayer), getHeightAnimations(i, numPlayer)), 100);
-					
+
 					currentXsrc+=getWidthAnimations(i, numPlayer);
 				}
 			}
@@ -276,41 +294,48 @@ public class Fighting extends BasicGameState {
 				for(int j=getNbAnimations(i, numPlayer)-1;j>=0;j--)
 				{
 					anim.addFrame(s.getSubImage(getWidthAnimations(i, numPlayer)*j, heightSrc, getWidthAnimations(i, numPlayer), getHeightAnimations(i, numPlayer)), 100);
-					
+
 					currentXsrc-=getWidthAnimations(i, numPlayer);
 				}
 			}
-			
-			if(player==0)
+
+			if(player==0){
 				this.animationsPlayer1.add(anim);
+			}
 			else
 				this.animationsPlayer2.add(anim);
-			
+
 			heightSrc += getHeightAnimations(i, numPlayer);
 		}
 	}
-	
+
 	public int getNbAnimations(int animation, int numPlayer)
 	{
 		if(animation == 0 || animation ==1) return InformationsCharacter.getNbSpritePersoIdle(numPlayer);
 		if(animation == 2 || animation ==3) return InformationsCharacter.getNbSpritePersoWalking(numPlayer);
-		
+		if(animation == 4 || animation ==5) return InformationsCharacter.getNbSpritePersoJump(numPlayer);
+		if(animation == 6 || animation ==7) return InformationsCharacter.getNbSpritePersoCrouch(numPlayer);
+
 		return 0;
 	}
-	
+
 	public int getWidthAnimations(int animation, int numPlayer)
 	{
 		if(animation == 0 || animation ==1) return InformationsCharacter.getWidthSpritePersoIdle(numPlayer);
 		if(animation == 2 || animation ==3) return InformationsCharacter.getWidthSpritePersoWalking(numPlayer);
-		
+		if(animation == 4 || animation ==5) return InformationsCharacter.getWidthSpritePersoJump(numPlayer);
+		if(animation == 6 || animation ==7) return InformationsCharacter.getWidthSpritePersoCrouch(numPlayer);
+
 		return 0;
 	}
-	
+
 	public int getHeightAnimations(int animation, int numPlayer)
 	{
 		if(animation == 0 || animation ==1) return InformationsCharacter.getHeightSpritePersoIdle(numPlayer);
 		if(animation == 2 || animation ==3) return InformationsCharacter.getHeightSpritePersoWalking(numPlayer);
-		
+		if(animation == 4 || animation ==5) return InformationsCharacter.getHeightSpritePersoJump(numPlayer);
+		if(animation == 6 || animation ==7) return InformationsCharacter.getHeightSpritePersoCrouch(numPlayer);
+
 		return 0;
 	}
 

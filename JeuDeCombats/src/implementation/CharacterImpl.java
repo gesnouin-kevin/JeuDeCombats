@@ -152,9 +152,7 @@ public class CharacterImpl implements CharacterService {
 			this.crouching=true;
 			break;
 		case NEUTRAL:
-			this.running = false;
-			this.crouching = false;
-			this.jumping=false;
+			neutral();
 			break;
 		default:
 			break;
@@ -185,6 +183,9 @@ public class CharacterImpl implements CharacterService {
 	public void init(int l, int s, boolean f, int numeroPlayer) {
 		this.life = l;
 		this.dead = false;
+		this.running = false;
+		this.crouching = false;
+		this.jumping = false;
 		this.speed = s;
 		this.faceRight = f;
 		this.numeroPlayer = numeroPlayer;
@@ -229,6 +230,16 @@ public class CharacterImpl implements CharacterService {
 	@Override
 	public boolean isJumping() {
 		return this.jumping;
+	}
+
+	@Override
+	public void neutral() {
+		this.running = false;
+		this.crouching = false;
+		this.jumping = false;
+		
+		this.rectangleHitbox.setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.numeroCharacter));
+		this.rectangleHitbox.setWidth(InformationsCharacter.getHeightSpritePersoIdle(this.numeroCharacter));
 	}
 	
 	

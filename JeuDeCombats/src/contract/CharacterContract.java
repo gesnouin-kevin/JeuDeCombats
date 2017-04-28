@@ -423,6 +423,13 @@ public class CharacterContract extends CharacterDecorator {
 		super.moveUp();
 	}
 
+
+	@Override
+	public void neutral() {
+		super.neutral();
+		
+	}
+
 	
 
 }

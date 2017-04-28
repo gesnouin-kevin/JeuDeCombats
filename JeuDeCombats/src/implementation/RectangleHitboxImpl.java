@@ -62,6 +62,12 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 	public void setHeight(int height) {
 		this.height=height;
 	}
+
+	@Override
+	public void setWidth(int heightSpritePersoIdle) {
+		this.width = width;
+		
+	}
 	
 	
 	

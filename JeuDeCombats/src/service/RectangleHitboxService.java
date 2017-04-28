@@ -45,6 +45,7 @@ public interface RectangleHitboxService extends HitboxService {
 	public void setPosY(int posY);
 	
 	public void setHeight(int height);
+	public void setWidth(int heightSpritePersoIdle);
 	
 
 }

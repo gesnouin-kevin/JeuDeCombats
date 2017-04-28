@@ -107,7 +107,13 @@ public class RectangleHitboxContract extends HitboxContract implements Rectangle
 
 	@Override
 	public void setHeight(int height) {
-		// TODO Auto-generated method stub
+		getDelegate().setHeight(height);
+		
+	}
+
+	@Override
+	public void setWidth(int heightSpritePersoIdle) {
+		getDelegate().setHeight(heightSpritePersoIdle);
 		
 	}
 

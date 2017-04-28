@@ -11,15 +11,15 @@ public abstract class InformationsCharacter {
 	private static int nbSpritePersoIdle[]={4,0,0,0,0,4};
 	
 	private static int widthSpritePersoWalking[]={182,0,0,0,0,230};
-	private static int heightSpritePersoWalking[]={345,0,0,0,0,357};
+	private static int heightSpritePersoWalking[]={345,0,0,0,0,360};
 	private static int nbSpritePersoWalking[]={5,0,0,0,0,8};
 	
 	private static int widthSpritePersoJump[]={182,0,0,0,0,205};
-	private static int heightSpritePersoJump[]={345,0,0,0,0,426};
+	private static int heightSpritePersoJump[]={380,0,0,0,0,426};
 	private static int nbSpritePersoJump[]={4,0,0,0,0,4};
 	
 	private static int widthSpritePersoCrouch[]={182,0,0,0,0,205};
-	private static int heightSpritePersoCrouch[]={345,0,0,0,0,266};
+	private static int heightSpritePersoCrouch[]={228,0,0,0,0,266};
 	private static int nbSpritePersoCrouch[]={1,0,0,0,0,1};
 	
 	private static int widthSpritePersoBlocking[]={182,0,0,0,0,219};
@@ -61,5 +61,13 @@ public abstract class InformationsCharacter {
 	public static int getWidthSpritePersoWalking(int numeroPerso){return InformationsCharacter.widthSpritePersoWalking[numeroPerso];}
 	public static int getHeightSpritePersoWalking(int numeroPerso){return InformationsCharacter.heightSpritePersoWalking[numeroPerso];}
 	public static int getNbSpritePersoWalking(int numeroPerso){return InformationsCharacter.nbSpritePersoWalking[numeroPerso];}
+	
+	public static int getWidthSpritePersoJump(int numeroPerso){return InformationsCharacter.widthSpritePersoJump[numeroPerso];}
+	public static int getHeightSpritePersoJump(int numeroPerso){return InformationsCharacter.heightSpritePersoJump[numeroPerso];}
+	public static int getNbSpritePersoJump(int numeroPerso){return InformationsCharacter.nbSpritePersoJump[numeroPerso];}
+	
+	public static int getWidthSpritePersoCrouch(int numeroPerso){return InformationsCharacter.widthSpritePersoCrouch[numeroPerso];}
+	public static int getHeightSpritePersoCrouch(int numeroPerso){return InformationsCharacter.heightSpritePersoCrouch[numeroPerso];}
+	public static int getNbSpritePersoCrouch(int numeroPerso){return InformationsCharacter.nbSpritePersoCrouch[numeroPerso];}
 
 }

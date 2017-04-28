@@ -129,4 +129,6 @@ public interface CharacterService {
 	public void moveDown();
 	
 	public void moveUp();
+	
+	public void neutral();
 }

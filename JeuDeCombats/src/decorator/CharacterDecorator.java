@@ -159,6 +159,12 @@ public abstract class CharacterDecorator implements CharacterService {
 		this.delegateCharacter.moveUp();
 	}
 
+	@Override
+	public void neutral() {
+		this.delegateCharacter.neutral();
+		
+	}
+
 	
 	
 }
