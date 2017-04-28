@@ -21,28 +21,17 @@ public class EngineContract extends EngineDecorator{
 			throw new InvariantError("Error checkInvariant : isGameOver() with isDead()");
 	}
 	
-	public void step(Command c1, Command c2){
+	public void step(){
 		// pre: not isGameOver()
 		if(isGameOver())
 			throw new PreConditionError("Error Precondition : isGameOver()");
 		
 		checkInvariant();
 		
-		CharacterService getChar1_atPre = getPlayer(1).getCharacter();
-		CharacterService getChar2_atPre = getPlayer(2).getCharacter();
-		super.step(c1, c2);
+		super.step();
 		
 		checkInvariant();
 		
-		//post: getChar(1) == getChar(1)@Pre.step(C1)
-		getChar1_atPre.step(c1);
-		if(!(getPlayer(1).getCharacter()==getChar1_atPre))
-			throw new PostConditionError("Error PostCondition : getChar(1)==getChar(1)@Pre.step(C1) ");
-			
-		//post: getChar(2) == getChar(2)@Pre.step(C2)
-		getChar2_atPre.step(c2);
-		if(!(getPlayer(2).getCharacter()==getChar2_atPre))
-			throw new PostConditionError("Error PostCondition : getChar(2)==getChar(2)@Pre.step(C2) ");
 	}
 	
 	public void init(int h, int w, int s, PlayerService p1, PlayerService p2){

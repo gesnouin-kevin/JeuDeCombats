@@ -7,7 +7,7 @@ import service.PlayerService;
 public class PlayerImpl implements PlayerService {
 	
 	private CharacterService character;
-	private int numeroPlayer;
+	private int numeroPlayer; // 0 ou 1
 
 	@Override
 	public void init(EngineService es,int numeroPlayer) {

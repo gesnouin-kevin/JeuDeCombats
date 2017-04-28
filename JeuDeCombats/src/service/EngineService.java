@@ -34,10 +34,5 @@ public interface EngineService {
 	
 	/** Operators */
 	
-	/**
-	 * pre: not isGameOver()
-	 * post: getChar(1) == getChar(1)@Pre.step(C1)
-	 * post: getChar(2) == getChar(2)@Pre.step(C2)
-	 */
-	public void step(Command c1, Command c2);
+	public void step();
 }

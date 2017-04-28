@@ -38,8 +38,8 @@ public abstract class EngineDecorator implements EngineService {
 	}
 
 	@Override
-	public void step(Command c1, Command c2) {
-		this.delegateEnfine.step(c1, c2);
+	public void step() {
+		this.delegateEnfine.step();
 	}
 
 }

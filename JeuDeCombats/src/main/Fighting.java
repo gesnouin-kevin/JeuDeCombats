@@ -22,7 +22,7 @@ public class Fighting extends BasicGameState {
 	public static int NB_FRAMES_BACKGROUND = 8;
 	public static int GROUND = 50;
 
-	private StateBasedGame game;
+	private Game game;
 	private Window window;
 	private Animation[] animationsBackground;
 	private SpriteSheet iconCharacter;
@@ -42,7 +42,6 @@ public class Fighting extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
 		gc.getInput().enableKeyRepeat();
-		this.game = game;
 		this.animationsPlayer1 = new ArrayList<Animation>();
 		this.animationsPlayer2 = new ArrayList<Animation>();
 		this.modeDebug = false;
@@ -188,81 +187,84 @@ public class Fighting extends BasicGameState {
 
 		//Player 2
 		if (key == Input.KEY_RIGHT && key == Input.KEY_UP){
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.UPRIGHT);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.UPRIGHT);
 
 		}
 		else if (key == Input.KEY_LEFT && key == Input.KEY_UP){
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.UPLEFT);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.UPLEFT);
 		}
 		else if(key== Input.KEY_LEFT){ 
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.LEFT);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT);
 		}
 		else if (key == Input.KEY_RIGHT){
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.RIGHT);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT);
 		}
 
 		else if(key== Input.KEY_DOWN){ 
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.DOWN);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.DOWN);
 		}
 
 		else if( key == Input.KEY_UP){ 
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.UP);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.UP);
 		}
 
 		else if(key==Input.KEY_4){
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.PUNCH);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.PUNCH);
 		}
 
 		else if(key==Input.KEY_5){
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.KICK);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.KICK);
 		}
 		else if(key==Input.KEY_6){
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.BLOCK);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.BLOCK);
 		}
 		//player 1
 
 		if (key == Input.KEY_D && key == Input.KEY_Z){
-			this.window.getGame().getEngine().step(Command.UPRIGHT, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.OTHERPLAYER);
 
 		}
 		else if (key == Input.KEY_Q && key == Input.KEY_Z){
-			this.window.getGame().getEngine().step(Command.UPLEFT, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.UPLEFT);
 
 		}
 		else if(key== Input.KEY_Q){ 
-			this.window.getGame().getEngine().step(Command.LEFT, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT);
 		}
 		else if (key == Input.KEY_D){
-			this.window.getGame().getEngine().step(Command.RIGHT, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT);
 		}
 		else if(key== Input.KEY_S){ 
-			this.window.getGame().getEngine().step(Command.DOWN, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.DOWN);
 		}
 		else if( key == Input.KEY_Z){ 
-			this.window.getGame().getEngine().step(Command.UP, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.UP);
 		}
 		else if(key==Input.KEY_A){
-			this.window.getGame().getEngine().step(Command.PUNCH, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.PUNCH);
 		}
 		else if(key==Input.KEY_E){
-			this.window.getGame().getEngine().step(Command.KICK, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.KICK);
 		} 
 		else if(key==Input.KEY_R){
-			this.window.getGame().getEngine().step(Command.BLOCK, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.BLOCK);
 		}
 	}
 	
 	@Override
 	public void keyReleased(int key, char c) {
 		if(key==Input.KEY_Z || key==Input.KEY_Q || key==Input.KEY_S || key==Input.KEY_D)
-			this.window.getGame().getEngine().step(Command.NEUTRAL, Command.OTHERPLAYER);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.NEUTRAL);
 		if(key==Input.KEY_DOWN || key==Input.KEY_UP || key==Input.KEY_LEFT || key==Input.KEY_RIGHT)
-			this.window.getGame().getEngine().step(Command.OTHERPLAYER, Command.NEUTRAL);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.NEUTRAL);
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame window, int arg2) throws SlickException {
-		this.window.getGame().getEngine().updateFace(); 
+	public void update(GameContainer gc, StateBasedGame window, int delta) throws SlickException {
+		synchronized(this){
+		this.window.getGame().getEngine().updateFace();
+		this.window.getGame().getEngine().step();
+		}
 	}
 
 	@Override

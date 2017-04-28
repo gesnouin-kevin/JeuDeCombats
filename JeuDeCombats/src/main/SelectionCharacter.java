@@ -250,34 +250,43 @@ public class SelectionCharacter extends BasicGameState {
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame window, int delta) throws SlickException {
+	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
 		if(this.character1Select && this.character2Select){
-			int numPlayer1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter();
-			int numPlayer2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter();
+			int cursor1;
+			if(this.cursorPlayer1<=4)
+				cursor1 = this.cursorPlayer1-1;
+			else
+				cursor1 = this.cursorPlayer1-2;
+			int cursor2;
+			if(this.cursorPlayer1<=4)
+				cursor2 = this.cursorPlayer1-1;
+			else
+				cursor2 = this.cursorPlayer1-2;
+			
 			
 			this.window.setCurrentBackground(this.currentBackground);
-			this.window.getGame().getEngine().getPlayer(0).getCharacter().init(InformationsCharacter.getLife(numPlayer1), 
-					InformationsCharacter.getSpeed(numPlayer1), true, numPlayer1);
-			this.window.getGame().getEngine().getPlayer(1).getCharacter().init(InformationsCharacter.getLife(numPlayer2), 
-					InformationsCharacter.getSpeed(numPlayer2), false, numPlayer2);
+			this.window.getGame().getEngine().getPlayer(0).getCharacter().init(InformationsCharacter.getLife(cursor1), 
+					InformationsCharacter.getSpeed(cursor1), true, 0);
+			this.window.getGame().getEngine().getPlayer(1).getCharacter().init(InformationsCharacter.getLife(cursor2), 
+					InformationsCharacter.getSpeed(cursor2), false, 1);
 
 			
 			this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().init(
-					InformationsCharacter.getWidthSpritePersoIdle(numPlayer1),
-					InformationsCharacter.getHeightSpritePersoIdle(numPlayer1));
+					InformationsCharacter.getWidthSpritePersoIdle(cursor1),
+					InformationsCharacter.getHeightSpritePersoIdle(cursor1));
 			
 			this.window.getGame().getEngine().getPlayer(1).getCharacter().getCharBox().init(
-					InformationsCharacter.getWidthSpritePersoIdle(numPlayer2),
-					InformationsCharacter.getHeightSpritePersoIdle(numPlayer2));
+					InformationsCharacter.getWidthSpritePersoIdle(cursor2),
+					InformationsCharacter.getHeightSpritePersoIdle(cursor2));
 			
-			// dÃ©caler p1 sur les x pour centrer
+			// décaler p1 sur les x pour centrer
 			int posXp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionX();
-			int widthp1 = InformationsCharacter.getWidthSpritePersoIdle(numPlayer1);
+			int widthp1 = InformationsCharacter.getWidthSpritePersoIdle(cursor1);
 			
 			this.window.getGame().getEngine().getPlayer(0).getCharacter().setPositionX(posXp1-widthp1);
 			this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().setPosX(posXp1-widthp1);
 			
-			this.window.getState(Fighting.ID).init(gc, window);
+			this.window.getState(Fighting.ID).init(gc, game);
 			this.game.enterState(Fighting.ID);
 		}
 

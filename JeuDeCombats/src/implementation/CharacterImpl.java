@@ -16,8 +16,8 @@ public class CharacterImpl implements CharacterService {
 	private int speed;
 	private boolean faceRight;
 	private boolean dead;
-	private int numeroPlayer;
-	private int numeroCharacter;
+	private int numeroPlayer;  // 0 ou 1
+	private int numeroCharacter; // contient le numero de perso //0->15
 	private boolean running;
 
 	@Override
@@ -62,29 +62,38 @@ public class CharacterImpl implements CharacterService {
 
 	@Override
 	public void moveLeft() {
-		// test collision avec autre player
-		int otherPlayer;
-		if(this.numeroPlayer == 1)
-			otherPlayer =0;
-		else
+		int otherPlayer = -1;
+		
+		if(this.numeroPlayer == 0)
 			otherPlayer =1;
-		// PRobleme ne voit pas les bonnes coordonnees
-		System.out.println("playerCourant:"+this.numeroPlayer);
-		System.out.println("posX: "+this.positionX);
-		System.out.println("autrePosx"+this.engine.getPlayer(otherPlayer).getCharacter().getRectangleHitboxService().getPositionX());
-
-		if(this.positionX-speed*4<this.engine.getPlayer(otherPlayer).getCharacter().getRectangleHitboxService().getPositionX() || this.positionX-speed*4 >
-		  this.engine.getPlayer(otherPlayer).getCharacter().getRectangleHitboxService().getPositionX()+this.engine.getPlayer(otherPlayer).getCharacter().getRectangleHitboxService().getWidth())
+		else
+			otherPlayer =0;
+		
+		this.positionX=this.positionX-speed;
+		this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()-speed, this.rectangleHitbox.getPositionY());
+		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()))
 		{
-			this.positionX=this.positionX-speed*4;
-			this.getCharBox().setPosX(this.getCharBox().getPositionX()-speed*4);
+			this.positionX=this.positionX+speed;
+			this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()+speed, this.rectangleHitbox.getPositionY());
 		}
 	}
 
 @Override
 public void moveRight() {
-	this.positionX=this.positionX+speed*4;
-	this.getCharBox().setPosX(this.getCharBox().getPositionX()+speed*4);
+	int otherPlayer = -1;
+	
+	if(this.numeroPlayer == 0)
+		otherPlayer =1;
+	else
+		otherPlayer =0;
+	
+	this.positionX=this.positionX+speed;
+	this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()+speed, this.rectangleHitbox.getPositionY());
+	if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()))
+	{
+		this.positionX=this.positionX-speed;
+		this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()-speed, this.rectangleHitbox.getPositionY());
+	}
 }
 
 @Override
@@ -97,18 +106,24 @@ public void step(Command c) {
 
 	switch (c) {
 	case LEFT:
-		this.moveLeft();
+		moveLeft();
 		this.running = true;
 		break;
 	case RIGHT:
-		this.moveRight();
+		moveRight();
 		this.running = true;
 		break;
 	case OTHERPLAYER:
 		//do nothing
 		break;
+		
+	case UP:
+		
+		break;
 	case NEUTRAL:
 		this.running = false;
+		break;
+	default:
 		break;
 	}
 

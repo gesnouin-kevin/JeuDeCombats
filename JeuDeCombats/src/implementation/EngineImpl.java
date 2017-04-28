@@ -11,6 +11,9 @@ public class EngineImpl implements EngineService{
 	private PlayerService player[] = new PlayerService[2];
 	private boolean gameOver=false;
 	
+	private Command commandPlayer1 = Command.NEUTRAL;
+	private Command commandPlayer2 = Command.NEUTRAL;
+	
 	@Override
 	public int getHeight() {
 		return this.height;
@@ -61,9 +64,17 @@ public class EngineImpl implements EngineService{
 	}
 
 	@Override
-	public void step(Command c1, Command c2) {
-		this.player[0].getCharacter().step(c1);
-		this.player[1].getCharacter().step(c2);
+	public void step() {
+		/*
+		System.out.println("Step engine");
+		System.out.println("coord1hitbox:"+this.getPlayer(0).getCharacter().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getPositionX());
+		System.out.println("coord2hitbox:"+this.getPlayer(1).getCharacter().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getPositionX());
+		System.out.println("coord1:"+this.getPlayer(0).getCharacter().getEngine().getPlayer(0).getCharacter().getPositionX());
+		System.out.println("coord2:"+this.getPlayer(1).getCharacter().getEngine().getPlayer(1).getCharacter().getPositionX());
+		System.out.println("end step engine");
+		*/
+		this.player[0].getCharacter().step(this.commandPlayer1);
+		this.player[1].getCharacter().step(this.commandPlayer2);
 		
 	}
 	// A SPECIFIER
@@ -80,6 +91,22 @@ public class EngineImpl implements EngineService{
 			this.getPlayer(1).getCharacter().setFaceRight(false);
 		}
 		
+	}
+
+	public Command getCommandPlayer1() {
+		return commandPlayer1;
+	}
+
+	public void setCommandPlayer1(Command commandPlayer1) {
+		this.commandPlayer1 = commandPlayer1;
+	}
+
+	public Command getCommandPlayer2() {
+		return commandPlayer2;
+	}
+
+	public void setCommandPlayer2(Command commandPlayer2) {
+		this.commandPlayer2 = commandPlayer2;
 	}
 
 }
