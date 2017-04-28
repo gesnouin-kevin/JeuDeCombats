@@ -151,7 +151,7 @@ public class Fighting extends BasicGameState {
 		System.out.println("size1"+this.animationsPlayer1.size());
 		System.out.println("size2"+this.animationsPlayer2.size());
 		
-		g.drawAnimation(this.animationsPlayer1.get(animPlayer1), posXp1, gc.getHeight()-(posYp1+heightPlayer1-GROUND));
+		g.drawAnimation(this.animationsPlayer1.get(animPlayer1), posXp1, gc.getHeight()-(posYp1+heightPlayer1+GROUND));
 
 		// draw player2
 		int animPlayer2 =0;
@@ -164,11 +164,11 @@ public class Fighting extends BasicGameState {
 		else if(this.window.getGame().getEngine().getPlayer(1).getCharacter().isCrouching())
 		{
 			animPlayer2 = 6;
-			heightPlayer2 = InformationsCharacter.getHeightSpritePersoWalking(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
+			heightPlayer2 = InformationsCharacter.getHeightSpritePersoCrouch(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
 		}
 		if(!this.window.getGame().getEngine().getPlayer(1).getCharacter().isFaceRight())
 			animPlayer2 += 1;
-		g.drawAnimation(this.animationsPlayer2.get(animPlayer2), posXp2, gc.getHeight()-(posYp2+heightPlayer2-GROUND));
+		g.drawAnimation(this.animationsPlayer2.get(animPlayer2), posXp2, gc.getHeight()-(posYp2+heightPlayer2+GROUND));
 	}
 
 	@Override

@@ -38,6 +38,7 @@ public class SelectionCharacter extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
 		this.game = game;
+		gc.getInput().enableKeyRepeat();
 		this.cursorSelectCharacter = new SpriteSheet("ressources/menu/cursorSelectCharacter.png", 42, 64);
 		this.iconCharacter = new SpriteSheet("ressources/menu/iconCharacter2.png", 976, 194);
 		this.selectionCharacter = new SpriteSheet("ressources/menu/selectionCharacter.png", 256, 193);
