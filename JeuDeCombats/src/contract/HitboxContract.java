@@ -4,6 +4,7 @@ import implementation.HitboxImpl;
 import decorator.HitboxDecorator;
 import error.InvariantError;
 import error.PostConditionError;
+import error.PreConditionError;
 import service.HitboxService;
 
 public class HitboxContract extends HitboxDecorator{
@@ -17,17 +18,17 @@ public class HitboxContract extends HitboxDecorator{
 		try {
 			HitboxImpl hb1 = (HitboxImpl) this.clone();
 			HitboxImpl hb2 = (HitboxImpl) this.clone();
-			
+
 			// \inv : isCollidesWith(H1) == \exist x,y { H.isBelongsTo(x,y) and H1.isBelongsTo(x,y) }
 			if(!(hb1.isCollidesWith(hb2) == hb1.isBelongsTo(0,0) && hb1.isCollidesWith(hb2) == hb2.isBelongsTo(0,0)))
 				throw new InvariantError("Error checkInvariant : collidesWith");
-			
+
 			// \inv : isEqualsTo(H1) == \forall x,y { H.isBelongsTo(x,y) == H1.isBelongsTo(x,y) }
 			if(!(hb1.isBelongsTo(0, 0)==hb2.isBelongsTo(0, 0)))
 				throw new InvariantError("Error checkInvariant : equalsTo");
-			
-			
-			
+
+
+
 		} catch (CloneNotSupportedException e) {e.printStackTrace();}		
 	}
 
@@ -42,11 +43,11 @@ public class HitboxContract extends HitboxDecorator{
 		int getPositionX_at_pre = getPositionX();
 		int getPositionY_at_pre = getPositionY();
 		boolean belongsTo_abs_at_pre = isBelongsTo(300, 0);
-		
+
 		super.moveTo(x,y);
-		
+
 		checkInvariant();
-		
+
 		if(! isBelongsTo(getPositionX(), getPositionY()) == belongsTo_centre_at_pre)
 		{throw new PostConditionError("Error PostCondition : belongsTo != belongsTo_centre_at_pre");}
 
@@ -56,17 +57,17 @@ public class HitboxContract extends HitboxDecorator{
 		if(! isBelongsTo(300 + (x - getPositionX_at_pre), 0 + (y - getPositionY_at_pre)) == belongsTo_abs_at_pre)
 		{throw new PostConditionError("belongsTo != belongsTo_abs_at_pre");}
 	}
-	
+
 	public void init(int x, int y){
 		checkInvariant();
-		
+
 		super.init(x, y);
-		
+
 		checkInvariant();
-		
+
 		if(!(getPositionX()==x))
 			throw new PostConditionError("Error PostConditions : getPositionX");
-		
+
 		if(!(getPositionY()==y))
 			throw new PostConditionError("Error PostConditions : getPositionY");
 	}
@@ -107,13 +108,39 @@ public class HitboxContract extends HitboxDecorator{
 	}
 
 	public void setPosX(int posX) {
+
+		//pre: posX > 0
+		if(!(posX>0))
+			throw new PreConditionError("Error PreCondition: posX>0");
+
+		checkInvariant();
+
 		super.setPosX(posX);
+
+		checkInvariant();
+
+		//post: getPositionX()==posX
+		if(!(getPositionX()==posX))
+			throw new PostConditionError("Error PostCondition: getPositionX()==posX");
 	}
 
 	public void setPosY(int posY) {
-		super.setPosY(posY);
 		
+		//pre: posY > 0
+		if(!(posY>0))
+			throw new PreConditionError("Error PreCondition: posY>0");
+
+		checkInvariant();
+
+		super.setPosY(posY);
+
+		checkInvariant();
+
+		//post: getPositionX()==posX
+		if(!(getPositionY()==posY))
+			throw new PostConditionError("Error PostCondition: getPositionX()==posY");
+
 	}
-	
-	
+
+
 }

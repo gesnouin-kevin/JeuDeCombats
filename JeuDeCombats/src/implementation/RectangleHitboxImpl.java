@@ -30,6 +30,7 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 		return rhs.getPositionX() == getPositionX() && rhs.getPositionY() == getPositionY() && rhs.getHeight() == height && rhs.getWidth() == width;
 	}
 	
+
 	public void init(int w, int h){
 		this.width = w;
 		this.height = h;
@@ -64,7 +65,7 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 	}
 
 	@Override
-	public void setWidth(int heightSpritePersoIdle) {
+	public void setWidth(int width) {
 		this.width = width;
 		
 	}

@@ -68,7 +68,9 @@ public class EngineImpl implements EngineService{
 		this.player[0].getCharacter().step(this.commandPlayer1);
 		this.player[1].getCharacter().step(this.commandPlayer2);
 	}
-	// A SPECIFIER
+
+	
+	@Override
 	public void updateFace() {
 		if(this.getPlayer(0).getCharacter().getPositionX()>this.getPlayer(1).getCharacter().getPositionX())
 		{
@@ -83,19 +85,19 @@ public class EngineImpl implements EngineService{
 		}
 		
 	}
-
+	@Override
 	public Command getCommandPlayer1() {
 		return commandPlayer1;
 	}
-
+	@Override
 	public void setCommandPlayer1(Command commandPlayer1) {
 		this.commandPlayer1 = commandPlayer1;
 	}
-
+	@Override
 	public Command getCommandPlayer2() {
 		return commandPlayer2;
 	}
-
+	@Override
 	public void setCommandPlayer2(Command commandPlayer2) {
 		this.commandPlayer2 = commandPlayer2;
 	}

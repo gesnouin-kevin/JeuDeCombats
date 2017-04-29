@@ -15,6 +15,9 @@ public interface CharacterService {
 	public boolean isRunning();
 	public boolean isCrouching();
 	public boolean isJumping();
+	public int getNumeroPlayer() ;
+	public int getNumeroCharacter();
+	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox);
 	
 	
 	/** Invariant */
@@ -114,21 +117,45 @@ public interface CharacterService {
 	public void setFaceRight(boolean fr);
 	
 	
-	public int getNumeroPlayer() ;
-
+	/**
+	 * pre: numeroPlayer>=0 && numeroPlayer<=1
+	 * post: getNumeroPlayer == numeroPlayer
+	 */
 	public void setNumeroPlayer(int numeroPlayer);
 	
-	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox);
 	
+	/**
+	 * post: getRectangleHitboxService()==rectangleHitbox
+	 * 
+	 */
 	public RectangleHitboxService getRectangleHitboxService();
 	
-	public int getNumeroCharacter();
-
+	
+	/**
+	 * pre: numeroCharacter>=0 && numeroCharacter<=15
+	 * post: getNumeroCharacter == numeroCharacter
+	 */
 	public void setNumeroCharacter(int numeroCharacter);
 	
+	
+	/**
+	 * post: getFaceRight() = faceRight()@Pre and getLife() = getLife()@Pre
+	 * post: getPositionY() == getPositionY()@Pre	
+	 */
 	public void moveDown();
 	
+	
+	/**
+	 * post: getFaceRight() = faceRight()@Pre and getLife() = getLife()@Pre
+	 * post: getPositionY() == getPositionY()@Pre	
+	 */
 	public void moveUp();
 	
+	///A COMPLETER POUR CHAQUE AJOUT
+	/**
+	 * isCrouching() || isJumping() || isRunning()
+	 * post: getFaceRight() = faceRight()@Pre and getLife() = getLife()@Pre
+	 * post: getPositionY() == getPositionY()@Pre	
+	 */
 	public void neutral();
 }

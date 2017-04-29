@@ -244,7 +244,7 @@ public class CharacterImpl implements CharacterService {
 		this.jumping = false;
 		
 		this.rectangleHitbox.setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.numeroCharacter));
-		this.rectangleHitbox.setWidth(InformationsCharacter.getHeightSpritePersoIdle(this.numeroCharacter));
+		this.rectangleHitbox.setWidth(InformationsCharacter.getWidthSpritePersoIdle(this.numeroCharacter));
 	}
 	
 	

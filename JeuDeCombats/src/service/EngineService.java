@@ -8,6 +8,8 @@ public interface EngineService {
 	public int getWidth();
 	public PlayerService getPlayer(int i);
 	public boolean isGameOver();
+	public Command getCommandPlayer1();
+	public Command getCommandPlayer2();
 
 	/** Invariants */
 	//inv:  isGameOver() == \exist i in {1,2} getCharacter::getChar(i).isDead()
@@ -35,4 +37,16 @@ public interface EngineService {
 	/** Operators */
 	
 	public void step();
+	
+	public void updateFace();
+	
+	/**
+	 * pre: commandplayer1 in Command
+	 */
+	public void setCommandPlayer1(Command commandPlayer1);
+
+	/**
+	 * pre: commandplayer1 in Command
+	 */
+	public void setCommandPlayer2(Command commandPlayer2);
 }

@@ -9,6 +9,8 @@ public interface RectangleHitboxService extends HitboxService {
 	public int getHeight();
 	public boolean isCollidesWith(RectangleHitboxService rhs);
 	public boolean isEqualsTo(RectangleHitboxService rhs);
+	public int getPosX();
+	public int getPosY();
 
 	/** invariants */
 	// \inv : isCollidesWith(H1) == \exist x,y { H.isBelongsTo(x,y) and H1.isBelongsTo(x,y) }
@@ -27,25 +29,43 @@ public interface RectangleHitboxService extends HitboxService {
 	 */
 	public void init(int x, int y, int w, int h);
 	
+	
+	//A RENOMMER
+	/**
+	 * pre: w > 0
+	 * pre: h > 0
+	 * post: getWidth() == w
+	 * post: getHeight() == h
+	 */
 	public void init(int w, int h);
 
+	
 	/** Operators */
+		
 	/**
-	* post: getPositionX() == x
-	* post: getPositionY() == y
-	* post: \forall u, v: int x int { belongsTo(u, v) == belongsTo(u-(x-getPositionX()@pre), v-(y-getPositionY()@pre)) }
-	*/
-	
-	public int getPosX();
-	
+	 * pos: getPosX()==posX
+	 */
 	public void setPosX(int posX);
-	
-	public int getPosY();
-	
+		
+
+	/**
+	 * pos: getPosY()==posY
+	 */
 	public void setPosY(int posY);
-	
+
+
+	/**
+	 * pre: height > 0	
+	 * pos: getHeight()==height
+	 */	
 	public void setHeight(int height);
-	public void setWidth(int heightSpritePersoIdle);
+
+	
+	/**
+	 * pre: width > 0	
+	 * pos: getWidth()==width
+	 */	
+	public void setWidth(int width);
 	
 
 }
