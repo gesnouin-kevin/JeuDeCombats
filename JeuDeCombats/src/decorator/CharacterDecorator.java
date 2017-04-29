@@ -14,6 +14,10 @@ public abstract class CharacterDecorator implements CharacterService {
 		this.delegateCharacter=cs;
 	}
 	
+	protected CharacterService getDelegate() {
+		return delegateCharacter;
+	}
+	
 	@Override
 	public int getPositionX() {
 		return this.delegateCharacter.getPositionX();
