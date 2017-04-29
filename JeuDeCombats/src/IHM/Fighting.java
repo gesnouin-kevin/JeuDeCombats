@@ -22,16 +22,15 @@ public class Fighting extends BasicGameState {
 	public static int NB_FRAMES_BACKGROUND = 8;
 	public static int NB_MAX_ANIMATION = 22;
 	public static int GROUND = 50;
+	
+	private int time = 0;
+	private long lastMs;
 
-	private Game game;
 	private Window window;
 	private Animation[] animationsBackground;
 	private SpriteSheet iconCharacter;
 	private SpriteSheet iconKO;
-
-	private ArrayList<Animation> animationsPlayer1;
-	private ArrayList<Animation> animationsPlayer2;
-
+	
 	private boolean modeDebug;
 
 	public Fighting(Window window) {
@@ -41,20 +40,23 @@ public class Fighting extends BasicGameState {
 	}
 
 	@Override
-	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
+	public void init(GameContainer gc, StateBasedGame game){
 		gc.getInput().enableKeyRepeat();
-		this.animationsPlayer1 = new ArrayList<Animation>();
-		this.animationsPlayer2 = new ArrayList<Animation>();
+		this.window.getGame().getEngine().getPlayer(0).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter(), this.window.getGame()));
+		this.window.getGame().getEngine().getPlayer(1).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter(), this.window.getGame()));
+		
 		this.modeDebug = false;
 
 		//load background images
+		try{
 		for(int j=0; j<NB_BACKGROUND; j++){
 			Animation animation = new Animation();
 			int nbFrames = NB_BACKGROUND;
 			if(j==3)
 				nbFrames = 24;
 			for(int i=0; i<nbFrames;i++){
-				animation.addFrame(new SpriteSheet("ressources/background/background"+(j+1)+"frame"+i+".png", 800, 336), 100); 
+					animation.addFrame(new SpriteSheet("ressources/background/background"+(j+1)+"frame"+i+".png", 800, 336), 100);
+				
 			}
 			this.animationsBackground[j] = animation;
 		}
@@ -64,9 +66,8 @@ public class Fighting extends BasicGameState {
 		this.iconCharacter = new SpriteSheet("ressources/menu/iconCharacter2.png", 976, 194);
 
 		// load animations characters
-		loadAnimationsPlayers(0);
-		loadAnimationsPlayers(1);
-
+		
+		} catch (SlickException e) {} 
 
 	}
 
@@ -76,6 +77,10 @@ public class Fighting extends BasicGameState {
 
 		float scaleX =  (gc.getWidth()/700f);
 		float scaleY = (gc.getHeight()/500f);
+		
+		//draw time
+		g.setColor(new Color(255,255,255));
+		g.drawString("Time : " + time/1000, 100, 100);
 
 		// draw head player1
 		this.iconCharacter.draw(5*scaleX, 0, 8*scaleX+61*scaleX, 14*scaleY+97*scaleY, this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter()*61, 0, this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter()*61+61, 97);
@@ -134,38 +139,25 @@ public class Fighting extends BasicGameState {
 		}
 
 		// draw player1
-		int animPlayer1 =0;
-		int heightPlayer1 =InformationsCharacter.getHeightSpritePersoIdle(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
-		if(this.window.getGame().getEngine().getPlayer(0).getCharacter().isRunning()){
-			animPlayer1 = 2;
-			heightPlayer1 = InformationsCharacter.getHeightSpritePersoWalking(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
-		}
-		else if(this.window.getGame().getEngine().getPlayer(0).getCharacter().isCrouching()){
-			animPlayer1 = 6;
-			heightPlayer1 = InformationsCharacter.getHeightSpritePersoCrouch(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
-		}
-
-		if(!this.window.getGame().getEngine().getPlayer(0).getCharacter().isFaceRight())
-			animPlayer1 += 1;
+		int heightPlayer1 = this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation());
 		
-		g.drawAnimation(this.animationsPlayer1.get(animPlayer1), posXp1, gc.getHeight()-(posYp1+heightPlayer1+GROUND));
-
+		if(this.window.getGame().getEngine().getPlayer(0).getCharacter().isFaceRight())
+			this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getSpriteSheet().draw(posXp1, gc.getHeight()-(posYp1+heightPlayer1+GROUND));
+		else
+			this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getSpriteSheet().draw(posXp1, gc.getHeight()-(posYp1+heightPlayer1+GROUND) 
+				,this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getWidthAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()),0
+							,0,this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()));
+			
 		// draw player2
-		int animPlayer2 =0;
-		int heightPlayer2=InformationsCharacter.getHeightSpritePersoIdle(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
-		if(this.window.getGame().getEngine().getPlayer(1).getCharacter().isRunning())
-		{
-			animPlayer2 = 2;
-			heightPlayer2 = InformationsCharacter.getHeightSpritePersoWalking(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
-		}
-		else if(this.window.getGame().getEngine().getPlayer(1).getCharacter().isCrouching())
-		{
-			animPlayer2 = 6;
-			heightPlayer2 = InformationsCharacter.getHeightSpritePersoCrouch(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
-		}
-		if(!this.window.getGame().getEngine().getPlayer(1).getCharacter().isFaceRight())
-			animPlayer2 += 1;
-		g.drawAnimation(this.animationsPlayer2.get(animPlayer2), posXp2, gc.getHeight()-(posYp2+heightPlayer2+GROUND));
+		int heightPlayer2 = this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation());
+		
+		if(this.window.getGame().getEngine().getPlayer(1).getCharacter().isFaceRight())
+			this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getSpriteSheet().draw(posXp2, gc.getHeight()-(posYp2+heightPlayer2+GROUND));
+		else
+			this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getSpriteSheet().draw(posXp2, gc.getHeight()-(posYp2+heightPlayer2+GROUND) 
+				,this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getWidthAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation()),0
+							,0,this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation()));
+			
 	}
 
 	@Override
@@ -251,89 +243,21 @@ public class Fighting extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame window, int delta) throws SlickException {
 		this.window.getGame().getEngine().updateFace();
 		this.window.getGame().getEngine().step();
+		time+=delta;
+		
+		if(System.currentTimeMillis()-lastMs>500) // limite frame rate -> frame de 500 ms ?
+		{
+			if(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer() != null)
+				this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().nextFrame();
+			if(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer() != null)
+				this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().nextFrame();
+			lastMs = System.currentTimeMillis();
+		
+		}
 	}
 
 	@Override
 	public int getID() {
 		return ID;
 	}
-
-	public void loadAnimationsPlayers(int player) throws SlickException
-	{
-		if(player==0)
-			this.animationsPlayer1 = new ArrayList<Animation>();
-		else
-			this.animationsPlayer2 = new ArrayList<Animation>();
-
-		int numPlayer = this.window.getGame().getEngine().getPlayer(player).getCharacter().getNumeroCharacter();
-		SpriteSheet s = new SpriteSheet("ressources/fight/"+numPlayer+".png", 1413, 2096);
-
-		int heightSrc = 0;
-
-		for(int i=0; i<NB_MAX_ANIMATION;  i++)
-		{
-			Animation anim = new Animation();
-			int currentXsrc;
-
-			if(i%2==0)//i est pair
-			{
-				currentXsrc = 0;
-				for(int j=0;j<getNbAnimations(i, numPlayer);j++)
-				{
-					anim.addFrame(s.getSubImage(getWidthAnimations(i, numPlayer)*j, heightSrc, getWidthAnimations(i, numPlayer), getHeightAnimations(i, numPlayer)), 100);
-
-					currentXsrc+=getWidthAnimations(i, numPlayer);
-				}
-			}
-			else
-			{
-				currentXsrc = (getNbAnimations(i, numPlayer)-1) * getWidthAnimations(i, numPlayer);
-				for(int j=getNbAnimations(i, numPlayer)-1;j>=0;j--)
-				{
-					anim.addFrame(s.getSubImage(getWidthAnimations(i, numPlayer)*j, heightSrc, getWidthAnimations(i, numPlayer), getHeightAnimations(i, numPlayer)), 100);
-
-					currentXsrc-=getWidthAnimations(i, numPlayer);
-				}
-			}
-
-			if(player==0){
-				this.animationsPlayer1.add(anim);
-			}
-			else
-				this.animationsPlayer2.add(anim);
-
-			heightSrc += getHeightAnimations(i, numPlayer);
-		}
-	}
-
-	public int getNbAnimations(int animation, int numPlayer)
-	{
-		if(animation == 0 || animation ==1) return InformationsCharacter.getNbSpritePersoIdle(numPlayer);
-		if(animation == 2 || animation ==3) return InformationsCharacter.getNbSpritePersoWalking(numPlayer);
-		if(animation == 4 || animation ==5) return InformationsCharacter.getNbSpritePersoJump(numPlayer);
-		if(animation == 6 || animation ==7) return InformationsCharacter.getNbSpritePersoCrouch(numPlayer);
-
-		return 0;
-	}
-
-	public int getWidthAnimations(int animation, int numPlayer)
-	{
-		if(animation == 0 || animation ==1) return InformationsCharacter.getWidthSpritePersoIdle(numPlayer);
-		if(animation == 2 || animation ==3) return InformationsCharacter.getWidthSpritePersoWalking(numPlayer);
-		if(animation == 4 || animation ==5) return InformationsCharacter.getWidthSpritePersoJump(numPlayer);
-		if(animation == 6 || animation ==7) return InformationsCharacter.getWidthSpritePersoCrouch(numPlayer);
-
-		return 0;
-	}
-
-	public int getHeightAnimations(int animation, int numPlayer)
-	{
-		if(animation == 0 || animation ==1) return InformationsCharacter.getHeightSpritePersoIdle(numPlayer);
-		if(animation == 2 || animation ==3) return InformationsCharacter.getHeightSpritePersoWalking(numPlayer);
-		if(animation == 4 || animation ==5) return InformationsCharacter.getHeightSpritePersoJump(numPlayer);
-		if(animation == 6 || animation ==7) return InformationsCharacter.getHeightSpritePersoCrouch(numPlayer);
-
-		return 0;
-	}
-
 }

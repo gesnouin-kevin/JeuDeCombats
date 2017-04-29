@@ -132,10 +132,12 @@ public class CharacterImpl implements CharacterService {
 		switch (c) {
 		case LEFT:
 			moveLeft();
+			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(1);
 			this.running = true;
 			break;
 		case RIGHT:
 			moveRight();
+			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(1);
 			this.running = true;
 			break;
 		case OTHERPLAYER:
@@ -144,15 +146,18 @@ public class CharacterImpl implements CharacterService {
 
 		case UP:
 			moveUp();
+			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(2);
 			this.jumping=true;
 			break;
 			
 		case DOWN:
 			moveDown();
+			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(3);
 			this.crouching=true;
 			break;
 		case NEUTRAL:
 			neutral();
+			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
 			break;
 		default:
 			break;

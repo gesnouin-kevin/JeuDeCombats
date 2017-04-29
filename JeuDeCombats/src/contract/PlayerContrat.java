@@ -14,4 +14,12 @@ public class PlayerContrat extends PlayerDecorator{
 	public void init(EngineService es, int numeroPlayer) {
 		super.init(es, numeroPlayer);
 	}
+	
+	public IHM.Animation getAnimationPlayer() {
+		return getAnimationPlayer();
+	}
+
+	public void setAnimationPlayer(IHM.Animation animationPlayer) {
+		this.setAnimationPlayer(animationPlayer);
+	}
 }

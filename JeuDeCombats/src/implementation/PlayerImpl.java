@@ -9,6 +9,8 @@ public class PlayerImpl implements PlayerService {
 	private CharacterService character;
 	private int numeroPlayer; // 0 ou 1
 
+	private IHM.Animation animationPlayer;
+
 	@Override
 	public void init(EngineService es,int numeroPlayer) {
 		this.character = new CharacterImpl();
@@ -24,6 +26,14 @@ public class PlayerImpl implements PlayerService {
 	@Override
 	public int getNumeroPlayer() {
 		return this.numeroPlayer;
+	}
+
+	public IHM.Animation getAnimationPlayer() {
+		return animationPlayer;
+	}
+
+	public void setAnimationPlayer(IHM.Animation animationPlayer) {
+		this.animationPlayer = animationPlayer;
 	}
 
 
