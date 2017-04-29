@@ -1,4 +1,4 @@
-package main;
+package IHM;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
