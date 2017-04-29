@@ -148,9 +148,6 @@ public class Fighting extends BasicGameState {
 		if(!this.window.getGame().getEngine().getPlayer(0).getCharacter().isFaceRight())
 			animPlayer1 += 1;
 		
-		System.out.println("size1"+this.animationsPlayer1.size());
-		System.out.println("size2"+this.animationsPlayer2.size());
-		
 		g.drawAnimation(this.animationsPlayer1.get(animPlayer1), posXp1, gc.getHeight()-(posYp1+heightPlayer1+GROUND));
 
 		// draw player2

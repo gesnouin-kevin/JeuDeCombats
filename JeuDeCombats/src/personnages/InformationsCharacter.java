@@ -23,32 +23,32 @@ public abstract class InformationsCharacter {
 	private static int nbSpritePersoCrouch[]={1,0,0,0,0,1};
 	
 	private static int widthSpritePersoBlocking[]={182,0,0,0,0,219};
-	private static int heightSpritePersoBlocking[]={345,0,0,0,0,340};
-	private static int nbSpritePersoBlocking[]={4,0,0,0,0,2};
+	private static int heightSpritePersoBlocking[]={350,0,0,0,0,340};
+	private static int nbSpritePersoBlocking[]={2,0,0,0,0,2};
 	
 	private static int widthSpritePersoPunch[]={182,0,0,0,0,384};
-	private static int heightSpritePersoPunch[]={345,0,0,0,0,340};
-	private static int nbSpritePersoPunch[]={4,0,0,0,0,3};
+	private static int heightSpritePersoPunch[]={341,0,0,0,0,340};
+	private static int nbSpritePersoPunch[]={3,0,0,0,0,3};
 	
 	private static int widthSpritePersoKick[]={182,0,0,0,0,366};
-	private static int heightSpritePersoKick[]={345,0,0,0,0,388};
-	private static int nbSpritePersoKick[]={4,0,0,0,0,5};
+	private static int heightSpritePersoKick[]={349,0,0,0,0,388};
+	private static int nbSpritePersoKick[]={3,0,0,0,0,5};
 	
 	private static int widthSpritePersoHit[]={182,0,0,0,0,290};
-	private static int heightSpritePersoHit[]={345,0,0,0,0,306};
+	private static int heightSpritePersoHit[]={287,0,0,0,0,306};
 	private static int nbSpritePersoHit[]={4,0,0,0,0,2};
 	
 	private static int widthSpritePersoCrouchHit[]={182,0,0,0,0,237};
-	private static int heightSpritePersoCrouchHit[]={345,0,0,0,0,248};
-	private static int nbSpritePersoCrouchHit[]={4,0,0,0,0,1};
+	private static int heightSpritePersoCrouchHit[]={241,0,0,0,0,248};
+	private static int nbSpritePersoCrouchHit[]={1,0,0,0,0,1};
 	
 	private static int widthSpritePersoKo[]={182,0,0,0,0,357};
-	private static int heightSpritePersoKo[]={345,0,0,0,0,283};
-	private static int nbSpritePersoKo[]={4,0,0,0,0,4};
+	private static int heightSpritePersoKo[]={312,0,0,0,0,283};
+	private static int nbSpritePersoKo[]={3,0,0,0,0,4};
 	
-	private static int widthSpritePersoVictory[]={182,0,0,0,0,203};
-	private static int heightSpritePersoVictory[]={345,0,0,0,0,384};
-	private static int nbSpritePersoVictory[]={4,0,0,0,0,3};
+	private static int widthSpritePersoVictory[]={180,0,0,0,0,203};
+	private static int heightSpritePersoVictory[]={460,0,0,0,0,384};
+	private static int nbSpritePersoVictory[]={3,0,0,0,0,3};
 
 	public static int getLife(int numeroPerso){return InformationsCharacter.life[numeroPerso];}
 	public static int getSpeed(int numeroPerso){return InformationsCharacter.speed[numeroPerso];}
