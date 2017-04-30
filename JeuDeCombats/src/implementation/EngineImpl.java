@@ -66,7 +66,9 @@ public class EngineImpl implements EngineService{
 	@Override
 	public void step() {
 		this.player[0].getCharacter().step(this.commandPlayer1);
+		this.commandPlayer1 = Command.NEUTRAL;
 		this.player[1].getCharacter().step(this.commandPlayer2);
+		this.commandPlayer2 = Command.NEUTRAL;
 	}
 
 	

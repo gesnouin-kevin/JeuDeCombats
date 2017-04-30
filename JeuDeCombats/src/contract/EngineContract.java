@@ -133,14 +133,14 @@ public class EngineContract extends EngineDecorator{
 
 	@Override
 	public void setCommandPlayer1(Command commandPlayer1) {
-
+/*
 		//pre: commandplayer1 in Command
 		if(!(commandPlayer1==Command.BLOCK || commandPlayer1==Command.DOWN || commandPlayer1==Command.KICK || commandPlayer1==Command.LEFT 
-				|| commandPlayer1==Command.NEUTRAL || commandPlayer1==Command.OTHERPLAYER || commandPlayer1==Command.PUNCH 
+				|| commandPlayer1==Command.NEUTRAL || commandPlayer1==Command.PUNCH 
 				|| commandPlayer1==Command.RIGHT || commandPlayer1==Command.UP || commandPlayer1==Command.UPLEFT || commandPlayer1==Command.UPRIGHT
 				))
 			throw new PreConditionError("Error PreCondition: commandPlayer1 doesn't exist in Command");
-
+*/ // a modif
 		checkInvariant();
 
 		super.setCommandPlayer1(commandPlayer1);
@@ -150,14 +150,14 @@ public class EngineContract extends EngineDecorator{
 
 	@Override
 	public void setCommandPlayer2(Command commandPlayer2) {
-		
+		/*
 		//pre: commandplayer1 in Command
 		if(!(commandPlayer2==Command.BLOCK || commandPlayer2==Command.DOWN || commandPlayer2==Command.KICK || commandPlayer2==Command.LEFT 
-				|| commandPlayer2==Command.NEUTRAL || commandPlayer2==Command.OTHERPLAYER || commandPlayer2==Command.PUNCH 
+				|| commandPlayer2==Command.NEUTRAL || commandPlayer2==Command.PUNCH 
 				|| commandPlayer2==Command.RIGHT || commandPlayer2==Command.UP || commandPlayer2==Command.UPLEFT || commandPlayer2==Command.UPRIGHT
 				))
 			throw new PreConditionError("Error PreCondition: commandPlayer1 doesn't exist in Command");
-
+*/ // a modif
 		checkInvariant();
 
 		super.setCommandPlayer2(commandPlayer2);

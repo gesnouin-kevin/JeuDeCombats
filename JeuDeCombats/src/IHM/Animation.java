@@ -14,11 +14,11 @@ public class Animation {
 
 	private int currentFrame;
 	private int currentAnimation;
-
-	private ArrayList<ArrayList<SpriteSheet>> images;
-	private int numPlayer;
-	private Game game;
 	private boolean repeatAnimation;
+	private int numPlayer;
+	
+	private ArrayList<ArrayList<SpriteSheet>> images;
+	private Game game;
 
 	public Animation(int numPlayer, Game game){
 		this.currentFrame=0;
@@ -43,9 +43,7 @@ public class Animation {
 			this.currentFrame = 0;
 		else	// animation end
 		{
-			this.currentFrame = 0;
-			this.currentAnimation = 0;
-			this.repeatAnimation = true;
+			this.setCurrentAnimation(0);
 		}
 			
 	}
@@ -112,7 +110,13 @@ public class Animation {
 
 	public void setCurrentAnimation(int currentAnimation) {
 		if(this.currentAnimation != currentAnimation)
+		{
 			this.currentFrame = 0;
+			if(currentAnimation==0 || currentAnimation==1 || currentAnimation == 3 || currentAnimation == 4 || currentAnimation==10)
+				this.repeatAnimation = true;
+			else
+				this.repeatAnimation = false;
+		}
 		this.currentAnimation = currentAnimation;
 	}
 

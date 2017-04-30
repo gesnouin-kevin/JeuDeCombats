@@ -247,6 +247,7 @@ public class CharacterContract extends CharacterDecorator {
 
 		checkInvariant();
 
+		/* a modif
 		//post: step(LEFT) == moveLeft()
 		if(c==Command.LEFT)
 			if(!(getPositionX()<positionX_atPre))
@@ -260,7 +261,7 @@ public class CharacterContract extends CharacterDecorator {
 		//post: step(NEUTRAL) == this
 		if(c==Command.NEUTRAL)
 			if(!(getPositionX()==positionX_atPre))
-				throw new PostConditionError("Error Precondition: step(NEUTRAL) == this");
+				throw new PostConditionError("Error Precondition: step(NEUTRAL) == this");*/
 	}
 
 	@Override

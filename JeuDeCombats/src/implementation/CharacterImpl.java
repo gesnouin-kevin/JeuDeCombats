@@ -113,14 +113,16 @@ public class CharacterImpl implements CharacterService {
 	@Override
 	public void moveDown() {
 		this.rectangleHitbox.setHeight(InformationsCharacter.getHeightSpritePersoCrouch(this.numeroCharacter));
+		this.rectangleHitbox.setWidth(InformationsCharacter.getWidthSpritePersoCrouch(this.numeroCharacter));
 	}
-	
+
 	@Override
 	public void moveUp() {
 		this.rectangleHitbox.setHeight(InformationsCharacter.getHeightSpritePersoJump(this.numeroCharacter));
+		this.rectangleHitbox.setWidth(InformationsCharacter.getWidthSpritePersoJump(this.numeroCharacter));
 	}
-	
-	
+
+
 	@Override
 	public void switchSide() {
 		this.faceRight = !this.faceRight;
@@ -128,42 +130,52 @@ public class CharacterImpl implements CharacterService {
 
 	@Override
 	public void step(Command c) {
-
 		switch (c) {
-		case LEFT:
+		case LEFT_PRESSED:
 			moveLeft();
 			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(1);
 			this.running = true;
 			break;
-		case RIGHT:
+			
+		case LEFT_RELEASED:
+			this.running = false;
+			neutral();
+			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
+			break;
+			
+		case RIGHT_PRESSED:
 			moveRight();
 			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(1);
 			this.running = true;
 			break;
-		case OTHERPLAYER:
-			//do nothing
+			
+		case RIGHT_RELEASED:
+			this.running = false;
+			neutral();
+			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
 			break;
-
+			
+		case DOWN_PRESSED:
+			this.crouching = true;
+			crounch();
+			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(3);
+			break;
+			
+		case DOWN_RELEASED:
+			this.crouching = false;
+			neutral();
+			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
+			break;
+			
 		case UP:
 			moveUp();
 			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(2);
 			this.jumping=true;
 			break;
 			
-		case DOWN:
-			moveDown();
-			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(3);
-			this.crouching=true;
-			break;
-		case NEUTRAL:
-			neutral();
-			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
-			break;
 		default:
 			break;
 		}
-
-
 	}
 
 	public void setPositionX(int x){
@@ -239,13 +251,13 @@ public class CharacterImpl implements CharacterService {
 
 	@Override
 	public void neutral() {
-		this.running = false;
-		this.crouching = false;
-		this.jumping = false;
-		
 		this.rectangleHitbox.setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.numeroCharacter));
 		this.rectangleHitbox.setWidth(InformationsCharacter.getWidthSpritePersoIdle(this.numeroCharacter));
 	}
-	
-	
+
+	public void crounch(){
+		this.rectangleHitbox.setHeight(InformationsCharacter.getHeightSpritePersoCrouch(this.numeroCharacter));
+		this.rectangleHitbox.setWidth(InformationsCharacter.getWidthSpritePersoCrouch(this.numeroCharacter));
+	}
+
 }

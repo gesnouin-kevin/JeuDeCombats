@@ -166,22 +166,16 @@ public class Fighting extends BasicGameState {
 			this.modeDebug = !this.modeDebug;
 
 		//Player 2
-		if (key == Input.KEY_RIGHT && key == Input.KEY_UP){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.UPRIGHT);
-
-		}
-		else if (key == Input.KEY_LEFT && key == Input.KEY_UP){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.UPLEFT);
-		}
+		
 		else if(key== Input.KEY_LEFT){ 
-			this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_PRESSED);
 		}
 		else if (key == Input.KEY_RIGHT){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT_PRESSED);
 		}
 
 		else if(key== Input.KEY_DOWN){ 
-			this.window.getGame().getEngine().setCommandPlayer2(Command.DOWN);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.DOWN_PRESSED);
 		}
 
 		else if( key == Input.KEY_UP){ 
@@ -196,26 +190,19 @@ public class Fighting extends BasicGameState {
 			this.window.getGame().getEngine().setCommandPlayer2(Command.KICK);
 		}
 		else if(key==Input.KEY_6){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.BLOCK);
+			this.window.getGame().getEngine().setCommandPlayer2(Command.BLOCK_PRESSED);
 		}
+		
 		//player 1
 
-		if (key == Input.KEY_D && key == Input.KEY_Z){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.UPRIGHT);
-
-		}
-		else if (key == Input.KEY_Q && key == Input.KEY_Z){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.UPLEFT);
-
-		}
 		else if(key== Input.KEY_Q){ 
-			this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_PRESSED);
 		}
 		else if (key == Input.KEY_D){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT_PRESSED);
 		}
 		else if(key== Input.KEY_S){ 
-			this.window.getGame().getEngine().setCommandPlayer1(Command.DOWN);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.DOWN_PRESSED);
 		}
 		else if( key == Input.KEY_Z){ 
 			this.window.getGame().getEngine().setCommandPlayer1(Command.UP);
@@ -227,16 +214,64 @@ public class Fighting extends BasicGameState {
 			this.window.getGame().getEngine().setCommandPlayer1(Command.KICK);
 		} 
 		else if(key==Input.KEY_R){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.BLOCK);
+			this.window.getGame().getEngine().setCommandPlayer1(Command.BLOCK_PRESSED);
 		}
+		
 	}
 
 	@Override
 	public void keyReleased(int key, char c) {
-		if(key==Input.KEY_Z || key==Input.KEY_Q || key==Input.KEY_S || key==Input.KEY_D)
-			this.window.getGame().getEngine().setCommandPlayer1(Command.NEUTRAL);
-		if(key==Input.KEY_DOWN || key==Input.KEY_UP || key==Input.KEY_LEFT || key==Input.KEY_RIGHT)
-			this.window.getGame().getEngine().setCommandPlayer2(Command.NEUTRAL);
+	
+		if(key== Input.KEY_LEFT){ 
+			this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_RELEASED);
+		}
+		else if (key == Input.KEY_RIGHT){
+			this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT_RELEASED);
+		}
+
+		else if(key== Input.KEY_DOWN){ 
+			this.window.getGame().getEngine().setCommandPlayer2(Command.DOWN_RELEASED);
+		}
+
+		else if( key == Input.KEY_UP){ 
+			this.window.getGame().getEngine().setCommandPlayer2(Command.UP);
+		}
+
+		else if(key==Input.KEY_4){
+			this.window.getGame().getEngine().setCommandPlayer2(Command.PUNCH);
+		}
+
+		else if(key==Input.KEY_5){
+			this.window.getGame().getEngine().setCommandPlayer2(Command.KICK);
+		}
+		else if(key==Input.KEY_6){
+			this.window.getGame().getEngine().setCommandPlayer2(Command.BLOCK_RELEASED);
+		}
+		
+		//player 1
+
+		else if(key== Input.KEY_Q){ 
+			this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_RELEASED);
+		}
+		else if (key == Input.KEY_D){
+			this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT_RELEASED);
+		}
+		else if(key== Input.KEY_S){ 
+			this.window.getGame().getEngine().setCommandPlayer1(Command.DOWN_RELEASED);
+		}
+		else if( key == Input.KEY_Z){ 
+			this.window.getGame().getEngine().setCommandPlayer1(Command.UP);
+		}
+		else if(key==Input.KEY_A){
+			this.window.getGame().getEngine().setCommandPlayer1(Command.PUNCH);
+		}
+		else if(key==Input.KEY_E){
+			this.window.getGame().getEngine().setCommandPlayer1(Command.KICK);
+		} 
+		else if(key==Input.KEY_R){
+			this.window.getGame().getEngine().setCommandPlayer1(Command.BLOCK_RELEASED);
+		}
+		
 	}
 
 	@Override
