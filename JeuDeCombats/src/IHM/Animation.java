@@ -75,6 +75,13 @@ public class Animation {
 		if(animation == 1) return InformationsCharacter.getNbSpritePersoWalking(numPlayer);
 		if(animation == 2) return InformationsCharacter.getNbSpritePersoJump(numPlayer);
 		if(animation == 3) return InformationsCharacter.getNbSpritePersoCrouch(numPlayer);
+		if(animation == 4) return InformationsCharacter.getNbSpritePersoBlocking(numPlayer);
+		if(animation == 5) return InformationsCharacter.getNbSpritePersoPunch(numPlayer);
+		if(animation == 6) return InformationsCharacter.getNbSpritePersoKick(numPlayer);
+		if(animation == 7) return InformationsCharacter.getNbSpritePersoHit(numPlayer);
+		if(animation == 8) return InformationsCharacter.getNbSpritePersoCrouchHit(numPlayer);
+		if(animation == 9) return InformationsCharacter.getNbSpritePersoKo(numPlayer);
+		if(animation == 10) return InformationsCharacter.getNbSpritePersoVictory(numPlayer);
 
 		return 0;
 	}
@@ -85,6 +92,13 @@ public class Animation {
 		if(animation == 1) return InformationsCharacter.getWidthSpritePersoWalking(numPlayer);
 		if(animation == 2) return InformationsCharacter.getWidthSpritePersoJump(numPlayer);
 		if(animation == 3) return InformationsCharacter.getWidthSpritePersoCrouch(numPlayer);
+		if(animation == 4) return InformationsCharacter.getWidthSpritePersoBlocking(numPlayer);
+		if(animation == 5) return InformationsCharacter.getWidthSpritePersoPunch(numPlayer);
+		if(animation == 6) return InformationsCharacter.getWidthSpritePersoKick(numPlayer);
+		if(animation == 7) return InformationsCharacter.getWidthSpritePersoHit(numPlayer);
+		if(animation == 8) return InformationsCharacter.getWidthSpritePersoCrouchHit(numPlayer);
+		if(animation == 9) return InformationsCharacter.getWidthSpritePersoKo(numPlayer);
+		if(animation == 10) return InformationsCharacter.getWidthSpritePersoVictory(numPlayer);
 
 		return 0;
 	}
@@ -95,6 +109,13 @@ public class Animation {
 		if(animation == 1) return InformationsCharacter.getHeightSpritePersoWalking(numPlayer);
 		if(animation == 2) return InformationsCharacter.getHeightSpritePersoJump(numPlayer);
 		if(animation == 3) return InformationsCharacter.getHeightSpritePersoCrouch(numPlayer);
+		if(animation == 4) return InformationsCharacter.getHeightSpritePersoBlocking(numPlayer);
+		if(animation == 5) return InformationsCharacter.getHeightSpritePersoPunch(numPlayer);
+		if(animation == 6) return InformationsCharacter.getHeightSpritePersoKick(numPlayer);
+		if(animation == 7) return InformationsCharacter.getHeightSpritePersoHit(numPlayer);
+		if(animation == 8) return InformationsCharacter.getHeightSpritePersoCrouchHit(numPlayer);
+		if(animation == 9) return InformationsCharacter.getHeightSpritePersoKo(numPlayer);
+		if(animation == 10) return InformationsCharacter.getHeightSpritePersoVictory(numPlayer);
 
 		return 0;
 	}

@@ -32,10 +32,13 @@ public class Fighting extends BasicGameState {
 	private SpriteSheet iconKO;
 	
 	private boolean modeDebug;
+	private int inputPlayer1[];  //0 rien , 1 appuyé, 2 released
+	private int inputPlayer2[];
 
 	public Fighting(Window window) {
 		this.window = window;
-
+		this.inputPlayer1 = new int[7];
+		this.inputPlayer2 = new int[7];
 		this.animationsBackground = new Animation[NB_BACKGROUND];
 	}
 
@@ -46,6 +49,11 @@ public class Fighting extends BasicGameState {
 		this.window.getGame().getEngine().getPlayer(1).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter(), this.window.getGame()));
 		
 		this.modeDebug = false;
+		for(int i=0;i<this.inputPlayer1.length;i++)
+		{
+			this.inputPlayer1[i]=0;
+			this.inputPlayer2[i]=0;
+		}
 
 		//load background images
 		try{
@@ -167,8 +175,9 @@ public class Fighting extends BasicGameState {
 
 		//Player 2
 		
-		else if(key== Input.KEY_LEFT){ 
-			this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_PRESSED);
+		if(key== Input.KEY_LEFT){
+			this.inputPlayer2[1] = 1;
+			//this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_PRESSED);
 		}
 		else if (key == Input.KEY_RIGHT){
 			this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT_PRESSED);
@@ -195,8 +204,9 @@ public class Fighting extends BasicGameState {
 		
 		//player 1
 
-		else if(key== Input.KEY_Q){ 
-			this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_PRESSED);
+		if(key== Input.KEY_Q){
+			this.inputPlayer1[1] = 1;
+			//this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_PRESSED);
 		}
 		else if (key == Input.KEY_D){
 			this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT_PRESSED);
@@ -223,7 +233,8 @@ public class Fighting extends BasicGameState {
 	public void keyReleased(int key, char c) {
 	
 		if(key== Input.KEY_LEFT){ 
-			this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_RELEASED);
+			this.inputPlayer2[1] = 2;
+			//this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_RELEASED);
 		}
 		else if (key == Input.KEY_RIGHT){
 			this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT_RELEASED);
@@ -250,8 +261,9 @@ public class Fighting extends BasicGameState {
 		
 		//player 1
 
-		else if(key== Input.KEY_Q){ 
-			this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_RELEASED);
+		else if(key== Input.KEY_Q){
+			this.inputPlayer1[1] = 2;
+			//this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_RELEASED);
 		}
 		else if (key == Input.KEY_D){
 			this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT_RELEASED);
@@ -277,6 +289,7 @@ public class Fighting extends BasicGameState {
 	@Override
 	public void update(GameContainer gc, StateBasedGame window, int delta) throws SlickException {
 		this.window.getGame().getEngine().updateFace();
+		updateCommand();
 		this.window.getGame().getEngine().step();
 		time+=delta;
 		
@@ -295,4 +308,31 @@ public class Fighting extends BasicGameState {
 	public int getID() {
 		return ID;
 	}
+	
+	public void updateCommand()
+	{
+		for(int i=0; i<this.inputPlayer1.length;i++)
+		{
+			if(this.inputPlayer1[i]==1)
+			{
+				if(i==1)
+					this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_PRESSED);
+			}
+			else if(this.inputPlayer1[i]==2)
+			{
+				if(i==1)
+					this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_RELEASED);
+			}
+		}
+		
+		for(int i=0; i<this.inputPlayer2.length;i++)
+		{
+			if(this.inputPlayer2[i]==1)
+			{
+				if(i==1)
+					this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_PRESSED);
+			}
+		}
+	}
+	
 }
