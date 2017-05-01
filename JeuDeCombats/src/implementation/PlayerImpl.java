@@ -44,5 +44,4 @@ public class PlayerImpl implements PlayerService {
 		this.animationPlayer = animationPlayer;
 	}
 
-
 }

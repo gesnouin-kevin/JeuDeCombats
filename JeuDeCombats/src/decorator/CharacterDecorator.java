@@ -169,6 +169,11 @@ public abstract class CharacterDecorator implements CharacterService {
 		
 	}
 
+	@Override
+	public void updateY() {
+		this.delegateCharacter.updateY();
+	}
+
 	
 	
 }

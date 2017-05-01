@@ -140,5 +140,10 @@ public class Animation {
 		}
 		this.currentAnimation = currentAnimation;
 	}
+	
+	public int getCurrentFrame()
+	{
+		return this.currentFrame;
+	}
 
 }

@@ -158,4 +158,7 @@ public interface CharacterService {
 	 * post: getPositionY() == getPositionY()@Pre	
 	 */
 	public void neutral();
+	
+
+	public void updateY();
 }

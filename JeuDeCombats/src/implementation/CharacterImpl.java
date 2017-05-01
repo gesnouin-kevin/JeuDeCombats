@@ -11,6 +11,9 @@ public class CharacterImpl implements CharacterService {
 
 	private int positionX;
 	private int positionY;
+	
+	private int positionXforJump;
+	
 	private EngineService engine;
 	private RectangleHitboxService rectangleHitbox;
 	private int life;
@@ -74,7 +77,7 @@ public class CharacterImpl implements CharacterService {
 
 		this.positionX=this.positionX-speed;
 		this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()-speed, this.rectangleHitbox.getPositionY());
-		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()))
+		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) && !this.jumping)
 		{
 			this.positionX=this.positionX+speed;
 			this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()+speed, this.rectangleHitbox.getPositionY());
@@ -98,7 +101,7 @@ public class CharacterImpl implements CharacterService {
 
 		this.positionX=this.positionX+speed;
 		this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()+speed, this.rectangleHitbox.getPositionY());
-		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()))
+		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) && !this.jumping)
 		{
 			this.positionX=this.positionX-speed;
 			this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()-speed, this.rectangleHitbox.getPositionY());
@@ -133,43 +136,50 @@ public class CharacterImpl implements CharacterService {
 		switch (c) {
 		case LEFT_PRESSED:
 			moveLeft();
-			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(1);
+			if(!this.jumping)
+				this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(1);
 			this.running = true;
 			break;
 			
 		case LEFT_RELEASED:
 			this.running = false;
 			neutral();
-			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
+			if(!this.jumping)
+				this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
 			break;
 			
 		case RIGHT_PRESSED:
 			moveRight();
-			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(1);
+			if(!this.jumping)
+				this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(1);
 			this.running = true;
 			break;
 			
 		case RIGHT_RELEASED:
 			this.running = false;
 			neutral();
-			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
+			if(!this.jumping)
+				this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
 			break;
 			
 		case DOWN_PRESSED:
 			this.crouching = true;
 			crounch();
-			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(3);
+			if(!this.jumping)
+				this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(3);
 			break;
 			
 		case DOWN_RELEASED:
 			this.crouching = false;
 			neutral();
-			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
+			if(!this.jumping)
+				this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
 			break;
 			
 		case UP:
 			moveUp();
-			this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(2);
+			if(!this.jumping)
+				this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(2);
 			this.jumping=true;
 			break;
 			
@@ -206,6 +216,8 @@ public class CharacterImpl implements CharacterService {
 		this.speed = s;
 		this.faceRight = f;
 		this.numeroPlayer = numeroPlayer;
+		
+		this.positionXforJump = -50;
 	}
 
 	public int getNumeroPlayer() {
@@ -258,6 +270,36 @@ public class CharacterImpl implements CharacterService {
 	public void crounch(){
 		this.rectangleHitbox.setHeight(InformationsCharacter.getHeightSpritePersoCrouch(this.numeroCharacter));
 		this.rectangleHitbox.setWidth(InformationsCharacter.getWidthSpritePersoCrouch(this.numeroCharacter));
+	}
+
+	@Override
+	public void updateY() {
+		if(this.jumping)
+		{
+			
+			this.positionXforJump ++;
+			if(this.positionXforJump>=100)
+            {
+				this.positionXforJump=-50;
+            }
+			
+            this.positionY = 0;
+
+            this.positionY = this.positionY + (int) (-0.06*(this.positionXforJump*this.positionXforJump)+200);
+            
+            this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX(),  this.positionY);
+			
+            
+            if(this.positionY <= 0){
+            	this.positionY = 0;
+            	this.positionXforJump = -50;
+            	this.jumping = false;
+            	this.engine.getPlayer(numeroPlayer).getAnimationPlayer().setCurrentAnimation(0);
+            	this.rectangleHitbox.setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.numeroCharacter));
+        		this.rectangleHitbox.setWidth(InformationsCharacter.getWidthSpritePersoIdle(this.numeroCharacter));
+            }
+		
+		}	
 	}
 
 }

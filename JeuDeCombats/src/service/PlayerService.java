@@ -28,4 +28,5 @@ public interface PlayerService {
 	 * post: getAnimationPlayer()==animationPlayer
 	 */
 	public void setAnimationPlayer(IHM.Animation animationPlayer);
+	
 }

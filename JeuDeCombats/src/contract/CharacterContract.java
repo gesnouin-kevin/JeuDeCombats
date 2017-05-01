@@ -513,5 +513,12 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 
+	@Override
+	public void updateY() {
+		super.updateY();
+		
+	}
+
+
 
 }

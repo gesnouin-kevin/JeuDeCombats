@@ -229,6 +229,9 @@ public class Fighting extends BasicGameState {
 		updateCommand();
 		this.window.getGame().getEngine().step();
 		time+=delta;
+		
+		this.window.getGame().getEngine().getPlayer(0).getCharacter().updateY();
+		this.window.getGame().getEngine().getPlayer(1).getCharacter().updateY();
 
 		if(System.currentTimeMillis()-lastMs>500) // limite frame rate -> frame de 500 ms ?
 		{
