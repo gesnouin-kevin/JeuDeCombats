@@ -69,5 +69,32 @@ public abstract class InformationsCharacter {
 	public static int getWidthSpritePersoCrouch(int numeroPerso){return InformationsCharacter.widthSpritePersoCrouch[numeroPerso];}
 	public static int getHeightSpritePersoCrouch(int numeroPerso){return InformationsCharacter.heightSpritePersoCrouch[numeroPerso];}
 	public static int getNbSpritePersoCrouch(int numeroPerso){return InformationsCharacter.nbSpritePersoCrouch[numeroPerso];}
+	
+	public static int getWidthSpritePersoBlocking(int numeroPerso){return InformationsCharacter.widthSpritePersoBlocking[numeroPerso];}
+	public static int getHeightSpritePersoBlocking(int numeroPerso){return InformationsCharacter.heightSpritePersoBlocking[numeroPerso];}
+	public static int getNbSpritePersoBlocking(int numeroPerso){return InformationsCharacter.nbSpritePersoBlocking[numeroPerso];}
+	
+	public static int getWidthSpritePersoPunch(int numeroPerso){return InformationsCharacter.widthSpritePersoPunch[numeroPerso];}
+	public static int getHeightSpritePersoPunch(int numeroPerso){return InformationsCharacter.heightSpritePersoPunch[numeroPerso];}
+	public static int getNbSpritePersoPunch(int numeroPerso){return InformationsCharacter.nbSpritePersoPunch[numeroPerso];}
 
+	public static int getWidthSpritePersoKick(int numeroPerso){return InformationsCharacter.widthSpritePersoKick[numeroPerso];}
+	public static int getHeightSpritePersoKick(int numeroPerso){return InformationsCharacter.heightSpritePersoKick[numeroPerso];}
+	public static int getNbSpritePersoKick(int numeroPerso){return InformationsCharacter.nbSpritePersoKick[numeroPerso];}
+	
+	public static int getWidthSpritePersoHit(int numeroPerso){return InformationsCharacter.widthSpritePersoHit[numeroPerso];}
+	public static int getHeightSpritePersoHit(int numeroPerso){return InformationsCharacter.heightSpritePersoHit[numeroPerso];}
+	public static int getNbSpritePersoHit(int numeroPerso){return InformationsCharacter.nbSpritePersoHit[numeroPerso];}
+	
+	public static int getWidthSpritePersoCrouchHit(int numeroPerso){return InformationsCharacter.widthSpritePersoCrouchHit[numeroPerso];}
+	public static int getHeightSpritePersoCrouchHit(int numeroPerso){return InformationsCharacter.heightSpritePersoCrouchHit[numeroPerso];}
+	public static int getNbSpritePersoCrouchHit(int numeroPerso){return InformationsCharacter.nbSpritePersoCrouchHit[numeroPerso];}
+	
+	public static int getWidthSpritePersoKo(int numeroPerso){return InformationsCharacter.widthSpritePersoKo[numeroPerso];}
+	public static int getHeightSpritePersoKo(int numeroPerso){return InformationsCharacter.heightSpritePersoKo[numeroPerso];}
+	public static int getNbSpritePersoKo(int numeroPerso){return InformationsCharacter.nbSpritePersoKo[numeroPerso];}
+	
+	public static int getWidthSpritePersoVictory(int numeroPerso){return InformationsCharacter.widthSpritePersoVictory[numeroPerso];}
+	public static int getHeightSpritePersoVictory(int numeroPerso){return InformationsCharacter.heightSpritePersoVictory[numeroPerso];}
+	public static int getNbSpritePersoVictory(int numeroPerso){return InformationsCharacter.nbSpritePersoVictory[numeroPerso];}
 }
