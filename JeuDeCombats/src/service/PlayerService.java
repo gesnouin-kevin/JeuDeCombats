@@ -7,6 +7,7 @@ public interface PlayerService {
 	public CharacterService getCharacter();
 	public int getNumeroPlayer();
 	public IHM.Animation getAnimationPlayer();
+	public FightCharService getFightCharacter();
 
 	/** Invariants */
 

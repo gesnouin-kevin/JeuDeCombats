@@ -12,6 +12,11 @@ public interface FightCharService extends CharacterService {
 	public boolean isBlockstunned();
 	public boolean isHitstunned();
 	public boolean isTeching();
+	public RectangleHitboxService getCoupBox();
+	
+	
+	/** Constructor */
+	public void init(int l, int s, boolean f, int numeroPlayer);
 	
 	/** Operators */
 	
@@ -27,4 +32,19 @@ public interface FightCharService extends CharacterService {
     // pre: not isTeching()
     public void startTech(TechData ts);
     
+    /** A MODIF
+	 * pre: not isDead()
+	 * post: step(KICK) == ()
+	 * post: step(PUNCH) == ()
+	 * post: step(BLOCK) == 
+	 */
+    public void step(Command c);
+    
+    public void kick();
+    
+    public void block();
+    
+    public void punch();
+    
+    public void hit();
 }

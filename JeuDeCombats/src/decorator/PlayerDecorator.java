@@ -3,6 +3,7 @@ package decorator;
 import IHM.Animation;
 import service.CharacterService;
 import service.EngineService;
+import service.FightCharService;
 import service.PlayerService;
 
 public abstract class PlayerDecorator implements PlayerService{
@@ -36,6 +37,11 @@ public abstract class PlayerDecorator implements PlayerService{
 	@Override
 	public void setAnimationPlayer(Animation animationPlayer) {
 		this.delegateService.setAnimationPlayer(animationPlayer);
+	}
+
+	@Override
+	public FightCharService getFightCharacter() {
+		return this.delegateService.getFightCharacter();
 	}
 	
 	

@@ -1,7 +1,9 @@
 package decorator;
 
 import service.CharacterService;
+import service.Command;
 import service.FightCharService;
+import service.RectangleHitboxService;
 import service.TechData;
 
 public class FightCharDecorator extends CharacterDecorator implements FightCharService {
@@ -55,4 +57,40 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 		getDelegate().startTech(ts);		
 	}
 
+	@Override
+	public void step(Command c) {
+		getDelegate().step(c);
+	}
+
+	@Override
+	public void kick() {
+		getDelegate().kick();
+	}
+
+	@Override
+	public void block() {
+		getDelegate().block();
+	}
+
+	@Override
+	public void punch() {
+		getDelegate().block();
+	}
+
+	@Override
+	public void hit() {
+		getDelegate().hit();
+	}
+
+	@Override
+	public RectangleHitboxService getCoupBox() {
+		return getDelegate().getCoupBox();
+	}
+
+	@Override
+	public void init(int l, int s, boolean f, int numeroPlayer) {
+		getDelegate().init(l, s, f, numeroPlayer);
+	}
+
+	
 }
