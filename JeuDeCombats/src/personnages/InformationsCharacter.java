@@ -15,7 +15,7 @@ public abstract class InformationsCharacter {
 	private static int nbSpritePersoWalking[]={5,4,8,5,0,8};
 	
 	private static int widthSpritePersoJump[]={182,277,216,187,0,205};
-	private static int heightSpritePersoJump[]={380,618,539,552,0,428};
+	private static int heightSpritePersoJump[]={380,357,383,552,0,428};
 	private static int nbSpritePersoJump[]={4,4,4,6,0,4};
 	
 	private static int widthSpritePersoCrouch[]={182,277,217,187,0,205};
@@ -24,7 +24,7 @@ public abstract class InformationsCharacter {
 	
 	private static int widthSpritePersoBlocking[]={182,295,210,217,0,219};
 	private static int heightSpritePersoBlocking[]={350,411,304,308,0,340};
-	private static int nbSpritePersoBlocking[]={2,1,1,1,0,2};
+	private static int nbSpritePersoBlocking[]={1,1,1,1,0,2};
 	
 	private static int widthSpritePersoPunch[]={182,379,319,285,0,384};
 	private static int heightSpritePersoPunch[]={341,353,317,348,0,340};
