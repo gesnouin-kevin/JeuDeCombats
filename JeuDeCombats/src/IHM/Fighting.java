@@ -103,7 +103,10 @@ public class Fighting extends BasicGameState {
 		g.setColor(new Color(255, 0, 0)); // red
 		g.fillRect(gc.getWidth()/2-(40/2)*scaleX-500, 10*scaleY, 502, 10*scaleY);
 		g.setColor(new Color(255, 255, 0)); // yellow
-		g.fillRect(gc.getWidth()/2-(40/2)*scaleX-500, 10*scaleY, 502, 10*scaleY);
+		int vieMaxPersoP1 = InformationsCharacter.getLife(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
+		int viePersoP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getLife();
+		int widthLifeBar = (502*viePersoP1)/vieMaxPersoP1;
+		g.fillRect(gc.getWidth()/2-(40/2)*scaleX-500+(502-widthLifeBar), 10*scaleY, widthLifeBar, 10*scaleY);
 
 		//right bar life
 		g.setColor(new Color(255, 255, 255));
@@ -111,7 +114,9 @@ public class Fighting extends BasicGameState {
 		g.setColor(new Color(255, 0, 0));
 		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, 502, 10*scaleY);
 		g.setColor(new Color(255, 255, 0));
-		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, 502, 10*scaleY);
+		int vieMaxPersoP2 = InformationsCharacter.getLife(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
+		int viePersoP2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getLife();
+		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, (502*viePersoP2)/vieMaxPersoP2, 10*scaleY);
 
 		int posXp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionX();
 		int posYp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionY();
@@ -189,9 +194,9 @@ public class Fighting extends BasicGameState {
 		else if (key == Input.KEY_RIGHT) this.inputPlayer2[3] = 1;
 		else if(key== Input.KEY_DOWN) this.inputPlayer2[2] = 1;
 		else if( key == Input.KEY_UP) this.inputPlayer2[0] = 1;
-		else if(key==Input.KEY_4) this.inputPlayer2[4] = 1;
-		else if(key==Input.KEY_5) this.inputPlayer2[5] = 1;
-		else if(key==Input.KEY_6) this.inputPlayer2[6] = 1;	
+		else if(key==Input.KEY_K) this.inputPlayer2[4] = 1;
+		else if(key==Input.KEY_L) this.inputPlayer2[5] = 1;
+		else if(key==Input.KEY_M) this.inputPlayer2[6] = 1;	
 	}
 
 	@Override
@@ -212,9 +217,9 @@ public class Fighting extends BasicGameState {
 		else if (key == Input.KEY_RIGHT) this.inputPlayer2[3] = 2;
 		else if(key== Input.KEY_DOWN) this.inputPlayer2[2] = 2;
 		else if( key == Input.KEY_UP) this.inputPlayer2[0] = 2;
-		else if(key==Input.KEY_4)this.inputPlayer2[4] = 2;
-		else if(key==Input.KEY_5)this.inputPlayer2[5] = 2;
-		else if(key==Input.KEY_6)this.inputPlayer2[6] = 2;
+		else if(key==Input.KEY_K)this.inputPlayer2[4] = 2;
+		else if(key==Input.KEY_L)this.inputPlayer2[5] = 2;
+		else if(key==Input.KEY_M)this.inputPlayer2[6] = 2;
 
 	}
 
