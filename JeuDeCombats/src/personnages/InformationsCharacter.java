@@ -49,6 +49,16 @@ public abstract class InformationsCharacter {
 	private static int widthSpritePersoVictory[]={180,299,240,182,0,203};
 	private static int heightSpritePersoVictory[]={460,536,486,453,0,384};
 	private static int nbSpritePersoVictory[]={3,2,4,5,0,3};
+	
+	private static int widthSpritePersoArm[]={110,103,91,103};
+	private static int heightSpritePersoArm[]={34,98,48,46};
+	private static int posXSpritePersoArm[]={372,655,547,468};
+	private static int posYSpritePersoArm[]={59,67,79,43};
+	
+	private static int widthSpritePersoFoot[]={46,116,120,158};
+	private static int heightSpritePersoFoot[]={39,103,101,106};
+	private static int posXSpritePersoFoot[]={520,688,530,521};
+	private static int posYSpritePersoFoot[]={8,236,73,127};
 
 	public static int getLife(int numeroPerso){return InformationsCharacter.life[numeroPerso];}
 	public static int getSpeed(int numeroPerso){return InformationsCharacter.speed[numeroPerso];}
@@ -97,4 +107,15 @@ public abstract class InformationsCharacter {
 	public static int getWidthSpritePersoVictory(int numeroPerso){return InformationsCharacter.widthSpritePersoVictory[numeroPerso];}
 	public static int getHeightSpritePersoVictory(int numeroPerso){return InformationsCharacter.heightSpritePersoVictory[numeroPerso];}
 	public static int getNbSpritePersoVictory(int numeroPerso){return InformationsCharacter.nbSpritePersoVictory[numeroPerso];}
+	
+	public static int getWidthSpritePersoArm(int numeroPerso){return InformationsCharacter.widthSpritePersoArm[numeroPerso];}
+	public static int getHeightSpritePersoArm(int numeroPerso){return InformationsCharacter.heightSpritePersoArm[numeroPerso];}
+	public static int getPosXSpritePersoArm(int numeroPerso){return InformationsCharacter.posXSpritePersoArm[numeroPerso];}
+	public static int getPosYSpritePersoArm(int numeroPerso){return InformationsCharacter.posYSpritePersoArm[numeroPerso];}
+	
+	public static int getWidthSpritePersoFoot(int numeroPerso){return InformationsCharacter.widthSpritePersoFoot[numeroPerso];}
+	public static int getHeightSpritePersoFoot(int numeroPerso){return InformationsCharacter.heightSpritePersoFoot[numeroPerso];}
+	public static int getPosXSpritePersoFoot(int numeroPerso){return InformationsCharacter.posXSpritePersoFoot[numeroPerso];}
+	public static int getPosYSpritePersoFoot(int numeroPerso){return InformationsCharacter.posYSpritePersoFoot[numeroPerso];}
+	
 }
