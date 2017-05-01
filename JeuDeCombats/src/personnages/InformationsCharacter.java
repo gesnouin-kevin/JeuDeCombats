@@ -26,12 +26,12 @@ public abstract class InformationsCharacter {
 	private static int heightSpritePersoBlocking[]={350,411,304,308,0,340};
 	private static int nbSpritePersoBlocking[]={1,1,1,1,0,2};
 	
-	private static int widthSpritePersoPunch[]={182,379,319,285,0,384};
+	private static int widthSpritePersoPunch[]={241,379,319,285,0,384};
 	private static int heightSpritePersoPunch[]={341,353,317,348,0,340};
 	private static int nbSpritePersoPunch[]={3,3,2,3,0,3};
 	
-	private static int widthSpritePersoKick[]={182,402,325,340,0,366};
-	private static int heightSpritePersoKick[]={349,361,300,357,0,388};
+	private static int widthSpritePersoKick[]={283,402,325,340,0,366};
+	private static int heightSpritePersoKick[]={357,361,300,357,0,388};
 	private static int nbSpritePersoKick[]={3,3,3,3,0,5};
 	
 	private static int widthSpritePersoHit[]={182,299,245,182,0,290};
