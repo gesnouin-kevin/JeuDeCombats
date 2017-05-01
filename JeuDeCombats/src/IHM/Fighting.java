@@ -22,7 +22,7 @@ public class Fighting extends BasicGameState {
 	public static int NB_FRAMES_BACKGROUND = 8;
 	public static int NB_MAX_ANIMATION = 22;
 	public static int GROUND = 50;
-	
+
 	private int time = 0;
 	private long lastMs;
 
@@ -30,7 +30,7 @@ public class Fighting extends BasicGameState {
 	private Animation[] animationsBackground;
 	private SpriteSheet iconCharacter;
 	private SpriteSheet iconKO;
-	
+
 	private boolean modeDebug;
 	private int inputPlayer1[];  //0 rien , 1 appuyé, 2 released
 	private int inputPlayer2[];
@@ -47,7 +47,7 @@ public class Fighting extends BasicGameState {
 		gc.getInput().enableKeyRepeat();
 		this.window.getGame().getEngine().getPlayer(0).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter(), this.window.getGame()));
 		this.window.getGame().getEngine().getPlayer(1).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter(), this.window.getGame()));
-		
+
 		this.modeDebug = false;
 		for(int i=0;i<this.inputPlayer1.length;i++)
 		{
@@ -57,24 +57,24 @@ public class Fighting extends BasicGameState {
 
 		//load background images
 		try{
-		for(int j=0; j<NB_BACKGROUND; j++){
-			Animation animation = new Animation();
-			int nbFrames = NB_BACKGROUND;
-			if(j==3)
-				nbFrames = 24;
-			for(int i=0; i<nbFrames;i++){
+			for(int j=0; j<NB_BACKGROUND; j++){
+				Animation animation = new Animation();
+				int nbFrames = NB_BACKGROUND;
+				if(j==3)
+					nbFrames = 24;
+				for(int i=0; i<nbFrames;i++){
 					animation.addFrame(new SpriteSheet("ressources/background/background"+(j+1)+"frame"+i+".png", 800, 336), 100);
-				
+
+				}
+				this.animationsBackground[j] = animation;
 			}
-			this.animationsBackground[j] = animation;
-		}
 
-		// load icon and image KO
-		this.iconKO = new SpriteSheet("ressources/fight/iconKO.png", 40, 31);
-		this.iconCharacter = new SpriteSheet("ressources/menu/iconCharacter2.png", 976, 194);
+			// load icon and image KO
+			this.iconKO = new SpriteSheet("ressources/fight/iconKO.png", 40, 31);
+			this.iconCharacter = new SpriteSheet("ressources/menu/iconCharacter2.png", 976, 194);
 
-		// load animations characters
-		
+			// load animations characters
+
 		} catch (SlickException e) {} 
 
 	}
@@ -85,10 +85,10 @@ public class Fighting extends BasicGameState {
 
 		float scaleX =  (gc.getWidth()/700f);
 		float scaleY = (gc.getHeight()/500f);
-		
+
 		//draw time
 		g.setColor(new Color(255,255,255));
-		g.drawString("Time : " + time/1000, 100, 100);
+		g.drawString("Time : " + time/1000, gc.getWidth()-100, gc.getHeight()-20);
 
 		// draw head player1
 		this.iconCharacter.draw(5*scaleX, 0, 8*scaleX+61*scaleX, 14*scaleY+97*scaleY, this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter()*61, 0, this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter()*61+61, 97);
@@ -148,142 +148,74 @@ public class Fighting extends BasicGameState {
 
 		// draw player1
 		int heightPlayer1 = this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation());
-		
+
 		if(this.window.getGame().getEngine().getPlayer(0).getCharacter().isFaceRight())
 			this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getSpriteSheet().draw(posXp1, gc.getHeight()-(posYp1+heightPlayer1+GROUND));
 		else
 			this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getSpriteSheet().draw(posXp1, gc.getHeight()-(posYp1+heightPlayer1+GROUND) 
-				,this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getWidthAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()),0
-							,0,this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()));
-			
+					,this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getWidthAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()),0
+					,0,this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()));
+
 		// draw player2
 		int heightPlayer2 = this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation());
-		
+
 		if(this.window.getGame().getEngine().getPlayer(1).getCharacter().isFaceRight())
 			this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getSpriteSheet().draw(posXp2, gc.getHeight()-(posYp2+heightPlayer2+GROUND));
 		else
 			this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getSpriteSheet().draw(posXp2, gc.getHeight()-(posYp2+heightPlayer2+GROUND) 
-				,this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getWidthAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation()),0
-							,0,this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation()));
-			
+					,this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getWidthAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation()),0
+					,0,this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation()));
+
 	}
 
 	@Override
 	public void keyPressed(int key, char c) {
-		if(key == Input.KEY_P)
-			this.modeDebug = !this.modeDebug;
+
+		// For debug in game
+		if(key == Input.KEY_P) this.modeDebug = !this.modeDebug;
+
+		//player 1
+		else if(key== Input.KEY_Q) this.inputPlayer1[1] = 1;
+		else if (key == Input.KEY_D) this.inputPlayer1[3] = 1;
+		else if(key== Input.KEY_S) this.inputPlayer1[2] = 1;
+		else if( key == Input.KEY_Z) this.inputPlayer1[0] = 1;
+		else if(key==Input.KEY_A) this.inputPlayer1[4] = 1;
+		else if(key==Input.KEY_E) this.inputPlayer1[5] = 1;
+		else if(key==Input.KEY_R) this.inputPlayer1[6] = 1;
+
 
 		//Player 2
-		
-		if(key== Input.KEY_LEFT){
-			this.inputPlayer2[1] = 1;
-			//this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_PRESSED);
-		}
-		else if (key == Input.KEY_RIGHT){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT_PRESSED);
-		}
-
-		else if(key== Input.KEY_DOWN){ 
-			this.window.getGame().getEngine().setCommandPlayer2(Command.DOWN_PRESSED);
-		}
-
-		else if( key == Input.KEY_UP){ 
-			this.window.getGame().getEngine().setCommandPlayer2(Command.UP);
-		}
-
-		else if(key==Input.KEY_4){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.PUNCH);
-		}
-
-		else if(key==Input.KEY_5){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.KICK);
-		}
-		else if(key==Input.KEY_6){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.BLOCK_PRESSED);
-		}
-		
-		//player 1
-
-		if(key== Input.KEY_Q){
-			this.inputPlayer1[1] = 1;
-			//this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_PRESSED);
-		}
-		else if (key == Input.KEY_D){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT_PRESSED);
-		}
-		else if(key== Input.KEY_S){ 
-			this.window.getGame().getEngine().setCommandPlayer1(Command.DOWN_PRESSED);
-		}
-		else if( key == Input.KEY_Z){ 
-			this.window.getGame().getEngine().setCommandPlayer1(Command.UP);
-		}
-		else if(key==Input.KEY_A){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.PUNCH);
-		}
-		else if(key==Input.KEY_E){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.KICK);
-		} 
-		else if(key==Input.KEY_R){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.BLOCK_PRESSED);
-		}
-		
+		else if(key== Input.KEY_LEFT) this.inputPlayer2[1] = 1;
+		else if (key == Input.KEY_RIGHT) this.inputPlayer2[3] = 1;
+		else if(key== Input.KEY_DOWN) this.inputPlayer2[2] = 1;
+		else if( key == Input.KEY_UP) this.inputPlayer2[0] = 1;
+		else if(key==Input.KEY_4) this.inputPlayer2[4] = 1;
+		else if(key==Input.KEY_5) this.inputPlayer2[5] = 1;
+		else if(key==Input.KEY_6) this.inputPlayer2[6] = 1;	
 	}
 
 	@Override
 	public void keyReleased(int key, char c) {
-	
-		if(key== Input.KEY_LEFT){ 
-			this.inputPlayer2[1] = 2;
-			//this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_RELEASED);
-		}
-		else if (key == Input.KEY_RIGHT){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT_RELEASED);
-		}
 
-		else if(key== Input.KEY_DOWN){ 
-			this.window.getGame().getEngine().setCommandPlayer2(Command.DOWN_RELEASED);
-		}
+		if(key== Input.KEY_LEFT)this.inputPlayer2[1] = 2;
 
-		else if( key == Input.KEY_UP){ 
-			this.window.getGame().getEngine().setCommandPlayer2(Command.UP);
-		}
-
-		else if(key==Input.KEY_4){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.PUNCH);
-		}
-
-		else if(key==Input.KEY_5){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.KICK);
-		}
-		else if(key==Input.KEY_6){
-			this.window.getGame().getEngine().setCommandPlayer2(Command.BLOCK_RELEASED);
-		}
-		
 		//player 1
+		else if(key== Input.KEY_Q)this.inputPlayer1[1] = 2;
+		else if (key == Input.KEY_D)this.inputPlayer1[3] = 2;
+		else if(key== Input.KEY_S)this.inputPlayer1[2] = 2;
+		else if( key == Input.KEY_Z)this.inputPlayer1[0] = 2;
+		else if(key==Input.KEY_A)this.inputPlayer1[4] = 2;
+		else if(key==Input.KEY_E)this.inputPlayer1[5] = 2;
+		else if(key==Input.KEY_R)this.inputPlayer1[6] = 2;
 
-		else if(key== Input.KEY_Q){
-			this.inputPlayer1[1] = 2;
-			//this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_RELEASED);
-		}
-		else if (key == Input.KEY_D){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT_RELEASED);
-		}
-		else if(key== Input.KEY_S){ 
-			this.window.getGame().getEngine().setCommandPlayer1(Command.DOWN_RELEASED);
-		}
-		else if( key == Input.KEY_Z){ 
-			this.window.getGame().getEngine().setCommandPlayer1(Command.UP);
-		}
-		else if(key==Input.KEY_A){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.PUNCH);
-		}
-		else if(key==Input.KEY_E){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.KICK);
-		} 
-		else if(key==Input.KEY_R){
-			this.window.getGame().getEngine().setCommandPlayer1(Command.BLOCK_RELEASED);
-		}
-		
+		//player 2
+		else if (key == Input.KEY_RIGHT) this.inputPlayer2[3] = 2;
+		else if(key== Input.KEY_DOWN) this.inputPlayer2[2] = 2;
+		else if( key == Input.KEY_UP) this.inputPlayer2[0] = 2;
+		else if(key==Input.KEY_4)this.inputPlayer2[4] = 2;
+		else if(key==Input.KEY_5)this.inputPlayer2[5] = 2;
+		else if(key==Input.KEY_6)this.inputPlayer2[6] = 2;
+
 	}
 
 	@Override
@@ -292,7 +224,7 @@ public class Fighting extends BasicGameState {
 		updateCommand();
 		this.window.getGame().getEngine().step();
 		time+=delta;
-		
+
 		if(System.currentTimeMillis()-lastMs>500) // limite frame rate -> frame de 500 ms ?
 		{
 			if(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer() != null)
@@ -300,7 +232,7 @@ public class Fighting extends BasicGameState {
 			if(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer() != null)
 				this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().nextFrame();
 			lastMs = System.currentTimeMillis();
-		
+
 		}
 	}
 
@@ -308,31 +240,53 @@ public class Fighting extends BasicGameState {
 	public int getID() {
 		return ID;
 	}
-	
+
 	public void updateCommand()
 	{
 		for(int i=0; i<this.inputPlayer1.length;i++)
 		{
 			if(this.inputPlayer1[i]==1)
 			{
-				if(i==1)
-					this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_PRESSED);
+				if(i==0) this.window.getGame().getEngine().setCommandPlayer1(Command.UP);
+				if(i==1) this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_PRESSED);
+				if(i==2) this.window.getGame().getEngine().setCommandPlayer1(Command.DOWN_PRESSED);
+				if(i==3) this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT_PRESSED);
+				if(i==4) this.window.getGame().getEngine().setCommandPlayer1(Command.PUNCH);
+				if(i==5) this.window.getGame().getEngine().setCommandPlayer1(Command.BLOCK_PRESSED);
+				if(i==6) this.window.getGame().getEngine().setCommandPlayer1(Command.KICK);
+
 			}
 			else if(this.inputPlayer1[i]==2)
 			{
-				if(i==1)
-					this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_RELEASED);
+				if(i==1) this.window.getGame().getEngine().setCommandPlayer1(Command.LEFT_RELEASED);
+				if(i==2) this.window.getGame().getEngine().setCommandPlayer1(Command.DOWN_RELEASED);
+				if(i==3) this.window.getGame().getEngine().setCommandPlayer1(Command.RIGHT_RELEASED);
+				if(i==5) this.window.getGame().getEngine().setCommandPlayer1(Command.BLOCK_RELEASED);
+				this.inputPlayer1[i]=0;
+
 			}
-		}
-		
-		for(int i=0; i<this.inputPlayer2.length;i++)
-		{
+
+
 			if(this.inputPlayer2[i]==1)
 			{
-				if(i==1)
-					this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_PRESSED);
+				if(i==0) this.window.getGame().getEngine().setCommandPlayer2(Command.UP);
+				if(i==1) this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_PRESSED);
+				if(i==2) this.window.getGame().getEngine().setCommandPlayer2(Command.DOWN_PRESSED);
+				if(i==3) this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT_PRESSED);
+				if(i==4) this.window.getGame().getEngine().setCommandPlayer2(Command.PUNCH);
+				if(i==5) this.window.getGame().getEngine().setCommandPlayer2(Command.BLOCK_PRESSED);
+				if(i==6) this.window.getGame().getEngine().setCommandPlayer2(Command.KICK);
+			}
+			else if(this.inputPlayer2[i]==2)
+			{
+				if(i==1) this.window.getGame().getEngine().setCommandPlayer2(Command.LEFT_RELEASED);
+				if(i==2) this.window.getGame().getEngine().setCommandPlayer2(Command.DOWN_RELEASED);
+				if(i==3) this.window.getGame().getEngine().setCommandPlayer2(Command.RIGHT_RELEASED);
+				if(i==5) this.window.getGame().getEngine().setCommandPlayer2(Command.BLOCK_RELEASED);
+
+				this.inputPlayer2[i]=0;
 			}
 		}
 	}
-	
+
 }
