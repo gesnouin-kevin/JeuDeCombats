@@ -165,9 +165,9 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 			otherPlayer =1;
 		else
 			otherPlayer =0;
-		
-		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoHit(this.getNumeroCharacter()));
-		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoHit(this.getNumeroCharacter()));
+		//ptete remove car on ne sait pas quand fini le truc de se faire hit donc on ne sait pas quand remettre bounding box idle
+		//this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoHit(this.getNumeroCharacter()));
+		//this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoHit(this.getNumeroCharacter()));
 		this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(7);
 		
 		super.setLife(super.getLife()-InformationsCharacter.getDamage(this.getEngine().getPlayer(otherPlayer).getCharacter().getNumeroCharacter()));

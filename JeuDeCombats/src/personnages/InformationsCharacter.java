@@ -34,8 +34,8 @@ public abstract class InformationsCharacter {
 	private static int heightSpritePersoKick[]={367,361,300,357,0,388};
 	private static int nbSpritePersoKick[]={3,3,3,3,0,5};
 	
-	private static int widthSpritePersoHit[]={182,299,245,182,0,290};
-	private static int heightSpritePersoHit[]={287,343,318,319,0,306};
+	private static int widthSpritePersoHit[]={207,299,245,182,0,290};
+	private static int heightSpritePersoHit[]={346,343,318,319,0,306};
 	private static int nbSpritePersoHit[]={4,3,2,1,0,2};
 	
 	private static int widthSpritePersoCrouchHit[]={182,299,227,217,0,237};

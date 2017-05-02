@@ -1,12 +1,11 @@
 package IHM;
 
-import java.util.ArrayList;
-
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
@@ -73,7 +72,10 @@ public class Fighting extends BasicGameState {
 			this.iconKO = new SpriteSheet("ressources/fight/iconKO.png", 40, 31);
 			this.iconCharacter = new SpriteSheet("ressources/menu/iconCharacter2.png", 976, 194);
 
-			// load animations characters
+			// load music and start it
+			Music music = new Music("ressources/music.ogg");
+			gc.setMusicVolume(0.2f);
+			music.loop();
 
 		} catch (SlickException e) {} 
 
