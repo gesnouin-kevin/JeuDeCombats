@@ -259,11 +259,10 @@ public class SelectionCharacter extends BasicGameState {
 			else
 				cursor1 = this.cursorPlayer1-2;
 			int cursor2;
-			if(this.cursorPlayer1<=4)
-				cursor2 = this.cursorPlayer1-1;
+			if(this.cursorPlayer2<=4)
+				cursor2 = this.cursorPlayer2-1;
 			else
-				cursor2 = this.cursorPlayer1-2;
-			
+				cursor2 = this.cursorPlayer2-2;
 			
 			this.window.setCurrentBackground(this.currentBackground);
 			this.window.getGame().getEngine().getPlayer(0).getCharacter().init(InformationsCharacter.getLife(cursor1), 

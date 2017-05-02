@@ -23,11 +23,6 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 	}
 
 	@Override
-	public boolean isBlockstunned() {
-		return getDelegate().isBlockstunned();
-	}
-
-	@Override
 	public boolean isHitstunned() {
 		return getDelegate().isHitstunned();
 	}
@@ -40,11 +35,6 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 	@Override
 	public TechData getTech() {
 		return getDelegate().getTech();
-	}
-
-	@Override
-	public boolean techFrame() {
-		return getDelegate().techFrame();
 	}
 
 	@Override
@@ -101,6 +91,21 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 	@Override
 	public void dead() {
 		getDelegate().dead();		
+	}
+
+	@Override
+	public void nextFrameTech() {
+		getDelegate().nextFrameTech();
+	}
+
+	@Override
+	public void setDurationStunned(int bs) {
+		getDelegate().setDurationStunned(bs);
+	}
+
+	@Override
+	public void updateDurationStunned() {
+		getDelegate().updateDurationStunned();
 	}
 
 	

@@ -23,11 +23,6 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 	}
 
 	@Override
-	public boolean isBlockstunned() {
-		return getDelegate().isBlockstunned();
-	}
-
-	@Override
 	public boolean isHitstunned() {
 		return getDelegate().isHitstunned();
 	}
@@ -40,11 +35,6 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 	@Override
 	public TechData getTech() {
 		return getDelegate().getTech();
-	}
-
-	@Override
-	public boolean techFrame() {
-		return getDelegate().techFrame();
 	}
 
 	@Override
@@ -95,6 +85,21 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 	@Override
 	public void dead() {
 		getDelegate().dead();
+	}
+
+	@Override
+	public void nextFrameTech() {
+		getDelegate().nextFrameTech();
+	}
+
+	@Override
+	public void setDurationStunned(int bs) {
+		getDelegate().setDurationStunned(bs);
+	}
+
+	@Override
+	public void updateDurationStunned() {
+		getDelegate().updateDurationStunned();		
 	}
 	
 	

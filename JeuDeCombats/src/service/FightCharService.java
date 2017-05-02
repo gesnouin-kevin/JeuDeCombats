@@ -9,7 +9,6 @@ public interface FightCharService extends CharacterService {
 	/** Observators */
 
 	public boolean isBlocking();
-	public boolean isBlockstunned();
 	public boolean isHitstunned();
 	public boolean isTeching();
 	public RectangleHitboxService getCoupBox();
@@ -23,8 +22,6 @@ public interface FightCharService extends CharacterService {
 	// pre: isTeching()
     public TechData getTech();
  
-    // pre: isTeching()
-    public boolean techFrame();
     
     // pre: isTeching()
     public boolean techHasAlreadyHit();
@@ -49,4 +46,10 @@ public interface FightCharService extends CharacterService {
     public void hit();
     
     public void dead();
+    
+    public void nextFrameTech();
+    
+    public void setDurationStunned(int bs);
+    
+    public void updateDurationStunned();
 }

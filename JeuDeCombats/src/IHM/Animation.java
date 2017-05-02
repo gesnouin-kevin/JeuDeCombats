@@ -40,13 +40,10 @@ public class Animation {
 		else if(this.repeatAnimation) // repeat animation
 			this.currentFrame = 0;
 		
-		else if(this.currentAnimation==9)
-			this.setCurrentAnimation(9);
-		else	// animation end
+		else if(this.currentAnimation!=9)	// animation end
 		{
 			this.setCurrentAnimation(0);
-		}
-			
+		}			
 	}
 	
 	public SpriteSheet getSpriteSheet()

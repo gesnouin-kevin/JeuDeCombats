@@ -107,9 +107,10 @@ public class Fighting extends BasicGameState {
 		g.setColor(new Color(255, 255, 0)); // yellow
 		int vieMaxPersoP1 = InformationsCharacter.getLife(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
 		int viePersoP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getLife();
-		int widthLifeBar = (502*viePersoP1)/vieMaxPersoP1;
 		if(viePersoP1<0)
 			viePersoP1 = 0;
+		int widthLifeBar = (502*viePersoP1)/vieMaxPersoP1;
+		
 		
 		g.fillRect(gc.getWidth()/2-(40/2)*scaleX-500+(502-widthLifeBar), 10*scaleY, widthLifeBar, 10*scaleY);
 
@@ -264,10 +265,16 @@ public class Fighting extends BasicGameState {
 
 		if(System.currentTimeMillis()-lastMs>500) // limite frame rate -> frame de 500 ms ?
 		{
-			if(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer() != null)
+			if(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer() != null){
 				this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().nextFrame();
-			if(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer() != null)
+				this.window.getGame().getEngine().getPlayer(0).getFightCharacter().nextFrameTech();
+				this.window.getGame().getEngine().getPlayer(0).getFightCharacter().updateDurationStunned();
+			}
+			if(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer() != null){
 				this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().nextFrame();
+				this.window.getGame().getEngine().getPlayer(1).getFightCharacter().nextFrameTech();
+				this.window.getGame().getEngine().getPlayer(1).getFightCharacter().updateDurationStunned();
+			}
 			lastMs = System.currentTimeMillis();
 
 		}

@@ -10,22 +10,19 @@ import service.TechData;
 public class FightCharImpl extends CharacterImpl implements FightCharService{
 
 	private boolean blocking;
-	private boolean blockstunned;
 	private boolean hitstunned;
 	private boolean teching;
-	private boolean techFrame;
+	private int techFrame;
 	private boolean techHasAlreadyHit;
+	private int technique;
+	private int durationStunned;
 	private RectangleHitboxService coupBox;
 	private EngineService engine;
+	
 
 	@Override
 	public boolean isBlocking() {
 		return this.blocking;
-	}
-
-	@Override
-	public boolean isBlockstunned() {
-		return this.blockstunned;
 	}
 
 	@Override
@@ -43,10 +40,6 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		return null;
 	}
 
-	@Override
-	public boolean techFrame() {
-		return this.techFrame;
-	}
 
 	@Override
 	public boolean techHasAlreadyHit() {
@@ -62,30 +55,30 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 	@Override
 	public void step(Command c) {
 
-		if(!this.teching || !this.blockstunned){
+		if(!this.teching && this.durationStunned==0){
 			switch (c) {
 			case KICK:
+				this.techFrame=0;
 				this.teching=true;
+				this.technique=6;
 				this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(6);
-				kick();
 				break;
 
 			case PUNCH:
+				this.techFrame=0;
 				this.teching=true;
+				this.technique=5;
 				this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(5);
-				punch();
 				break;
 
 			case BLOCK_PRESSED:
 				this.blocking=true;
-				this.teching=true;
 				this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(4);
 				block();
 				break;
 
 			case BLOCK_RELEASED:
 				this.blocking=false;
-				this.teching=false;
 				this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(0);
 				break;
 
@@ -123,6 +116,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		{
 			if(!this.getEngine().getPlayer(otherPlayer).getFightCharacter().isBlocking()){
 				this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();
+				this.getEngine().getPlayer(otherPlayer).getFightCharacter().setDurationStunned(3);
 
 			}
 		}
@@ -160,6 +154,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 			
 			if(!this.getEngine().getPlayer(otherPlayer).getFightCharacter().isBlocking()){
 				this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();
+				this.getEngine().getPlayer(otherPlayer).getFightCharacter().setDurationStunned(2);
 
 			}
 		}
@@ -196,14 +191,13 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 	public void init(int l, int s, boolean f, int numeroPlayer) {
 		super.init(l, s, f, numeroPlayer);
 		this.blocking=false;
-		this.blockstunned=false;
+		this.durationStunned=0;
 		this.hitstunned=false;
 		this.teching=false;
-		this.techFrame=false;
+		this.techFrame=0;
 		this.techHasAlreadyHit=false;
-
+		this.technique=0;
 		this.coupBox=new RectangleHitboxImpl();
-		//this.setCoupBox(this.coupBox);
 	}
 
 	@Override
@@ -233,6 +227,43 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		}
 		
 		
+	}
+
+	@Override
+	public void nextFrameTech() {
+		
+		if(this.techFrame<2){
+			this.techFrame++;
+			
+			if(this.techFrame==1){
+				if(this.technique==5){
+					punch();
+					this.technique=0;
+				}else if(this.technique==6){
+					kick();
+					this.technique=0;
+				}
+				
+				
+			}
+				
+		}
+		else{
+			this.techFrame=0;
+			this.teching=false;
+		}
+	}
+	
+	@Override
+	public void setDurationStunned(int bs) {
+		this.durationStunned=bs;
+	}
+
+	@Override
+	public void updateDurationStunned() {
+		if(this.durationStunned>0){
+			this.durationStunned--;
+		}
 	}
 	
 	
