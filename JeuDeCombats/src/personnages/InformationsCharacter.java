@@ -52,13 +52,13 @@ public abstract class InformationsCharacter {
 	
 	private static int widthSpritePersoArm[]={110,103,91,103};
 	private static int heightSpritePersoArm[]={34,98,48,46};
-	private static int posXSpritePersoArm[]={372,655,547,468};
-	private static int posYSpritePersoArm[]={59,67,79,43};
+	private static int posXSpritePersoArm[]={131,276,228,183};
+	private static int posYSpritePersoArm[]={282,286,238,305};
 	
 	private static int widthSpritePersoFoot[]={46,116,120,158};
 	private static int heightSpritePersoFoot[]={39,103,101,106};
-	private static int posXSpritePersoFoot[]={520,688,530,521};
-	private static int posYSpritePersoFoot[]={8,236,73,127};
+	private static int posXSpritePersoFoot[]={237,286,205,181};
+	private static int posYSpritePersoFoot[]={359,125,227,230};
 
 	public static int getLife(int numeroPerso){return InformationsCharacter.life[numeroPerso];}
 	public static int getSpeed(int numeroPerso){return InformationsCharacter.speed[numeroPerso];}

@@ -106,18 +106,18 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		else
 			otherPlayer =0;
 
-		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoKick(this.getNumeroCharacter()));
-		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter()));
-
-		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoPunch(this.getNumeroCharacter()));
-		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter()));
+		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.getNumeroCharacter()));
+		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter()));
 
 		this.coupBox.setHeight(InformationsCharacter.getHeightSpritePersoFoot(this.getNumeroCharacter()));
 		this.coupBox.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
-		this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
 		this.coupBox.setPosY(InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()));
 
-
+		if(this.isFaceRight())
+			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
+		else
+			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
+		
 		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) ||
 				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
 		{
@@ -140,15 +140,18 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		else
 			otherPlayer =0;
 
-		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoPunch(this.getNumeroCharacter()));
-		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter()));
+		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.getNumeroCharacter()));
+		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter()));
 
 		this.coupBox.setHeight(InformationsCharacter.getHeightSpritePersoArm(this.getNumeroCharacter()));
 		this.coupBox.setWidth(InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
-		this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
 		this.coupBox.setPosY(InformationsCharacter.getPosYSpritePersoArm(this.getNumeroCharacter()));
 
-
+		if(this.isFaceRight())
+			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
+		else
+			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
+		
 		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) ||
 				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
 			this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();

@@ -162,13 +162,13 @@ public class Fighting extends BasicGameState {
 			g.setColor(new Color(0,255,0,60));
 			g.fillRect(posXp1hitbox, gc.getHeight()-posYp1hitbox-GROUND-heightHitboxP1, widthHitboxP1, heightHitboxP1);
 			g.setColor(new Color(0,255,0,200));
-			g.fillRect(posXp1Coupbox, gc.getHeight()-posYp1Coupbox-GROUND-heightCoupboxP1, widthCoupboxP1, heightCoupboxP1);
+			g.fillRect(posXp1Coupbox, gc.getHeight()-posYp1Coupbox-GROUND, widthCoupboxP1, heightCoupboxP1);
 
 			// draw boudingbox player 2
 			g.setColor(new Color(255,0,0,60));
 			g.fillRect(posXp2hitbox, gc.getHeight()-posYp2hitbox-GROUND-heightHitboxP2, widthHitboxP2, heightHitboxP2);
 			g.setColor(new Color(255,0,0,200));
-			g.fillRect(posXp2Coupbox, gc.getHeight()-posYp2Coupbox-GROUND-heightCoupboxP2, widthCoupboxP2, heightCoupboxP2);
+			g.fillRect(posXp2Coupbox, gc.getHeight()-posYp2Coupbox-GROUND, widthCoupboxP2, heightCoupboxP2);
 		}
 
 		// draw player1
