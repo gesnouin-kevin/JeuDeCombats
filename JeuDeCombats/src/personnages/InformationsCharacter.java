@@ -42,7 +42,7 @@ public abstract class InformationsCharacter {
 	private static int heightSpritePersoCrouchHit[]={241,295,277,243,0,248};
 	private static int nbSpritePersoCrouchHit[]={1,1,3,1,0,1};
 	
-	private static int widthSpritePersoKo[]={321,388,378,352,0,357};
+	private static int widthSpritePersoKo[]={312,388,378,352,0,357};
 	private static int heightSpritePersoKo[]={232,384,266,280,0,283};
 	private static int nbSpritePersoKo[]={3,5,5,3,0,4};
 	
