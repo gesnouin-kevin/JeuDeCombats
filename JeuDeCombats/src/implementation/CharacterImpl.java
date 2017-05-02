@@ -302,4 +302,10 @@ public class CharacterImpl implements CharacterService {
 		}	
 	}
 
+	@Override
+	public void setLife(int l) {
+		this.life = l;
+		
+	}
+
 }

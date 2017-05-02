@@ -520,5 +520,12 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 
+	@Override
+	public void setLife(int l) {
+		this.setLife(l);
+		
+	}
+
+
 
 }

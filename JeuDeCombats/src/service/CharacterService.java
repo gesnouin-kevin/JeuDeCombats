@@ -161,4 +161,6 @@ public interface CharacterService {
 	
 
 	public void updateY();
+	
+	public void setLife(int l);
 }

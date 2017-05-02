@@ -40,7 +40,6 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 
 	@Override
 	public TechData getTech() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -106,22 +105,24 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 			otherPlayer =1;
 		else
 			otherPlayer =0;
-		
+
 		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoKick(this.getNumeroCharacter()));
 		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter()));
 
 		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoPunch(this.getNumeroCharacter()));
 		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter()));
-		
+
 		this.coupBox.setHeight(InformationsCharacter.getHeightSpritePersoFoot(this.getNumeroCharacter()));
 		this.coupBox.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
 		this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
 		this.coupBox.setPosY(InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()));
-		
-		
+
+
 		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) ||
 				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
-			System.out.println("collision kick");
+		{
+			this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();
+		}
 	}
 
 	@Override
@@ -134,29 +135,39 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 	public void punch() {
 		int otherPlayer = -1;
 
-		if(this.getNumeroPlayer() == 0)
+		if(getNumeroPlayer() == 0)
 			otherPlayer =1;
 		else
 			otherPlayer =0;
-		
+
 		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoPunch(this.getNumeroCharacter()));
 		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter()));
-		
+
 		this.coupBox.setHeight(InformationsCharacter.getHeightSpritePersoArm(this.getNumeroCharacter()));
 		this.coupBox.setWidth(InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
 		this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
 		this.coupBox.setPosY(InformationsCharacter.getPosYSpritePersoArm(this.getNumeroCharacter()));
-		
-		
+
+
 		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) ||
 				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
-			System.out.println("collision punch");
+			this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();
 	}
 
 	@Override
 	public void hit() {
+		int otherPlayer = -1;
+
+		if(getNumeroPlayer() == 0)
+			otherPlayer =1;
+		else
+			otherPlayer =0;
+		
 		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoHit(this.getNumeroCharacter()));
 		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoHit(this.getNumeroCharacter()));
+		this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(7);
+		
+		super.setLife(super.getLife()-InformationsCharacter.getDamage(this.getEngine().getPlayer(otherPlayer).getCharacter().getNumeroCharacter()));
 	}
 
 	@Override
@@ -167,7 +178,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 	public void setCoupBox(RectangleHitboxService rectangleHitbox){
 		this.coupBox=rectangleHitbox;
 	}
-	
+
 	@Override
 	public void init(int l, int s, boolean f, int numeroPlayer) {
 		super.init(l, s, f, numeroPlayer);
@@ -177,11 +188,8 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		this.teching=false;
 		this.techFrame=false;
 		this.techHasAlreadyHit=false;
-		
+
 		this.coupBox=new RectangleHitboxImpl();
 		//this.setCoupBox(this.coupBox);
 	}
-
-
-
 }

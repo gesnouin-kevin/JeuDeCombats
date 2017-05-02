@@ -106,6 +106,9 @@ public class Fighting extends BasicGameState {
 		int vieMaxPersoP1 = InformationsCharacter.getLife(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
 		int viePersoP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getLife();
 		int widthLifeBar = (502*viePersoP1)/vieMaxPersoP1;
+		if(viePersoP1<0)
+			viePersoP1 = 0;
+		
 		g.fillRect(gc.getWidth()/2-(40/2)*scaleX-500+(502-widthLifeBar), 10*scaleY, widthLifeBar, 10*scaleY);
 
 		//right bar life
@@ -116,6 +119,8 @@ public class Fighting extends BasicGameState {
 		g.setColor(new Color(255, 255, 0));
 		int vieMaxPersoP2 = InformationsCharacter.getLife(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
 		int viePersoP2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getLife();
+		if(viePersoP2<0)
+			viePersoP2 = 0;
 		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, (502*viePersoP2)/vieMaxPersoP2, 10*scaleY);
 
 		int posXp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionX();

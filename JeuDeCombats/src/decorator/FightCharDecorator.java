@@ -92,5 +92,11 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 		getDelegate().init(l, s, f, numeroPlayer);
 	}
 
+	@Override
+	public void setLife(int l) {
+		getDelegate().setLife(l);
+		
+	}
+
 	
 }
