@@ -91,6 +91,11 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 	public void init(int l, int s, boolean f, int numeroPlayer) {
 		getDelegate().init(l, s, f, numeroPlayer);		
 	}
+
+	@Override
+	public void dead() {
+		getDelegate().dead();
+	}
 	
 	
 }

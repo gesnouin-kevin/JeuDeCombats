@@ -18,13 +18,11 @@ public class Animation {
 	private int numPlayer;
 	
 	private ArrayList<ArrayList<SpriteSheet>> images;
-	private Game game;
 
-	public Animation(int numPlayer, Game game){
+	public Animation(int numPlayer){
 		this.currentFrame=0;
 		this.currentAnimation=0;
 		this.numPlayer = numPlayer;
-		this.game = game;
 		this.images=new ArrayList<ArrayList<SpriteSheet>>();
 		this.repeatAnimation = true;
 		
@@ -41,6 +39,9 @@ public class Animation {
 			this.currentFrame++;
 		else if(this.repeatAnimation) // repeat animation
 			this.currentFrame = 0;
+		
+		else if(this.currentAnimation==9)
+			this.setCurrentAnimation(9);
 		else	// animation end
 		{
 			this.setCurrentAnimation(0);

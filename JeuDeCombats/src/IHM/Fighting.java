@@ -44,8 +44,8 @@ public class Fighting extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame game){
 		gc.getInput().enableKeyRepeat();
-		this.window.getGame().getEngine().getPlayer(0).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter(), this.window.getGame()));
-		this.window.getGame().getEngine().getPlayer(1).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter(), this.window.getGame()));
+		this.window.getGame().getEngine().getPlayer(0).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter()));
+		this.window.getGame().getEngine().getPlayer(1).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter()));
 
 		this.modeDebug = false;
 		for(int i=0;i<this.inputPlayer1.length;i++)

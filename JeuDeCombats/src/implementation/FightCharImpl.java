@@ -121,7 +121,10 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) ||
 				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
 		{
-			this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();
+			if(!this.getEngine().getPlayer(otherPlayer).getFightCharacter().isBlocking()){
+				this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();
+
+			}
 		}
 	}
 
@@ -153,8 +156,13 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
 		
 		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) ||
-				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
-			this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();
+				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox())){
+			
+			if(!this.getEngine().getPlayer(otherPlayer).getFightCharacter().isBlocking()){
+				this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();
+
+			}
+		}
 	}
 
 	@Override
@@ -171,6 +179,8 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(7);
 		
 		super.setLife(super.getLife()-InformationsCharacter.getDamage(this.getEngine().getPlayer(otherPlayer).getCharacter().getNumeroCharacter()));
+		dead();
+		
 	}
 
 	@Override
@@ -195,4 +205,35 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		this.coupBox=new RectangleHitboxImpl();
 		//this.setCoupBox(this.coupBox);
 	}
+
+	@Override
+	public void dead() {
+		int otherPlayer = -1;
+
+		if(getNumeroPlayer() == 0)
+			otherPlayer =1;
+		else
+			otherPlayer =0;
+		
+		if(this.getLife()<=0){
+			
+			this.setDead(true);
+			
+			this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(9);
+			this.getEngine().getPlayer(otherPlayer).getAnimationPlayer().setCurrentAnimation(10);
+			
+			
+		}else if(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getLife()<=0){
+			
+			this.getEngine().getPlayer(otherPlayer).getFightCharacter().setDead(true);
+			
+			this.getEngine().getPlayer(otherPlayer).getAnimationPlayer().setCurrentAnimation(9);
+			this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(10);
+			
+		}
+		
+		
+	}
+	
+	
 }

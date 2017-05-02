@@ -98,5 +98,11 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 		
 	}
 
+	@Override
+	public void dead() {
+		getDelegate().dead();		
+	}
+
+	
 	
 }

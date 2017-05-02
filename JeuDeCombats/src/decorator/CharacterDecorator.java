@@ -174,6 +174,16 @@ public abstract class CharacterDecorator implements CharacterService {
 		this.delegateCharacter.updateY();
 	}
 
+	@Override
+	public void setLife(int l) {
+		this.delegateCharacter.setLife(l);
+	}
+
+	@Override
+	public void setDead(boolean d) {
+		this.delegateCharacter.setDead(d);
+	}
+
 	
 	
 }

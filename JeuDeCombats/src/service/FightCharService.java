@@ -47,4 +47,6 @@ public interface FightCharService extends CharacterService {
     public void punch();
     
     public void hit();
+    
+    public void dead();
 }

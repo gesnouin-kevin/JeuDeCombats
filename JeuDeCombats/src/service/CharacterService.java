@@ -17,7 +17,7 @@ public interface CharacterService {
 	public boolean isJumping();
 	public int getNumeroPlayer() ;
 	public int getNumeroCharacter();
-	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox);
+	
 	
 	
 	/** Invariant */
@@ -163,4 +163,8 @@ public interface CharacterService {
 	public void updateY();
 	
 	public void setLife(int l);
+	
+	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox);
+	
+	public void setDead(boolean d);
 }
