@@ -23,7 +23,6 @@ public interface FightCharService extends CharacterService {
 	 * post: getSpeed()=s
 	 * post: isFaceRight() = f
 	 * post: getNumeroPlayer()==numeroPlayer
-	 * post: \exist h :RectangleHitboxService { getCoupBox() = h }
 	 */
 	public void init(int l, int s, boolean f, int numeroPlayer);
 	
@@ -34,7 +33,7 @@ public interface FightCharService extends CharacterService {
 	 * post: step(KICK) == kick()
 	 * post: step(PUNCH) == punch()
 	 * post: step(BLOCK_PRESSED) == block()
-	 * post: step(BLOCK_RELEASED) == 
+	 * 
 	 */
     public void step(Command c);
     
@@ -43,17 +42,45 @@ public interface FightCharService extends CharacterService {
      * post: getCharBox().getHeight()==getCharBox()@Pre.setHeight(InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()))
      * post: getCharBox().getWidth()==getCharBox()@Pre.setWidth(InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()))
      * 
-     * post: getCoupBox()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoFoot(getNumeroCharacter())) 
-     * post: getCoupBox()==getCoupBox@Pre.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()))
-     * post: getCoupBox()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()))
+     * post: getCoupBox().getHeight()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoFoot(getNumeroCharacter())) 
+     * post: getCoupBox().getWidth()==getCoupBox@Pre.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()))
+     * post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()))
      * 
-     * post: isFaceRight() => getCoupBox()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
-     * post: not isFaceRight() => getCoupBox()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
+     * post: isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
+     * post: not isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
      * 
-     * post: 
+     * post: \exist i in {0,1}  
+     * 			getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()) ||
+				getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCoupBox())
+				=>
+					!getEngine().getPlayer(i).getFightCharacter().isBlocking())
+						=> getEngine().getPlayer(i).getFightCharacter().getDurationStunned()==3
+				
+				
      */
     public void kick();
     
+    
+    /**
+     * post: getCharBox().getHeight()==getCharBox()@Pre.setHeight(InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()))
+     * post: getCharBox().getWidth()==getCharBox()@Pre.setWidth(InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()))
+     * 
+     * post: getCoupBox().getHeight()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoFoot(getNumeroCharacter())) 
+     * post: getCoupBox().getWidth()==getCoupBox@Pre.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()))
+     * post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()))
+     * 
+     * post: isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
+     * post: not isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
+     * 
+     * post: \exist i in {0,1}  
+     * 			getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()) ||
+				getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCoupBox())
+				=>
+					!getEngine().getPlayer(i).getFightCharacter().isBlocking())
+						=> getEngine().getPlayer(i).getFightCharacter().getDurationStunned()==2
+				
+				
+     */
     public void punch();
     
     /**
@@ -70,15 +97,14 @@ public interface FightCharService extends CharacterService {
     
     /**
      * post:\exist i && j in {0,1},j!=i, getEngine().getPlayer(i).getFightCharacter().getLife()<=0 
-     * 							=> getEngine().getPlayer(i).getFightCharacter().getDead()==true && getEngine().getPlayer(i).getAnimationPlayer().getCurrentAnimation(10)
-     * 							&& this.getEngine().getPlayer(j).getAnimationPlayer().setCurrentAnimation(9);
+     * 							=> getEngine().getPlayer(i).getFightCharacter().isDead()
      * 
      */
     public void dead();
     
     /**
      * post: getTechFrame()<2 => getTechFrame()==getTechFrame()@Pre++
-     * post: getTechFrame()>=2 => getTechFrame()==0 && getTeching()==true
+     * post: getTechFrame()>=2 => getTechFrame()==0 && isTeching()==true
      * 
      */
     public void nextFrameTech();
