@@ -88,19 +88,7 @@ public class EngineContract extends EngineDecorator{
 		if(getCommandPlayer2() != Command.NEUTRAL)
 			throw new PostConditionError("Error PostCondition: getCommandPlayer2() == Command.NEUTRAL");
 	}
-
-	@Override
-	public int getHeight() { return super.getHeight(); }
-
-	@Override
-	public int getWidth() { return super.getWidth();}
-
-	@Override
-	public PlayerService getPlayer(int i) { return super.getPlayer(i); }
-
-	@Override
-	public boolean isGameOver() { return super.isGameOver();}
-
+	
 	@Override
 	public void updateFace() {
 		checkInvariant();
@@ -164,15 +152,17 @@ public class EngineContract extends EngineDecorator{
 	}
 
 	@Override
-	public Command getCommandPlayer1() {
-		return super.getCommandPlayer1();
-	}
-
+	public Command getCommandPlayer1() { return super.getCommandPlayer1();}
 	@Override
-	public Command getCommandPlayer2() {
-		return super.getCommandPlayer2();
-	}
-
+	public Command getCommandPlayer2() { return super.getCommandPlayer2();}
+	@Override
+	public int getHeight() { return super.getHeight(); }
+	@Override
+	public int getWidth() { return super.getWidth();}
+	@Override
+	public PlayerService getPlayer(int i) { return super.getPlayer(i); }
+	@Override
+	public boolean isGameOver() { return super.isGameOver();}
 
 
 

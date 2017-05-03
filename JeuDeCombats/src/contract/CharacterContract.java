@@ -4,6 +4,7 @@ import decorator.CharacterDecorator;
 import error.InvariantError;
 import error.PostConditionError;
 import error.PreConditionError;
+import personnages.InformationsCharacter;
 import service.CharacterService;
 import service.Command;
 import service.EngineService;
@@ -30,45 +31,37 @@ public class CharacterContract extends CharacterDecorator {
 		if (!(isDead() == !(getLife() > 0)))
 			throw new InvariantError("Error checkInvariant: isDead() == !(getLife() > 0");
 	}
-
+	
 	@Override
-	public int getLife(){
-		return super.getLife();
-	}
+	public void init(int l, int s, boolean f, int numeroPlayer) {
 
-	@Override
-	public int getPositionX(){
-		return super.getPositionX();
-	}
+		// pre: l > 0
+		if (!(l > 0))
+			throw new PreConditionError("Error PreCondition : l>0");
 
-	@Override
-	public int getPositionY(){
-		return super.getPositionY();
-	}
+		// pre: s > 0
+		if (!(s > 0))
+			throw new PreConditionError("Error PreCondition : s>0");
 
-	@Override
-	public EngineService getEngine(){
-		return super.getEngine();
-	}
 
-	@Override
-	public RectangleHitboxService getCharBox(){
-		return super.getCharBox();
-	}
+		checkInvariant();
 
-	@Override
-	public int getSpeed(){
-		return super.getSpeed();
-	}
+		super.init(l, s, f, numeroPlayer);
 
-	@Override
-	public boolean isFaceRight(){
-		return super.isFaceRight();
-	}
+		checkInvariant();
 
-	@Override
-	public boolean isDead(){
-		return super.isDead();
+		// post: getLife() == l
+		if (!(getLife() == l))
+			throw new PostConditionError("Error PostCondition: getLife() == l");
+
+		// post: getSpeed() == s
+		if (!(getSpeed() == s))
+			throw new PostConditionError("Error PostCondition: getSpeed() == s");
+
+		// post: isfaceRight() == f
+		if (!(isFaceRight() == f))
+			throw new PostConditionError("Error PostCondition: isfaceRight() == f");
+
 	}
 
 	@Override
@@ -240,21 +233,21 @@ public class CharacterContract extends CharacterDecorator {
 
 		checkInvariant();
 
-		/* a modif
-		//post: step(LEFT) == moveLeft()
-		if(c==Command.LEFT)
+
+		//post: step(LEFT_PRESSED) == moveLeft()
+		if(c==Command.LEFT_PRESSED)
 			if(!(getPositionX()<positionX_atPre))
 				throw new PostConditionError("Error Precondition: step(LEFT) == moveLeft()");
 
-		//post: step(RIGHT) == moveRight()
-		if(c==Command.RIGHT)
+		//post: step(RIGHT_PRESSED) == moveRight()
+		if(c==Command.RIGHT_PRESSED)
 			if(!(getPositionX()>positionX_atPre))
 				throw new PostConditionError("Error Precondition: step(RIGHT) == moveRight()");
 
 		//post: step(NEUTRAL) == this
 		if(c==Command.NEUTRAL)
 			if(!(getPositionX()==positionX_atPre))
-				throw new PostConditionError("Error Precondition: step(NEUTRAL) == this");*/
+				throw new PostConditionError("Error Precondition: step(NEUTRAL) == this");
 	}
 
 	@Override
@@ -308,46 +301,10 @@ public class CharacterContract extends CharacterDecorator {
 			throw new PostConditionError("Error PostCondition: isFaceRight() == fr");
 	}
 
-
-	@Override
-	public void init(int l, int s, boolean f, int numeroPlayer) {
-
-		// pre: l > 0
-		if (!(l > 0))
-			throw new PreConditionError("Error PreCondition : l>0");
-
-		// pre: s > 0
-		if (!(s > 0))
-			throw new PreConditionError("Error PreCondition : s>0");
-
-
-		checkInvariant();
-
-		super.init(l, s, f, numeroPlayer);
-
-		checkInvariant();
-
-		// post: getLife() == l
-		if (!(getLife() == l))
-			throw new PostConditionError("Error PostCondition: getLife() == l");
-
-		// post: getSpeed() == s
-		if (!(getSpeed() == s))
-			throw new PostConditionError("Error PostCondition: getSpeed() == s");
-
-		// post: isfaceRight() == f
-		if (!(isFaceRight() == f))
-			throw new PostConditionError("Error PostCondition: isfaceRight() == f");
-
-		// post: \exists h: HitboxService { getCharBox() == h }
-	}
-
-
 	@Override
 	public int getNumeroPlayer() {
 		return super.getPositionX();
 	}
-
 
 	@Override
 	public void setNumeroPlayer(int numeroPlayer) {
@@ -396,7 +353,7 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void setNumeroCharacter(int numeroCharacter) {
-		
+
 		//pre: numeroPlayer>=0 && numeroPlayer<=15
 		if(!(numeroCharacter>=0 || numeroCharacter<=15))
 			throw new PreConditionError("Error PreCondition: numeroCharacter>=0 || numeroCharacter<=1");
@@ -427,17 +384,17 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveDown() {
-		
+
 		int getPositionY_atPre = getPositionY();
 		int getLife_atPre = getLife();
 		boolean isFaceRight_atPre = isFaceRight();
 
 		checkInvariant();
-		
+
 		super.moveDown();
-		
+
 		checkInvariant();
-		
+
 		// post: faceRight() == not isFaceRight()@Pre && getLife() == getLife()@Pre
 		if (!(isFaceRight() == !(isFaceRight_atPre) && getLife() == getLife_atPre))
 			throw new PostConditionError("Error PostCondition: isFaceRight() && getLife() ");
@@ -456,17 +413,17 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveUp() {
-		
+
 		int getPositionY_atPre = getPositionY();
 		int getLife_atPre = getLife();
 		boolean isFaceRight_atPre = isFaceRight();
 
 		checkInvariant();
-		
+
 		super.moveUp();
-		
+
 		checkInvariant();
-		
+
 		// post: faceRight() == not isFaceRight()@Pre && getLife() == getLife()@Pre
 		if (!(isFaceRight() == !(isFaceRight_atPre) && getLife() == getLife_atPre))
 			throw new PostConditionError("Error PostCondition: isFaceRight() && getLife() ");
@@ -479,44 +436,83 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void neutral() {
-		
-		int getPositionY_atPre = getPositionY();
-		int getLife_atPre = getLife();
-		boolean isFaceRight_atPre = isFaceRight();
-
-		//pre: isCrouching() || isJumping() || isRunning()
-		if(!(isCrouching() || isJumping() || isRunning()))
-			throw new PreConditionError("Error PreCondition: isCrouching() || isJumping() || isRunning()");
-		
 		checkInvariant();
-		
 		super.neutral();
-		
 		checkInvariant();
-		
-		// post: faceRight() == not isFaceRight()@Pre && getLife() == getLife()@Pre
-		if (!(isFaceRight() == !(isFaceRight_atPre) && getLife() == getLife_atPre))
-			throw new PostConditionError("Error PostCondition: isFaceRight() && getLife() ");
 
-		// post: getPositionY() == getPositionY()@Pre
-		if (!(getPositionY() == getPositionY_atPre))
-			throw new PostConditionError("Error PostCondition: getPositionY()");
+		// post: getRectangleHitbox().getHeight == InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter())
+		if(this.getRectangleHitboxService().getHeight()!= InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()))
+			throw new PostConditionError("Error PostCondition:getRectangleHitbox().getHeight != InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter())");
 
+		// post: getRectangleHitbox().getWidth == InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter)
+		if(this.getRectangleHitboxService().getWidth()!= InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()))
+			throw new PostConditionError("Error PostCondition:getRectangleHitbox().getWidth != InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter())");
 	}
 
 
 	@Override
 	public void updateY() {
+		checkInvariant();
 		super.updateY();
-		
+		checkInvariant();
 	}
 
 
 	@Override
 	public void setLife(int l) {
-		this.setLife(l);
-		
+		checkInvariant();
+		super.setLife(l);
+		checkInvariant();
+
+		//post : getLife()==l
+		if(getLife()!=l)
+			throw new PostConditionError("Error PostCondition: getLife()!=l");
 	}
+
+
+	@Override
+	public void crouch() {
+		checkInvariant();
+		super.crouch();
+		checkInvariant();
+
+		// post: getRectangleHitbox().getHeight == InformationsCharacter.getHeightSpritePersoCrouch(getNumeroCharacter())
+		if(this.getRectangleHitboxService().getHeight()!= InformationsCharacter.getHeightSpritePersoCrouch(getNumeroCharacter()))
+			throw new PostConditionError("Error PostCondition:getRectangleHitbox().getHeight != InformationsCharacter.getHeightSpritePersoCrouch(getNumeroCharacter())");
+
+		// post: getRectangleHitbox().getWidth == InformationsCharacter.getWidthSpritePersoCrouch(getNumeroCharacter)
+		if(this.getRectangleHitboxService().getWidth()!= InformationsCharacter.getWidthSpritePersoCrouch(getNumeroCharacter()))
+			throw new PostConditionError("Error PostCondition:getRectangleHitbox().getWidth != InformationsCharacter.getWidthSpritePersoCrouch(getNumeroCharacter())");
+	}
+
+	@Override
+	public void setDead(boolean d) {
+		checkInvariant();
+		super.setDead(d);
+		checkInvariant();
+		
+		// post: isDead = d
+		if(isDead()!= d)
+			throw new PostConditionError("Error PostCondition: isDead != d");
+	}
+
+
+	@Override
+	public int getLife(){return super.getLife();}
+	@Override
+	public int getPositionX(){return super.getPositionX();}
+	@Override
+	public int getPositionY(){return super.getPositionY();}
+	@Override
+	public EngineService getEngine(){return super.getEngine();}
+	@Override
+	public RectangleHitboxService getCharBox(){return super.getCharBox();}
+	@Override
+	public int getSpeed(){return super.getSpeed();}
+	@Override
+	public boolean isFaceRight(){return super.isFaceRight();}
+	@Override
+	public boolean isDead(){return super.isDead();}
 
 
 

@@ -105,26 +105,21 @@ public abstract class CharacterDecorator implements CharacterService {
 
 	@Override
 	public int getNumeroPlayer() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.delegateCharacter.getNumeroPlayer();
 	}
 
 	@Override
 	public void setNumeroPlayer(int numeroPlayer) {
-		// TODO Auto-generated method stub
-		
+		this.delegateCharacter.setNumeroPlayer(numeroPlayer);
 	}
 
 	@Override
 	public void setRectangleHitboxService(RectangleHitboxService rectangleHitbox) {
-		// TODO Auto-generated method stub
-		
-	}
+		this.delegateCharacter.setRectangleHitboxService(rectangleHitbox);}
 
 	@Override
 	public RectangleHitboxService getRectangleHitboxService() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.delegateCharacter.getRectangleHitboxService();
 	}
 
 	@Override
@@ -182,6 +177,12 @@ public abstract class CharacterDecorator implements CharacterService {
 	@Override
 	public void setDead(boolean d) {
 		this.delegateCharacter.setDead(d);
+	}
+
+	@Override
+	public void crouch() {
+		this.delegateCharacter.crouch();
+		
 	}
 
 	
