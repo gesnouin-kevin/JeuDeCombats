@@ -13,43 +13,21 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 	private boolean hitstunned;
 	private boolean teching;
 	private int techFrame;
-	private boolean techHasAlreadyHit;
 	private int technique;
 	private int durationStunned;
 	private RectangleHitboxService coupBox;
 	private EngineService engine;
 	
-
 	@Override
-	public boolean isBlocking() {
-		return this.blocking;
-	}
-
-	@Override
-	public boolean isHitstunned() {
-		return this.hitstunned;
-	}
-
-	@Override
-	public boolean isTeching() {
-		return this.teching;
-	}
-
-	@Override
-	public TechData getTech() {
-		return null;
-	}
-
-
-	@Override
-	public boolean techHasAlreadyHit() {
-		return this.techHasAlreadyHit;
-	}
-
-	@Override
-	public void startTech(TechData ts) {
-		// TODO Auto-generated method stub
-
+	public void init(int l, int s, boolean f, int numeroPlayer) {
+		super.init(l, s, f, numeroPlayer);
+		this.blocking=false;
+		this.durationStunned=0;
+		this.hitstunned=false;
+		this.teching=false;
+		this.techFrame=0;
+		this.technique=0;
+		this.coupBox=new RectangleHitboxImpl();
 	}
 
 	@Override
@@ -123,12 +101,6 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 	}
 
 	@Override
-	public void block() {
-		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoBlocking(this.getNumeroCharacter()));
-		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoBlocking(this.getNumeroCharacter()));
-	}
-
-	@Override
 	public void punch() {
 		int otherPlayer = -1;
 
@@ -150,8 +122,8 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
 		
 		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCharBox()) ||
-				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox())){
-			
+				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
+		{
 			if(!this.getEngine().getPlayer(otherPlayer).getFightCharacter().isBlocking()){
 				this.getEngine().getPlayer(otherPlayer).getFightCharacter().hit();
 				this.getEngine().getPlayer(otherPlayer).getFightCharacter().setDurationStunned(2);
@@ -168,36 +140,18 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 			otherPlayer =1;
 		else
 			otherPlayer =0;
-		//ptete remove car on ne sait pas quand fini le truc de se faire hit donc on ne sait pas quand remettre bounding box idle
-		//this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoHit(this.getNumeroCharacter()));
-		//this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoHit(this.getNumeroCharacter()));
+
 		this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(7);
 		
-		super.setLife(super.getLife()-InformationsCharacter.getDamage(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getNumeroCharacter()));
+		this.setLife(this.getLife()-InformationsCharacter.getDamage(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getNumeroCharacter()));
 		dead();
 		
 	}
-
+	
 	@Override
-	public RectangleHitboxService getCoupBox() {
-		return this.coupBox;
-	}
-
-	public void setCoupBox(RectangleHitboxService rectangleHitbox){
-		this.coupBox=rectangleHitbox;
-	}
-
-	@Override
-	public void init(int l, int s, boolean f, int numeroPlayer) {
-		super.init(l, s, f, numeroPlayer);
-		this.blocking=false;
-		this.durationStunned=0;
-		this.hitstunned=false;
-		this.teching=false;
-		this.techFrame=0;
-		this.techHasAlreadyHit=false;
-		this.technique=0;
-		this.coupBox=new RectangleHitboxImpl();
+	public void block() {
+		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoBlocking(this.getNumeroCharacter()));
+		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoBlocking(this.getNumeroCharacter()));
 	}
 
 	@Override
@@ -210,23 +164,15 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 			otherPlayer =0;
 		
 		if(this.getLife()<=0){
-			
 			this.setDead(true);
-			
 			this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(9);
 			this.getEngine().getPlayer(otherPlayer).getAnimationPlayer().setCurrentAnimation(10);
 			
-			
 		}else if(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getLife()<=0){
-			
 			this.getEngine().getPlayer(otherPlayer).getFightCharacter().setDead(true);
-			
 			this.getEngine().getPlayer(otherPlayer).getAnimationPlayer().setCurrentAnimation(9);
 			this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(10);
-			
 		}
-		
-		
 	}
 
 	@Override
@@ -242,21 +188,12 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 				}else if(this.technique==6){
 					kick();
 					this.technique=0;
-				}
-				
-				
-			}
-				
-		}
-		else{
+				}				
+			}	
+		}else{
 			this.techFrame=0;
 			this.teching=false;
 		}
-	}
-	
-	@Override
-	public void setDurationStunned(int bs) {
-		this.durationStunned=bs;
 	}
 
 	@Override
@@ -266,5 +203,25 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		}
 	}
 	
+	@Override
+	public boolean isBlocking() { return this.blocking; }
+
+	@Override
+	public boolean isHitstunned() { return this.hitstunned; }
+
+	@Override
+	public boolean isTeching() { return this.teching; }
 	
+	@Override
+	public RectangleHitboxService getCoupBox() { return this.coupBox; }
+
+	@Override
+	public void setCoupBox(RectangleHitboxService rectangleHitbox){ this.coupBox=rectangleHitbox; }
+		
+	@Override
+	public int getDurationStunned() { return this.durationStunned; }
+
+	@Override
+	public void setDurationStunned(int bs) { this.durationStunned=bs; }
+
 }

@@ -33,21 +33,6 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 	}
 
 	@Override
-	public TechData getTech() {
-		return getDelegate().getTech();
-	}
-
-	@Override
-	public boolean techHasAlreadyHit() {
-		return getDelegate().techHasAlreadyHit();
-	}
-
-	@Override
-	public void startTech(TechData ts) {
-		getDelegate().startTech(ts);		
-	}
-
-	@Override
 	public void step(Command c) {
 		getDelegate().step(c);
 	}
@@ -83,12 +68,6 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 	}
 
 	@Override
-	public void setLife(int l) {
-		getDelegate().setLife(l);
-		
-	}
-
-	@Override
 	public void dead() {
 		getDelegate().dead();		
 	}
@@ -108,6 +87,15 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 		getDelegate().updateDurationStunned();
 	}
 
-	
+	@Override
+	public void setCoupBox(RectangleHitboxService rectangleHitbox) {
+		getDelegate().setCoupBox(rectangleHitbox);
+	}
+
+	@Override
+	public int getDurationStunned() {
+		return getDelegate().getDurationStunned();
+	}
+
 	
 }

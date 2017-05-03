@@ -13,8 +13,9 @@ public interface RectangleHitboxService extends HitboxService {
 	public int getPosY();
 
 	/** invariants */
-	// \inv : isCollidesWith(H1) == \exist x,y { H.isBelongsTo(x,y) and H1.isBelongsTo(x,y) }
-	// \inv : isEqualsTo(H1) == \forall x,y { H.isBelongsTo(x,y) == H1.isBelongsTo(x,y) }
+	/** inv: getWidth() > 0
+	 *  inv: getHeight() > 0
+	 */
 	
 
 	/** Constructors*/

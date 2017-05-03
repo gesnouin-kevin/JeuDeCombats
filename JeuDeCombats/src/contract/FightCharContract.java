@@ -17,6 +17,10 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 		return (FightCharService) super.getDelegate();
 	}
 
+	public void checkInvariant(){
+		super.checkInvariant();
+	}
+	
 	@Override
 	public boolean isBlocking() {
 		return getDelegate().isBlocking();
@@ -30,21 +34,6 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 	@Override
 	public boolean isTeching() {
 		return getDelegate().isTeching();
-	}
-
-	@Override
-	public TechData getTech() {
-		return getDelegate().getTech();
-	}
-
-	@Override
-	public boolean techHasAlreadyHit() {
-		return getDelegate().techHasAlreadyHit();
-	}
-
-	@Override
-	public void startTech(TechData ts) {
-		getDelegate().startTech(ts);
 	}
 
 	@Override
@@ -100,6 +89,16 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 	@Override
 	public void updateDurationStunned() {
 		getDelegate().updateDurationStunned();		
+	}
+
+	@Override
+	public void setCoupBox(RectangleHitboxService rectangleHitbox) {
+		getDelegate().setCoupBox(rectangleHitbox);
+	}
+
+	@Override
+	public int getDurationStunned() {
+		return getDelegate().getDurationStunned();
 	}
 	
 	

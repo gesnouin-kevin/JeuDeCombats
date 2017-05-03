@@ -18,23 +18,10 @@ public class RectangleHitboxContract extends HitboxContract implements Rectangle
 		// inv: getWidth() > 0
 		if (!(getWidth() >= 0))
 			throw new InvariantError("getWidth() >= 0");
-		// inv: getWidth() > 0
+		// inv: getHeight() > 0
 		if (!(getHeight() >= 0))
 			throw new InvariantError("getHeight() >= 0");
 
-		try {
-			RectangleHitboxImpl rhb1 = (RectangleHitboxImpl) this.clone();
-			RectangleHitboxImpl rhb2 = (RectangleHitboxImpl) this.clone();
-
-			// \inv : isCollidesWith(H1) == \exist x,y { H.isBelongsTo(x,y) and H1.isBelongsTo(x,y) }
-			if(!(rhb1.isCollidesWith(rhb2) == rhb1.isBelongsTo(getHeight(),getWidth()) && rhb1.isCollidesWith(rhb2) == rhb2.isBelongsTo(getHeight(),getWidth())))
-				throw new InvariantError("Error checkInvariant : collidesWith");
-
-			// \inv : isEqualsTo(H1) == \forall x,y { H.isBelongsTo(x,y) == H1.isBelongsTo(x,y) }
-			if(!(rhb1.isBelongsTo(getHeight(),getWidth())==rhb2.isBelongsTo(getHeight(),getWidth())))
-				throw new InvariantError("Error checkInvariant : equalsTo");
-
-		} catch (CloneNotSupportedException e) {e.printStackTrace();}	
 	}
 
 	@Override
@@ -106,10 +93,9 @@ public class RectangleHitboxContract extends HitboxContract implements Rectangle
 
 		checkInvariant();
 
-		getDelegate().init(w, h);
+		getDelegate().setWidthHeight(w, h);
 
 		checkInvariant();
-
 		if (!(getWidth() == w))
 			throw new PostConditionError("Error PostConditions : getWidth()");
 
@@ -146,7 +132,7 @@ public class RectangleHitboxContract extends HitboxContract implements Rectangle
 
 		checkInvariant();
 
-		super.setPosX(posY);
+		getDelegate().setPosX(posY);
 
 		checkInvariant();
 

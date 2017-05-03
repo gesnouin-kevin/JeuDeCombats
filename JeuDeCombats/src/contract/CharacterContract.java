@@ -19,17 +19,18 @@ public class CharacterContract extends CharacterDecorator {
 
 	public void checkInvariant() {
 
-		//inv: getPositionX() > 0 and getPositionX() < Engine::getWidth()
-		if (!(getPositionX() > 0 && getPositionX() < getEngine().getWidth()))
+		//inv: getPositionX() >= 0 and getPositionX() < Engine::getWidth()
+		if (!(getPositionX() >= 0 && getPositionX() < getEngine().getWidth()))
 			throw new InvariantError("Error checkInvariant: getPositionX() > 0 && getPositionX() < getEngine().getWidth()");
 
-		// inv: getPositionY() > 0 && getPositionY() < Engine::getHeight()
-		if (!(getPositionY() > 0 && getPositionY() < getEngine().getHeight()))
+		// inv: getPositionY() >= 0 && getPositionY() < Engine::getHeight()
+		if (!(getPositionY() >= 0 && getPositionY() < getEngine().getHeight()))
 			throw new InvariantError("Error checkInvariant: getPositionY() > 0 && getPositionY() < getEngine().getHeight()");
 
-		// inv: isDead() == not (getLife() > 0)
-		if (!(isDead() == !(getLife() > 0)))
-			throw new InvariantError("Error checkInvariant: isDead() == !(getLife() > 0");
+		// inv: isDead() == not (getLife() >= 0)
+		if (!(isDead() == !(getLife() >= 0)))
+			throw new InvariantError("Error checkInvariant: isDead() == !getLife() > 0");
+		
 	}
 	
 	@Override
@@ -42,7 +43,6 @@ public class CharacterContract extends CharacterDecorator {
 		// pre: s > 0
 		if (!(s > 0))
 			throw new PreConditionError("Error PreCondition : s>0");
-
 
 		checkInvariant();
 
@@ -66,7 +66,7 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void init(EngineService es){
-		checkInvariant();
+
 		super.init(es);
 		checkInvariant();
 		// post: getEngine() == e
@@ -76,7 +76,6 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public void moveLeft(){
-
 		int getPositionX_atPre = getPositionX();
 		int getPositionY_atPre = getPositionY();
 		int getSpeed_atPre = getSpeed();
@@ -303,7 +302,7 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public int getNumeroPlayer() {
-		return super.getPositionX();
+		return super.getNumeroPlayer();
 	}
 
 	@Override
@@ -315,7 +314,7 @@ public class CharacterContract extends CharacterDecorator {
 
 		checkInvariant();
 
-		this.setNumeroPlayer(numeroPlayer);
+		super.setNumeroPlayer(numeroPlayer);
 
 		checkInvariant();
 
@@ -330,7 +329,7 @@ public class CharacterContract extends CharacterDecorator {
 
 		checkInvariant();
 
-		this.setRectangleHitboxService(rectangleHitbox);
+		super.setRectangleHitboxService(rectangleHitbox);
 
 		checkInvariant();
 
@@ -356,11 +355,11 @@ public class CharacterContract extends CharacterDecorator {
 
 		//pre: numeroPlayer>=0 && numeroPlayer<=15
 		if(!(numeroCharacter>=0 || numeroCharacter<=15))
-			throw new PreConditionError("Error PreCondition: numeroCharacter>=0 || numeroCharacter<=1");
+			throw new PreConditionError("Error PreCondition: numeroCharacter>=0 || numeroCharacter<=15");
 
 		checkInvariant();
 
-		this.setNumeroPlayer(numeroCharacter);
+		super.setNumeroCharacter(numeroCharacter);
 
 		checkInvariant();
 

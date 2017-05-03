@@ -15,21 +15,6 @@ public class HitboxContract extends HitboxDecorator{
 
 	public void checkInvariant(){
 
-		try {
-			HitboxImpl hb1 = (HitboxImpl) this.clone();
-			HitboxImpl hb2 = (HitboxImpl) this.clone();
-
-			// \inv : isCollidesWith(H1) == \exist x,y { H.isBelongsTo(x,y) and H1.isBelongsTo(x,y) }
-			if(!(hb1.isCollidesWith(hb2) == hb1.isBelongsTo(0,0) && hb1.isCollidesWith(hb2) == hb2.isBelongsTo(0,0)))
-				throw new InvariantError("Error checkInvariant : collidesWith");
-
-			// \inv : isEqualsTo(H1) == \forall x,y { H.isBelongsTo(x,y) == H1.isBelongsTo(x,y) }
-			if(!(hb1.isBelongsTo(0, 0)==hb2.isBelongsTo(0, 0)))
-				throw new InvariantError("Error checkInvariant : equalsTo");
-
-
-
-		} catch (CloneNotSupportedException e) {e.printStackTrace();}		
 	}
 
 
@@ -111,10 +96,10 @@ public class HitboxContract extends HitboxDecorator{
 
 		//pre: posX > 0
 		if(!(posX>0))
-			throw new PreConditionError("Error PreCondition: posX>0");
+			throw new PreConditionError("Error PreCondition: posX>=0");
 
 		checkInvariant();
-
+		System.out.println("Hitbox Contract pos x donnee:"+posX);
 		super.setPosX(posX);
 
 		checkInvariant();

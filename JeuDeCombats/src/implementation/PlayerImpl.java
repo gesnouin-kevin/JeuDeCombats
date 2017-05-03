@@ -1,5 +1,6 @@
 package implementation;
 
+import contract.FightCharContract;
 import service.EngineService;
 import service.FightCharService;
 import service.PlayerService;
@@ -7,12 +8,12 @@ import service.PlayerService;
 public class PlayerImpl implements PlayerService {
 	
 	private int numeroPlayer;
-	private FightCharService fightcharacter;
+	private FightCharContract fightcharacter;
 	private IHM.Animation animationPlayer;
 
 	@Override
 	public void init(EngineService es,int numeroPlayer) {
-		this.fightcharacter = new FightCharImpl();
+		this.fightcharacter = new FightCharContract(new FightCharImpl());
 		this.fightcharacter.init(es);
 		this.numeroPlayer = numeroPlayer;
 	}

@@ -4,6 +4,7 @@ import service.Command;
 import service.EngineService;
 import service.PlayerService;
 import contract.PlayerContract;
+import contract.RectangleHitboxContract;
 
 public class EngineImpl implements EngineService{
 
@@ -34,10 +35,10 @@ public class EngineImpl implements EngineService{
 		this.player[1].getFightCharacter().setPositionY(0);
 		this.player[0].getFightCharacter().setFaceRight(true);
 		this.player[1].getFightCharacter().setFaceRight(false);
-
-		this.player[0].getFightCharacter().setRectangleHitboxService(new RectangleHitboxImpl());
-		this.player[1].getFightCharacter().setRectangleHitboxService(new RectangleHitboxImpl());
-
+		
+		this.player[0].getFightCharacter().setRectangleHitboxService(new RectangleHitboxContract(new RectangleHitboxImpl()));
+		this.player[1].getFightCharacter().setRectangleHitboxService(new RectangleHitboxContract(new RectangleHitboxImpl()));
+		
 		this.player[0].getFightCharacter().getCharBox().setPosX(w/2 - s/2);
 		this.player[1].getFightCharacter().getCharBox().setPosX(w/2 + s/2);
 		this.player[0].getFightCharacter().getCharBox().setPosY(0);

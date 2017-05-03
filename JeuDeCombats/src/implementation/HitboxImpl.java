@@ -9,13 +9,9 @@ public class HitboxImpl implements HitboxService {
 	
 	
 	@Override
-	public int getPositionX() {
-		return this.positionX;
-	}
-
-	@Override
-	public int getPositionY() {
-		return this.positionY;
+	public void init(int x, int y) {
+		this.positionX=x;
+		this.positionY=y;
 	}
 
 	@Override
@@ -34,28 +30,21 @@ public class HitboxImpl implements HitboxService {
 	}
 
 	@Override
-	public void init(int x, int y) {
-		this.positionX=x;
-		this.positionY=y;
-		
-	}
-
-	@Override
 	public void moveTo(int x, int y) {
 		this.positionX=x;
 		this.positionY=y;
 	}
 
 	@Override
-	public void setPosX(int posX) {
-		this.positionX = posX;
-		
-	}
+	public int getPositionX() { return this.positionX; }
+	
+	@Override
+	public void setPosX(int posX) { this.positionX = posX; }
 
 	@Override
-	public void setPosY(int posY) {
-		this.positionY = posY;
-		
-	}
+	public int getPositionY() { return this.positionY; }
+	
+	@Override
+	public void setPosY(int posY) { this.positionY = posY; }
 
 }
