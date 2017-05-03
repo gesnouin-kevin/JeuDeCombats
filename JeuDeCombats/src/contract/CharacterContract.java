@@ -32,54 +32,47 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 	@Override
-	public int getLife() {
+	public int getLife(){
 		return super.getLife();
 	}
 
 	@Override
-	public int getPositionX() {
-		// TODO Auto-generated method stub
+	public int getPositionX(){
 		return super.getPositionX();
 	}
 
 	@Override
-	public int getPositionY() {
-		// TODO Auto-generated method stub
+	public int getPositionY(){
 		return super.getPositionY();
 	}
 
 	@Override
-	public EngineService getEngine() {
-		// TODO Auto-generated method stub
+	public EngineService getEngine(){
 		return super.getEngine();
 	}
 
 	@Override
-	public RectangleHitboxService getCharBox() {
-		// TODO Auto-generated method stub
+	public RectangleHitboxService getCharBox(){
 		return super.getCharBox();
 	}
 
 	@Override
-	public int getSpeed() {
-		// TODO Auto-generated method stub
+	public int getSpeed(){
 		return super.getSpeed();
 	}
 
 	@Override
-	public boolean isFaceRight() {
-		// TODO Auto-generated method stub
+	public boolean isFaceRight(){
 		return super.isFaceRight();
 	}
 
 	@Override
-	public boolean isDead() {
-		// TODO Auto-generated method stub
+	public boolean isDead(){
 		return super.isDead();
 	}
 
 	@Override
-	public void init(EngineService es) {
+	public void init(EngineService es){
 		checkInvariant();
 		super.init(es);
 		checkInvariant();
@@ -89,7 +82,7 @@ public class CharacterContract extends CharacterDecorator {
 	}
 
 	@Override
-	public void moveLeft() {
+	public void moveLeft(){
 
 		int getPositionX_atPre = getPositionX();
 		int getPositionY_atPre = getPositionY();
@@ -107,7 +100,7 @@ public class CharacterContract extends CharacterDecorator {
 		//		 				=> getPositionX() == getPositionX()@Pre }
 		int compt=0;
 		for (int i = 0; i < 2; i++) {
-			if(getEngine().getPlayer(i).getCharacter()!= this && getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
+			if(getEngine().getPlayer(i).getFightCharacter()!= this && getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
 				if(!(getPositionX()==getPositionX_atPre))
 					compt++;
 		}
@@ -119,8 +112,8 @@ public class CharacterContract extends CharacterDecorator {
 		//		 					=> getPositionX() == getPositionX()@Pre - getSpeed() }
 		if(getPositionX_atPre<=getSpeed_atPre)
 			for (int i = 0; i < 2; i++) {
-				if(getEngine().getPlayer(i).getCharacter()!=this)
-					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
+				if(getEngine().getPlayer(i).getFightCharacter()!=this)
+					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == getPositionX_atPre - getSpeed()))
 						throw new PostConditionError("Error PostCondition: getPositionX() == getPositionX()@Pre - getSpeed()");
@@ -133,8 +126,8 @@ public class CharacterContract extends CharacterDecorator {
 
 		if(getPositionX_atPre>getSpeed_atPre){
 			for (int i = 0; i < 2; i++) {
-				if(getEngine().getPlayer(i).getCharacter()!=this)
-					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
+				if(getEngine().getPlayer(i).getFightCharacter()!=this)
+					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == 0))
 						throw new PostConditionError("Error PostCondition: getPositionX() == 0");
@@ -152,7 +145,7 @@ public class CharacterContract extends CharacterDecorator {
 
 
 	@Override
-	public void moveRight() {
+	public void moveRight(){
 		int getPositionX_atPre = getPositionX();
 		int getPositionY_atPre = getPositionY();
 		int getSpeed_atPre = getSpeed();
@@ -169,7 +162,7 @@ public class CharacterContract extends CharacterDecorator {
 		//		 				=> getPositionX() == getPositionX()@Pre }
 		int compt=0;
 		for (int i = 0; i < 2; i++) {
-			if(getEngine().getPlayer(i).getCharacter()!= this && getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
+			if(getEngine().getPlayer(i).getFightCharacter()!= this && getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
 				if(!(getPositionX()==getPositionX_atPre))
 					compt++;
 		}
@@ -181,8 +174,8 @@ public class CharacterContract extends CharacterDecorator {
 		//		 					=> getPositionX() == getPositionX()@Pre + getSpeed() }
 		if(getPositionX_atPre<=getSpeed_atPre)
 			for (int i = 0; i < 2; i++) {
-				if(getEngine().getPlayer(i).getCharacter()!=this)
-					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
+				if(getEngine().getPlayer(i).getFightCharacter()!=this)
+					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == getPositionX_atPre + getSpeed()))
 						throw new PostConditionError("Error PostCondition: getPositionX() == getPositionX()@Pre - getSpeed()");
@@ -195,8 +188,8 @@ public class CharacterContract extends CharacterDecorator {
 
 		if(getPositionX_atPre>getSpeed_atPre){
 			for (int i = 0; i < 2; i++) {
-				if(getEngine().getPlayer(i).getCharacter()!=this)
-					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getCharacter().getCharBox()))
+				if(getEngine().getPlayer(i).getFightCharacter()!=this)
+					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == 0))
 						throw new PostConditionError("Error PostCondition: getPositionX() == 0");
@@ -428,7 +421,6 @@ public class CharacterContract extends CharacterDecorator {
 
 	@Override
 	public boolean isCrouching() {
-		// TODO Auto-generated method stub
 		return super.isCrouching();
 	}
 

@@ -7,21 +7,24 @@ import service.EngineService;
 import service.FightCharService;
 import service.PlayerService;
 
-public class PlayerContrat extends PlayerDecorator{
+public class PlayerContract extends PlayerDecorator{
 
-	public PlayerContrat(PlayerService ps) {
+	public PlayerContract(PlayerService ps) {
 		super(ps);
 	}
 	
 	public void checkInvariant(){
+		//getNumeroPlayer == 0 || getNumeroPlayer == 1
+		if(!(getNumeroPlayer()==0  || getNumeroPlayer()==1))
+			throw new PreConditionError("Check Invariant error : getNumeroPlayer() == 0 || getNumeroPlayer() == 1");
 		
 	}
 
 	public void init(EngineService es, int numeroPlayer) {
 		
-		//pre: numeroPlayer >=0 && numeroPlayer<=1
-		if(!(numeroPlayer >=0 && numeroPlayer<=1))
-			throw new PreConditionError("Error PreCondition : numeroPlayer >=0 && numeroPlayer<=1");
+		// pre numeroPlayer == 0 || numeroPlayer == 1
+		if(!(numeroPlayer==0  ||  numeroPlayer==1))
+			throw new PreConditionError("Error PreCondition : pre numeroPlayer == 0 || numeroPlayer == 1");
 			
 		checkInvariant();
 		
@@ -33,14 +36,14 @@ public class PlayerContrat extends PlayerDecorator{
 	}
 	
 	public IHM.Animation getAnimationPlayer() {
-		return getAnimationPlayer();
+		return super.getAnimationPlayer();
 	}
 
 	public void setAnimationPlayer(IHM.Animation animationPlayer) {
 		
 		checkInvariant();
 		
-		this.setAnimationPlayer(animationPlayer);
+		super.setAnimationPlayer(animationPlayer);
 		
 		checkInvariant();
 		
@@ -50,20 +53,12 @@ public class PlayerContrat extends PlayerDecorator{
 	}
 
 	@Override
-	public CharacterService getCharacter() {
-		// TODO Auto-generated method stub
-		return super.getCharacter();
-	}
-
-	@Override
 	public int getNumeroPlayer() {
-		// TODO Auto-generated method stub
 		return super.getNumeroPlayer();
 	}
 
 	@Override
 	public FightCharService getFightCharacter() {
-		// TODO Auto-generated method stub
 		return super.getFightCharacter();
 	}
 	

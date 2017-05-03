@@ -111,7 +111,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		else
 			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
 		
-		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) ||
+		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCharBox()) ||
 				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
 		{
 			if(!this.getEngine().getPlayer(otherPlayer).getFightCharacter().isBlocking()){
@@ -149,7 +149,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		else
 			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
 		
-		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) ||
+		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCharBox()) ||
 				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox())){
 			
 			if(!this.getEngine().getPlayer(otherPlayer).getFightCharacter().isBlocking()){
@@ -173,7 +173,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		//this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoHit(this.getNumeroCharacter()));
 		this.getEngine().getPlayer(getNumeroPlayer()).getAnimationPlayer().setCurrentAnimation(7);
 		
-		super.setLife(super.getLife()-InformationsCharacter.getDamage(this.getEngine().getPlayer(otherPlayer).getCharacter().getNumeroCharacter()));
+		super.setLife(super.getLife()-InformationsCharacter.getDamage(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getNumeroCharacter()));
 		dead();
 		
 	}

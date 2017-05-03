@@ -13,11 +13,6 @@ public abstract class PlayerDecorator implements PlayerService{
 	public PlayerDecorator(PlayerService ps) {
 		this.delegateService=ps;
 	}
-	
-	@Override
-	public CharacterService getCharacter() {
-		return this.delegateService.getCharacter();
-	}
 
 	@Override
 	public int getNumeroPlayer() {
@@ -43,7 +38,4 @@ public abstract class PlayerDecorator implements PlayerService{
 	public FightCharService getFightCharacter() {
 		return this.delegateService.getFightCharacter();
 	}
-	
-	
-
 }

@@ -77,7 +77,7 @@ public class CharacterImpl implements CharacterService {
 
 		this.positionX=this.positionX-speed;
 		this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()-speed, this.rectangleHitbox.getPositionY());
-		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) && !this.jumping)
+		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCharBox()) && !this.jumping)
 		{
 			this.positionX=this.positionX+speed;
 			this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()+speed, this.rectangleHitbox.getPositionY());
@@ -101,7 +101,7 @@ public class CharacterImpl implements CharacterService {
 
 		this.positionX=this.positionX+speed;
 		this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()+speed, this.rectangleHitbox.getPositionY());
-		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getCharacter().getCharBox()) && !this.jumping)
+		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCharBox()) && !this.jumping)
 		{
 			this.positionX=this.positionX-speed;
 			this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()-speed, this.rectangleHitbox.getPositionY());

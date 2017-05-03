@@ -17,7 +17,7 @@ public class EngineContract extends EngineDecorator{
 
 	public void checkInvariant(){
 		//inv:  isGameOver() == \exist i in {1,2} Character::getChar(i).isDead()
-		if(!(isGameOver()== getPlayer(0).getCharacter().isDead() || isGameOver()== getPlayer(1).getCharacter().isDead()))
+		if(!(isGameOver()== getPlayer(0).getFightCharacter().isDead() || isGameOver()== getPlayer(1).getFightCharacter().isDead()))
 			throw new InvariantError("Error checkInvariant : isGameOver() with isDead()");
 	}
 
@@ -49,36 +49,28 @@ public class EngineContract extends EngineDecorator{
 		if(!(getWidth()==w))
 			throw new PostConditionError("Error PostCondition : getWidth != w");
 
-		// post: getPlayer(0) == p1
-		if(!(getPlayer(0)==p1))
-			throw new PostConditionError("Error PostCondition : getPlayer(1)");
-
-		// post: getPlayer(1) == p2
-		if(!(getPlayer(1)==p2))
-			throw new PostConditionError("Error PostCondition : getPlayer(2)");
-
 		// post: Character::getPositionX(), char(0).getPositionX() == w//2 - s//2
-		if(!(getPlayer(0).getCharacter().getPositionX()== (int) w/2 - (int) s/2))
+		if(!(getPlayer(0).getFightCharacter().getPositionX()== (int) w/2 - (int) s/2))
 			throw new PostConditionError("Error PostCondition: getChar(0).getPositionX()== w/2 - s/2");
 
 		// post: Character::getPositionX(), char(1).getPositionX() == w//2 + s//2
-		if(!(getPlayer(1).getCharacter().getPositionX()== (int) w/2 + (int) s/2))
+		if(!(getPlayer(1).getFightCharacter().getPositionX()== (int) w/2 + (int) s/2))
 			throw new PostConditionError("Error PostCondition: getChar(1).getPositionX()== w/2 + s/2");
 
 		// post: Character::getPositionY(), char(1).getPositionY() == 0
-		if(!(getPlayer(0).getCharacter().getPositionY()==0))
+		if(!(getPlayer(0).getFightCharacter().getPositionY()==0))
 			throw new PostConditionError("Error PostCondition: getChar(0).getPositionY()==0");
 
 		// post: Character::getPositionY(), char(2).getPositionY() == 0
-		if(!(getPlayer(1).getCharacter().getPositionY()==0))
+		if(!(getPlayer(1).getFightCharacter().getPositionY()==0))
 			throw new PostConditionError("Error PostCondition: getChar(1).getPositionY()==0");
 
 		// post: Character::isFaceRight(), char(0).isFaceRight()
-		if(!(getPlayer(0).getCharacter().isFaceRight()))
+		if(!(getPlayer(0).getFightCharacter().isFaceRight()))
 			throw new PostConditionError("Error PostCondition: getChar(0).isFaceRight()");
 
 		// post: Character::isFaceRight(), not char(1).isFaceRight()
-		if((getPlayer(1).getCharacter().isFaceRight()))
+		if((getPlayer(1).getFightCharacter().isFaceRight()))
 			throw new PostConditionError("Error PostCondition: getChar(1).isFaceRight()");
 	}
 
@@ -117,18 +109,18 @@ public class EngineContract extends EngineDecorator{
 
 		// post: getPlayer(Math.max(getPlayer(0).getPosX(), getPlayer(1).getPosX()).getNumeroPlayer()).isFaceRight() == false
 		// post: getPlayer(Math.min(getPlayer(0).getPosX(), getPlayer(1).getPosX()).getNumeroPlayer()).isFaceRight() == true
-		if(getPlayer(0).getCharacter().getPositionX()>getPlayer(1).getCharacter().getPositionX())
+		if(getPlayer(0).getFightCharacter().getPositionX()>getPlayer(1).getFightCharacter().getPositionX())
 		{
-			if(getPlayer(0).getCharacter().isFaceRight())
+			if(getPlayer(0).getFightCharacter().isFaceRight())
 				throw new PostConditionError("Error PostCondition: getPlayer(0).getCharacter().isFaceRight()");
-			if(!getPlayer(1).getCharacter().isFaceRight())
+			if(!getPlayer(1).getFightCharacter().isFaceRight())
 				throw new PostConditionError("Error PostCondition: !getPlayer(1).getCharacter().isFaceRight()");
 		}
 		else 
 		{
-			if(!getPlayer(0).getCharacter().isFaceRight())
+			if(!getPlayer(0).getFightCharacter().isFaceRight())
 				throw new PostConditionError("Error PostCondition: getPlayer(0).getCharacter().isFaceRight()");
-			if(getPlayer(1).getCharacter().isFaceRight())
+			if(getPlayer(1).getFightCharacter().isFaceRight())
 				throw new PostConditionError("Error PostCondition: getPlayer(1).getCharacter().isFaceRight()");
 		}
 	}

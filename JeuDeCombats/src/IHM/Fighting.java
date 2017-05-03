@@ -45,8 +45,8 @@ public class Fighting extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame game){
 		gc.getInput().enableKeyRepeat();
-		this.window.getGame().getEngine().getPlayer(0).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter()));
-		this.window.getGame().getEngine().getPlayer(1).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter()));
+		this.window.getGame().getEngine().getPlayer(0).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getNumeroCharacter()));
+		this.window.getGame().getEngine().getPlayer(1).setAnimationPlayer(new IHM.Animation(this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getNumeroCharacter()));
 
 		this.modeDebug = false;
 		for(int i=0;i<this.inputPlayer1.length;i++)
@@ -94,9 +94,9 @@ public class Fighting extends BasicGameState {
 		g.drawString("Time : " + time/1000, gc.getWidth()-100, gc.getHeight()-20);
 
 		// draw head player1
-		this.iconCharacter.draw(5*scaleX, 0, 8*scaleX+61*scaleX, 14*scaleY+97*scaleY, this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter()*61, 0, this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter()*61+61, 97);
+		this.iconCharacter.draw(5*scaleX, 0, 8*scaleX+61*scaleX, 14*scaleY+97*scaleY, this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getNumeroCharacter()*61, 0, this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getNumeroCharacter()*61+61, 97);
 		// draw head player2
-		this.iconCharacter.draw(gc.getWidth()-61*scaleX, 0 , gc.getWidth(), 97*scaleY, this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter()*61, 97, this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter()*61+61, 194);
+		this.iconCharacter.draw(gc.getWidth()-61*scaleX, 0 , gc.getWidth(), 97*scaleY, this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getNumeroCharacter()*61, 97, this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getNumeroCharacter()*61+61, 194);
 
 		this.iconKO.draw(gc.getWidth()/2-(40/2)*scaleX, 5*scaleY, gc.getWidth()/2+(40/2)*scaleX, 5*scaleY+20*scaleY, 0, 0, 40, 31);
 
@@ -106,8 +106,8 @@ public class Fighting extends BasicGameState {
 		g.setColor(new Color(255, 0, 0)); // red
 		g.fillRect(gc.getWidth()/2-(40/2)*scaleX-500, 10*scaleY, 502, 10*scaleY);
 		g.setColor(new Color(255, 255, 0)); // yellow
-		int vieMaxPersoP1 = InformationsCharacter.getLife(this.window.getGame().getEngine().getPlayer(0).getCharacter().getNumeroCharacter());
-		int viePersoP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getLife();
+		int vieMaxPersoP1 = InformationsCharacter.getLife(this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getNumeroCharacter());
+		int viePersoP1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getLife();
 		if(viePersoP1<0)
 			viePersoP1 = 0;
 		int widthLifeBar = (502*viePersoP1)/vieMaxPersoP1;
@@ -121,26 +121,26 @@ public class Fighting extends BasicGameState {
 		g.setColor(new Color(255, 0, 0));
 		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, 502, 10*scaleY);
 		g.setColor(new Color(255, 255, 0));
-		int vieMaxPersoP2 = InformationsCharacter.getLife(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
-		int viePersoP2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getLife();
+		int vieMaxPersoP2 = InformationsCharacter.getLife(this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getNumeroCharacter());
+		int viePersoP2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getLife();
 		if(viePersoP2<0)
 			viePersoP2 = 0;
 		g.fillRect(gc.getWidth()/2+(40/2)*scaleX, 10*scaleY, (502*viePersoP2)/vieMaxPersoP2, 10*scaleY);
 
-		int posXp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionX();
-		int posYp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionY();
-		int posXp2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getPositionX();
-		int posYp2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getPositionY();
+		int posXp1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getPositionX();
+		int posYp1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getPositionY();
+		int posXp2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getPositionX();
+		int posYp2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getPositionY();
 
-		int posXp1hitbox = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getPositionX();
-		int posYp1hitbox = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getPositionY();
-		int widthHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getWidth();
-		int heightHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getRectangleHitboxService().getHeight();
+		int posXp1hitbox = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitboxService().getPositionX();
+		int posYp1hitbox = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitboxService().getPositionY();
+		int widthHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitboxService().getWidth();
+		int heightHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitboxService().getHeight();
 
-		int posXp2hitbox = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getPositionX();
-		int posYp2hitbox = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getPositionY();
-		int widthHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getWidth();	
-		int heightHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getCharacter().getRectangleHitboxService().getHeight();
+		int posXp2hitbox = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitboxService().getPositionX();
+		int posYp2hitbox = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitboxService().getPositionY();
+		int widthHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitboxService().getWidth();	
+		int heightHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitboxService().getHeight();
 
 
 		int posXp1Coupbox = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getCoupBox().getPositionX();
@@ -155,8 +155,8 @@ public class Fighting extends BasicGameState {
 
 		if(this.modeDebug)
 		{	
-			g.drawString("Vie j1: "+this.window.getGame().getEngine().getPlayer(0).getCharacter().getLife(), 0, gc.getHeight()-40);
-			g.drawString("Vie j2: "+this.window.getGame().getEngine().getPlayer(1).getCharacter().getLife(), 0, gc.getHeight()-20);
+			g.drawString("Vie j1: "+this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getLife(), 0, gc.getHeight()-40);
+			g.drawString("Vie j2: "+this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getLife(), 0, gc.getHeight()-20);
 			g.drawString("Position j1: X: "+posXp1+" Y: "+posYp1, 0, gc.getHeight()-80);
 			g.drawString("Position j2: X: "+posXp2+" Y: "+posYp2, 0, gc.getHeight()-60);
 			g.drawString("Position hitbox j1: X: "+posXp1hitbox+" Y: "+posYp1hitbox+" Width: "+widthHitboxP1+" Height: "+heightHitboxP1, 0, gc.getHeight()-120);
@@ -178,25 +178,32 @@ public class Fighting extends BasicGameState {
 		// draw player1
 		int heightPlayer1 = this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation());
 
-		if(this.window.getGame().getEngine().getPlayer(0).getCharacter().isFaceRight())
+		if(this.window.getGame().getEngine().getPlayer(0).getFightCharacter().isFaceRight())
 			this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getSpriteSheet().draw(posXp1, gc.getHeight()-(posYp1+heightPlayer1+GROUND));
-		else
+		else{
+			if(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()==6)
+				posXp1 = posXp1 + InformationsCharacter.getWidthSpritePersoIdle(this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getNumeroCharacter())
+				- InformationsCharacter.getWidthSpritePersoKick(this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getNumeroCharacter());
+			else if(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()==5)
+				posXp1 = posXp1 + InformationsCharacter.getWidthSpritePersoIdle(this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getNumeroCharacter())
+				- InformationsCharacter.getWidthSpritePersoPunch(this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getNumeroCharacter());
+
 			this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getSpriteSheet().draw(posXp1, gc.getHeight()-(posYp1+heightPlayer1+GROUND) 
 					,this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getWidthAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()),0
 					,0,this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(0).getAnimationPlayer().getCurrentAnimation()));
-
+		}
 		// draw player2
 		int heightPlayer2 = this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getHeightAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation());
 
-		if(this.window.getGame().getEngine().getPlayer(1).getCharacter().isFaceRight())
+		if(this.window.getGame().getEngine().getPlayer(1).getFightCharacter().isFaceRight())
 			this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getSpriteSheet().draw(posXp2, gc.getHeight()-(posYp2+heightPlayer2+GROUND));
 		else{
 			if(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation()==6)
-				posXp2 = posXp2 + InformationsCharacter.getWidthSpritePersoIdle(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter())
-				- InformationsCharacter.getWidthSpritePersoKick(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
+				posXp2 = posXp2 + InformationsCharacter.getWidthSpritePersoIdle(this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getNumeroCharacter())
+				- InformationsCharacter.getWidthSpritePersoKick(this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getNumeroCharacter());
 			else if(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation()==5)
-				posXp2 = posXp2 + InformationsCharacter.getWidthSpritePersoIdle(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter())
-				- InformationsCharacter.getWidthSpritePersoPunch(this.window.getGame().getEngine().getPlayer(1).getCharacter().getNumeroCharacter());
+				posXp2 = posXp2 + InformationsCharacter.getWidthSpritePersoIdle(this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getNumeroCharacter())
+				- InformationsCharacter.getWidthSpritePersoPunch(this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getNumeroCharacter());
 
 			this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getSpriteSheet().draw(posXp2, gc.getHeight()-(posYp2+heightPlayer2+GROUND) 
 					,this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getWidthAnimations(this.window.getGame().getEngine().getPlayer(1).getAnimationPlayer().getCurrentAnimation()),0
@@ -261,8 +268,8 @@ public class Fighting extends BasicGameState {
 		this.window.getGame().getEngine().step();
 		time+=delta;
 
-		this.window.getGame().getEngine().getPlayer(0).getCharacter().updateY();
-		this.window.getGame().getEngine().getPlayer(1).getCharacter().updateY();
+		this.window.getGame().getEngine().getPlayer(0).getFightCharacter().updateY();
+		this.window.getGame().getEngine().getPlayer(1).getFightCharacter().updateY();
 
 		if(System.currentTimeMillis()-lastMs>500) // limite frame rate -> frame de 500 ms ?
 		{

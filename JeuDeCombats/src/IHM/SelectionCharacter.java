@@ -187,7 +187,7 @@ public class SelectionCharacter extends BasicGameState {
 					cursor2 = this.cursorPlayer2-1;
 				else
 					cursor2 = this.cursorPlayer2-2;
-				this.window.getGame().getEngine().getPlayer(1).getCharacter().setNumeroCharacter(cursor2);
+				this.window.getGame().getEngine().getPlayer(1).getFightCharacter().setNumeroCharacter(cursor2);
 			}
 		}
 
@@ -244,7 +244,7 @@ public class SelectionCharacter extends BasicGameState {
 					cursor1 = this.cursorPlayer1-1;
 				else
 					cursor1 = this.cursorPlayer1-2;
-				this.window.getGame().getEngine().getPlayer(0).getCharacter().setNumeroCharacter(cursor1);
+				this.window.getGame().getEngine().getPlayer(0).getFightCharacter().setNumeroCharacter(cursor1);
 			}
 		}
 
@@ -265,26 +265,26 @@ public class SelectionCharacter extends BasicGameState {
 				cursor2 = this.cursorPlayer2-2;
 			
 			this.window.setCurrentBackground(this.currentBackground);
-			this.window.getGame().getEngine().getPlayer(0).getCharacter().init(InformationsCharacter.getLife(cursor1), 
+			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().init(InformationsCharacter.getLife(cursor1), 
 					InformationsCharacter.getSpeed(cursor1), true, 0);
-			this.window.getGame().getEngine().getPlayer(1).getCharacter().init(InformationsCharacter.getLife(cursor2), 
+			this.window.getGame().getEngine().getPlayer(1).getFightCharacter().init(InformationsCharacter.getLife(cursor2), 
 					InformationsCharacter.getSpeed(cursor2), false, 1);
 
 			
-			this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().setWidthHeight(
+			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getCharBox().setWidthHeight(
 					InformationsCharacter.getWidthSpritePersoIdle(cursor1),
 					InformationsCharacter.getHeightSpritePersoIdle(cursor1));
 			
-			this.window.getGame().getEngine().getPlayer(1).getCharacter().getCharBox().setWidthHeight(
+			this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getCharBox().setWidthHeight(
 					InformationsCharacter.getWidthSpritePersoIdle(cursor2),
 					InformationsCharacter.getHeightSpritePersoIdle(cursor2));
 			
 			// décaler p1 sur les x pour centrer
-			int posXp1 = this.window.getGame().getEngine().getPlayer(0).getCharacter().getPositionX();
+			int posXp1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getPositionX();
 			int widthp1 = InformationsCharacter.getWidthSpritePersoIdle(cursor1);
 			
-			this.window.getGame().getEngine().getPlayer(0).getCharacter().setPositionX(posXp1-widthp1);
-			this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().setPosX(posXp1-widthp1);
+			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().setPositionX(posXp1-widthp1);
+			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getCharBox().setPosX(posXp1-widthp1);
 			
 			this.window.getState(Fighting.ID).init(gc, game);
 			this.game.enterState(Fighting.ID);

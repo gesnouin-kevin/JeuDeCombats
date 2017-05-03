@@ -23,14 +23,12 @@ public interface EngineService {
 	 * pre:  p1 != p2
 	 * post: getHeight() == h
 	 * post: getWidth() == w
-	 * post: getPlayer(0) == p1
-	 * post: getPlayer(1) == p2
-	 * post: getCharacter::getPositionX(), getChar(0).getPositionX() == w//2 - s//2
-	 * post: getCharacter::getPositionX(), getChar(1).getPositionX() == w//2 + s//2
-	 * post: getCharacter::getPositionY(), getChar(0).getPositionY() == 0
-	 * post: getCharacter::getPositionY(), getChar(1).getPositionY() == 0
-	 * post: getCharacter::isFaceRight(), getChar(0).isFaceRight()
-	 * post: getCharacter::isFaceRight(), not getChar(1).isFaceRight()
+	 * post: getFightCharacter::getPositionX(), getChar(0).getPositionX() == w//2 - s//2
+	 * post: getFightCharacter::getPositionX(), getChar(1).getPositionX() == w//2 + s//2
+	 * post: getFightCharacter::getPositionY(), getChar(0).getPositionY() == 0
+	 * post: getFightCharacter::getPositionY(), getChar(1).getPositionY() == 0
+	 * post: getFightCharacter::isFaceRight(), getChar(0).isFaceRight()
+	 * post: getFightCharacter::isFaceRight(), not getChar(1).isFaceRight()
 	 */
 	public void init(int h, int w, int s, PlayerService p1, PlayerService p2);
 	
