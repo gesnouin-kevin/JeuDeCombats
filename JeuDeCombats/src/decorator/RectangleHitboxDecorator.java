@@ -57,6 +57,11 @@ public abstract class RectangleHitboxDecorator extends HitboxDecorator implement
 	public void setWidth(int width) {
 		getDelegate().setWidth(width);
 	}
+
+	@Override
+	public void setWidthHeight(int w, int h) {
+		getDelegate().setWidthHeight(w, h);
+	}
 	
 	
 	

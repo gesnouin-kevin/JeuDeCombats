@@ -8,15 +8,13 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 	private int height;
 	
 	@Override
-	public int getWidth() {
-		return width;
+	public void init(int x, int y, int w, int h) {
+		super.init(x, y);
+		this.height=h;
+		this.width=w;
+		
 	}
-
-	@Override
-	public int getHeight() {
-		return height;
-	}
-
+	
 	@Override
 	public boolean isCollidesWith(RectangleHitboxService rhs) {
 		return getPositionX() < rhs.getPositionX() + rhs.getWidth() 
@@ -29,26 +27,30 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 	public boolean isEqualsTo(RectangleHitboxService rhs) {
 		return rhs.getPositionX() == getPositionX() && rhs.getPositionY() == getPositionY() && rhs.getHeight() == height && rhs.getWidth() == width;
 	}
-	
-
-	public void init(int w, int h){
-		this.width = w;
-		this.height = h;
-	}
-
-	@Override
-	public void init(int x, int y, int w, int h) {
-		super.init(x, y);
-		this.height=h;
-		this.width=w;
-		
-	}
 
 	@Override
 	public boolean isBelongsTo(int x, int y) {
 		return y >= getPositionY() && y <= getPositionY() + height && x >= getPositionX() - width / 2 && x <= getPositionX() + width / 2;
 	}
 
+	@Override
+	public int getWidth() { return width; }
+
+	@Override
+	public void setWidth(int width) { this.width = width; }
+	
+	@Override
+	public int getHeight() { return height; }
+	
+	@Override
+	public void setHeight(int height) { this.height=height; }
+
+	@Override
+	public void setWidthHeight(int w, int h){
+		this.width = w;
+		this.height = h;
+	}
+	
 	@Override
 	public int getPosX() {
 		return this.getPositionX();
@@ -59,18 +61,6 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 		return this.getPositionY();
 	}
 
-	@Override
-	public void setHeight(int height) {
-		this.height=height;
-	}
-
-	@Override
-	public void setWidth(int width) {
-		this.width = width;
 		
-	}
-	
-	
-	
 
 }

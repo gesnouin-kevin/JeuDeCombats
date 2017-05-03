@@ -30,16 +30,6 @@ public interface RectangleHitboxService extends HitboxService {
 	public void init(int x, int y, int w, int h);
 	
 	
-	//A RENOMMER
-	/**
-	 * pre: w > 0
-	 * pre: h > 0
-	 * post: getWidth() == w
-	 * post: getHeight() == h
-	 */
-	public void init(int w, int h);
-
-	
 	/** Operators */
 		
 	/**
@@ -67,5 +57,12 @@ public interface RectangleHitboxService extends HitboxService {
 	 */	
 	public void setWidth(int width);
 	
+	/**
+	 * pre: w > 0
+	 * pre: h > 0
+	 * post: getWidth() == w
+	 * post: getHeight() == h
+	 */
+	public void setWidthHeight(int w, int h);
 
 }

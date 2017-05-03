@@ -271,11 +271,11 @@ public class SelectionCharacter extends BasicGameState {
 					InformationsCharacter.getSpeed(cursor2), false, 1);
 
 			
-			this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().init(
+			this.window.getGame().getEngine().getPlayer(0).getCharacter().getCharBox().setWidthHeight(
 					InformationsCharacter.getWidthSpritePersoIdle(cursor1),
 					InformationsCharacter.getHeightSpritePersoIdle(cursor1));
 			
-			this.window.getGame().getEngine().getPlayer(1).getCharacter().getCharBox().init(
+			this.window.getGame().getEngine().getPlayer(1).getCharacter().getCharBox().setWidthHeight(
 					InformationsCharacter.getWidthSpritePersoIdle(cursor2),
 					InformationsCharacter.getHeightSpritePersoIdle(cursor2));
 			

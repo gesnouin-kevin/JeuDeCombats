@@ -93,9 +93,8 @@ public class RectangleHitboxContract extends HitboxContract implements Rectangle
 			throw new PostConditionError("Error PostConditions : getHeight()");
 	}
 
-	/*MODIFIER LE NOM*/
 	@Override
-	public void init(int w, int h) {
+	public void setWidthHeight(int w, int h) {
 
 		//pre: w>0
 		if(!(w>0))
