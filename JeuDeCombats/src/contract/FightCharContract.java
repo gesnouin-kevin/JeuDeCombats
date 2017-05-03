@@ -90,8 +90,8 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 		
 		//post: getFrameTech()<2 => getFrameTech()==getFrameTech()@Pre++
 		if(getFrameTech()<2)
-			if(getFrameTech()==getTechFrame_atPre++)
-				throw new PostConditionError("");
+			if(!(getFrameTech()==getTechFrame_atPre++))
+				throw new PostConditionError("Error PostCondition: getFrameTech()==getTechFrame_atPre++");
 		//post: getFrameTech()>=2 => getFrameTech()==0 && getTeching()==true
 	}
 
