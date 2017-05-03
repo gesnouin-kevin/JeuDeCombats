@@ -20,7 +20,7 @@ public class RectangleHitboxImpl extends HitboxImpl implements RectangleHitboxSe
 		return getPositionX() < rhs.getPositionX() + rhs.getWidth() 
 				&& getPositionX() + getWidth() > rhs.getPositionX() 
 				&& getPositionY() < rhs.getPositionY() + rhs.getHeight()
-				&& getPositionY() + getHeight() > rhs.getPositionY();
+				&& getPositionY() + getHeight() > rhs.getPositionY();			
 	}
 
 	@Override

@@ -1,12 +1,9 @@
 package IHM;
 
 import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
-
 import contract.EngineContract;
 import implementation.EngineImpl;
 import implementation.PlayerImpl;
-import service.EngineService;
 
 public class Game{
 

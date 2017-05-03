@@ -91,7 +91,7 @@ public interface FightCharService extends CharacterService {
     
     
     /**
-     * post: \exist i in {0,1} getLife()==getLife()@Pre-InformationsCharacter.getDamage(getEngine().getPlayer(i).getFightCharacter().getNumeroCharacter())
+     * //post: (getLife()==getLife_atPre-InformationsCharacter.getDamage(getOtherPlayer().getFightCharacter().getNumeroCharacter()))
      */
     public void hit();
     

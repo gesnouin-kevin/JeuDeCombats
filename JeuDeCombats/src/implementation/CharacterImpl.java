@@ -22,6 +22,10 @@ public class CharacterImpl implements CharacterService {
 	private boolean running;
 	private boolean crouching;
 	private boolean jumping;
+	
+	public CharacterImpl() {
+		this.dead  = true;
+	}
 
 	@Override
 	public void init(EngineService es) {

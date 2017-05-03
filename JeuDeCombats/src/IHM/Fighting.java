@@ -75,7 +75,7 @@ public class Fighting extends BasicGameState {
 
 			// load music and start it
 			Music music = new Music("ressources/music.ogg");
-			gc.setMusicVolume(0.2f);
+			gc.setMusicVolume(0.1f);
 			music.loop();
 
 		} catch (SlickException e) {} 
@@ -161,18 +161,19 @@ public class Fighting extends BasicGameState {
 			g.drawString("Position j2: X: "+posXp2+" Y: "+posYp2, 0, gc.getHeight()-60);
 			g.drawString("Position hitbox j1: X: "+posXp1hitbox+" Y: "+posYp1hitbox+" Width: "+widthHitboxP1+" Height: "+heightHitboxP1, 0, gc.getHeight()-120);
 			g.drawString("Position hitbox j2: X: "+posXp2hitbox+" Y: "+posYp2hitbox+" Width: "+widthHitboxP2+" Height: "+heightHitboxP2, 0, gc.getHeight()-100);
-
+			g.drawString("Position coup hitbox j1: X: "+posXp1Coupbox+" Y: "+posYp1Coupbox+" Width: "+widthCoupboxP1+" Height: "+heightCoupboxP1, 0, gc.getHeight()-140);
+			
 			// draw boudingbox player 1
 			g.setColor(new Color(0,255,0,60));
 			g.fillRect(posXp1hitbox, gc.getHeight()-posYp1hitbox-GROUND-heightHitboxP1, widthHitboxP1, heightHitboxP1);
 			g.setColor(new Color(0,255,0,200));
-			g.fillRect(posXp1Coupbox, gc.getHeight()-posYp1Coupbox-GROUND, widthCoupboxP1, heightCoupboxP1);
+			g.fillRect(posXp1Coupbox, gc.getHeight()-posYp1Coupbox-GROUND-heightCoupboxP1, widthCoupboxP1, heightCoupboxP1);
 
 			// draw boudingbox player 2
 			g.setColor(new Color(255,0,0,60));
 			g.fillRect(posXp2hitbox, gc.getHeight()-posYp2hitbox-GROUND-heightHitboxP2, widthHitboxP2, heightHitboxP2);
 			g.setColor(new Color(255,0,0,200));
-			g.fillRect(posXp2Coupbox, gc.getHeight()-posYp2Coupbox-GROUND, widthCoupboxP2, heightCoupboxP2);
+			g.fillRect(posXp2Coupbox, gc.getHeight()-posYp2Coupbox-GROUND-heightCoupboxP1, widthCoupboxP2, heightCoupboxP2);
 		}
 
 		// draw player1

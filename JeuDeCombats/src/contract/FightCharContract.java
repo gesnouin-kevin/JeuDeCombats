@@ -48,7 +48,7 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 		// post: isfaceRight() == f
 		if (!(isFaceRight() == f))
 			throw new PostConditionError("Error PostCondition: isfaceRight() == f");
-		
+
 		//post: getNumeroPlayer()==numeroPlayer
 		if(!(getNumeroPlayer()==numeroPlayer))
 			throw new PostConditionError("Error PostCondition: getNumeroPlayer()==numeroPlayer");
@@ -254,11 +254,15 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 
 		checkInvariant();
 
-		//post: \exist i in {0,1} getLife()==getLife()@Pre-InformationsCharacter.getDamage(getEngine().getPlayer(i).getFightCharacter().getNumeroCharacter())
-		for(int i=0;i<1;i++){
-			if(!(getLife()==getLife_atPre-InformationsCharacter.getDamage(getEngine().getPlayer(i).getFightCharacter().getNumeroCharacter())))
-				throw new PostConditionError("Error PostCondition: getLife()==getLife_atPre-InformationsCharacter.getDamage(getEngine().getPlayer(i).getFightCharacter().getNumeroCharacter())");
-		}
+		int otherPlayer = 0;
+		if(this.getNumeroPlayer()==0)
+			otherPlayer = 1;
+
+		//post: (getLife()==getLife_atPre-InformationsCharacter.getDamage(getOtherPlayer().getFightCharacter().getNumeroCharacter()))
+
+		if(!(getLife()==getLife_atPre-InformationsCharacter.getDamage(getEngine().getPlayer(otherPlayer).getFightCharacter().getNumeroCharacter())))
+			throw new PostConditionError("Error PostCondition: getLife()==getLife_atPre-InformationsCharacter.getDamage(getEngine().getPlayer(i).getFightCharacter().getNumeroCharacter())");
+
 	}
 
 	@Override

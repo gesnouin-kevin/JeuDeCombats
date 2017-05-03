@@ -28,7 +28,7 @@ public class CharacterContract extends CharacterDecorator {
 			throw new InvariantError("Error checkInvariant: getPositionY() > 0 && getPositionY() < getEngine().getHeight()");
 
 		// inv: isDead() == not (getLife() >= 0)
-		if (!(isDead() == !(getLife() >= 0)))
+		if (!(isDead() == !(getLife() > 0)))
 			throw new InvariantError("Error checkInvariant: isDead() == !getLife() > 0");
 		
 	}

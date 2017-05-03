@@ -81,7 +81,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 
 		this.coupBox.setHeight(InformationsCharacter.getHeightSpritePersoFoot(this.getNumeroCharacter()));
 		this.coupBox.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
-		this.coupBox.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()));
+		this.coupBox.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getHeightSpritePersoFoot(this.getNumeroCharacter()));
 
 		if(this.isFaceRight())
 			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
@@ -113,7 +113,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 
 		this.coupBox.setHeight(InformationsCharacter.getHeightSpritePersoArm(this.getNumeroCharacter()));
 		this.coupBox.setWidth(InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
-		this.coupBox.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoArm(this.getNumeroCharacter()));
+		this.coupBox.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getHeightSpritePersoArm(this.getNumeroCharacter()));
 
 		if(this.isFaceRight())
 			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
@@ -144,7 +144,6 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		
 		this.setLife(this.getLife()-InformationsCharacter.getDamage(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getNumeroCharacter()));
 		dead();
-		
 	}
 	
 	@Override
@@ -176,7 +175,6 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 
 	@Override
 	public void nextFrameTech() {
-		
 		if(this.techFrame<2){
 			this.techFrame++;
 			
@@ -192,6 +190,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		}else{
 			this.techFrame=0;
 			this.teching=false;
+			this.coupBox.setWidthHeight(0, 0);
 		}
 	}
 
