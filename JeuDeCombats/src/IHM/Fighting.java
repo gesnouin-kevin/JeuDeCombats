@@ -159,9 +159,7 @@ public class Fighting extends BasicGameState {
 			g.drawString("Vie j2: "+this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getLife(), 0, gc.getHeight()-20);
 			g.drawString("Position j1: X: "+posXp1+" Y: "+posYp1, 0, gc.getHeight()-80);
 			g.drawString("Position j2: X: "+posXp2+" Y: "+posYp2, 0, gc.getHeight()-60);
-			g.drawString("Position hitbox j1: X: "+posXp1hitbox+" Y: "+posYp1hitbox+" Width: "+widthHitboxP1+" Height: "+heightHitboxP1, 0, gc.getHeight()-120);
-			g.drawString("Position hitbox j2: X: "+posXp2hitbox+" Y: "+posYp2hitbox+" Width: "+widthHitboxP2+" Height: "+heightHitboxP2, 0, gc.getHeight()-100);
-			g.drawString("Position coup hitbox j1: X: "+posXp1Coupbox+" Y: "+posYp1Coupbox+" Width: "+widthCoupboxP1+" Height: "+heightCoupboxP1, 0, gc.getHeight()-140);
+			g.drawString("Position coup hitbox j1: X: "+posXp1Coupbox+" Y: "+posYp1Coupbox+" Width: "+widthCoupboxP1+" Height: "+heightCoupboxP1, 0, gc.getHeight()-100);
 			
 			// draw boudingbox player 1
 			g.setColor(new Color(0,255,0,60));

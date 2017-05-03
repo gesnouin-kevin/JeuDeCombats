@@ -1,5 +1,6 @@
 package IHM;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -21,7 +22,7 @@ public class SelectionCharacter extends BasicGameState {
 	private SpriteSheet selectionCharacter;
 	private SpriteSheet[] background;
 	private int currentBackground = 1;
-	
+
 
 	// numero of character 0 -> 17  -warning- 0 and 5 place for 1P and 2P
 	private int cursorPlayer1 = 1;
@@ -49,9 +50,10 @@ public class SelectionCharacter extends BasicGameState {
 	@Override
 	public void render(GameContainer gc, StateBasedGame window, Graphics g) throws SlickException {
 
-
-
 		this.selectionCharacter.draw(0, 0, gc.getWidth(), gc.getHeight());
+		// more character coming soon
+		g.setColor(new Color(0,0,0,200));
+		g.fillRect(346, 210, 675, 255);
 
 		float scaleX =  (gc.getWidth()/256f);
 		float scaleY = (gc.getHeight()/193f);
@@ -70,7 +72,7 @@ public class SelectionCharacter extends BasicGameState {
 			this.cursorSelectCharacter.draw(x1Player1, y1Player1, x2Player1, y2Player1, 0, 0, 42/2, 64/2);
 		else
 			this.cursorSelectCharacter.draw(x1Player1, y1Player1, x2Player1, y2Player1, 42/2, 0, 42, 64/2);
-		
+
 		// draw cursor player 2
 		int linePlayer2 = (this.cursorPlayer2/6);
 		int columnPlayer2 = (this.cursorPlayer2)%6;
@@ -78,7 +80,7 @@ public class SelectionCharacter extends BasicGameState {
 		float x2Player2 = x1Player2 + widthSelector;
 		float y1Player2 = 20*scaleY+heightSelector*(linePlayer2);
 		float y2Player2 = y1Player2 + heightSelector;
-		
+
 		if(!this.character2Select)
 			this.cursorSelectCharacter.draw(x1Player2, y1Player2, x2Player2, y2Player2, 0, 64/2, 42/2, 64);
 		else
@@ -99,27 +101,28 @@ public class SelectionCharacter extends BasicGameState {
 
 		// draw head player1
 		this.iconCharacter.draw(8*scaleX, 14*scaleY , 8*scaleX+61*scaleX, 14*scaleY+97*scaleY, cursor1*61, 0, cursor1*61+61, 97);
-		
+
 		// draw head player2
 		this.iconCharacter.draw(192*scaleX, 14*scaleY , 192*scaleX+61*scaleX, 14*scaleY+97*scaleY, cursor2*61, 97, cursor2*61+61, 194);
-	
-	
+
+
 		// draw map choice
 		this.background[this.currentBackground].draw(gc.getWidth()/2-(80/2)*scaleX, 135*scaleY, gc.getWidth()/2+(80/2)*scaleX, 135*scaleY+40*scaleY, 0, 0, 800, 336);
-	
+
 		//draw keys help
+		g.setColor(new Color(255,255,255));
 		g.drawString("-- Player 1 --", 130, gc.getHeight()-300);
 		g.drawString("Q, Z, S and D for move cursor  --> E for lock", 20, gc.getHeight()-280);
 		g.drawString("-- Player 2 --", gc.getWidth()-320, gc.getHeight()-300);
 		g.drawString("Arrow keys for move cursor  --> Enter for lock", gc.getWidth() -450, gc.getHeight()-280);
-		
+
 		g.drawString("-- U and I for switch Arena --", gc.getWidth()/2-100, gc.getHeight()-50);
-	
+
 	}
 
 	@Override
 	public void keyPressed(int key, char c) {
-		
+
 		if(key == Input.KEY_U)
 		{
 			if(this.currentBackground-1>=0)
@@ -134,7 +137,7 @@ public class SelectionCharacter extends BasicGameState {
 			else
 				this.currentBackground = 0;
 		}
-		
+
 		if(!this.character2Select){
 			if (key == Input.KEY_RIGHT){
 				if((this.cursorPlayer2%6)+1<=5)
@@ -154,7 +157,7 @@ public class SelectionCharacter extends BasicGameState {
 				if(this.cursorPlayer2 == 0)
 					this.cursorPlayer2 = 4;
 			}
-
+/*
 			if(key== Input.KEY_DOWN){ 
 				if(this.cursorPlayer2+6<=17)
 					this.cursorPlayer2 +=6;
@@ -178,7 +181,7 @@ public class SelectionCharacter extends BasicGameState {
 				else if(this.cursorPlayer2 == 5)
 					this.cursorPlayer2 = 17;
 			}
-
+*/
 			if(key==Input.KEY_ENTER){
 				this.character2Select = true;
 				int cursor2;
@@ -211,7 +214,7 @@ public class SelectionCharacter extends BasicGameState {
 				if(this.cursorPlayer1 == 0)
 					this.cursorPlayer1 = 4;
 			}
-
+/*
 			if(key == Input.KEY_S){ 
 				if(this.cursorPlayer1+6<=17)
 					this.cursorPlayer1 +=6;
@@ -235,7 +238,7 @@ public class SelectionCharacter extends BasicGameState {
 				else if(this.cursorPlayer1 == 5)
 					this.cursorPlayer1 = 17;
 			}
-
+*/
 			if(key == Input.KEY_E){
 				this.character1Select = true;
 				int cursor1;
@@ -263,29 +266,29 @@ public class SelectionCharacter extends BasicGameState {
 				cursor2 = this.cursorPlayer2-1;
 			else
 				cursor2 = this.cursorPlayer2-2;
-			
+
 			this.window.setCurrentBackground(this.currentBackground);
 			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().init(InformationsCharacter.getLife(cursor1), 
 					InformationsCharacter.getSpeed(cursor1), true, 0);
 			this.window.getGame().getEngine().getPlayer(1).getFightCharacter().init(InformationsCharacter.getLife(cursor2), 
 					InformationsCharacter.getSpeed(cursor2), false, 1);
 
-			
+
 			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getCharBox().setWidthHeight(
 					InformationsCharacter.getWidthSpritePersoIdle(cursor1),
 					InformationsCharacter.getHeightSpritePersoIdle(cursor1));
-			
+
 			this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getCharBox().setWidthHeight(
 					InformationsCharacter.getWidthSpritePersoIdle(cursor2),
 					InformationsCharacter.getHeightSpritePersoIdle(cursor2));
-			
+
 			// décaler p1 sur les x pour centrer
 			int posXp1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getPositionX();
 			int widthp1 = InformationsCharacter.getWidthSpritePersoIdle(cursor1);
-			
+
 			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().setPositionX(posXp1-widthp1);
 			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getCharBox().setPosX(posXp1-widthp1);
-			
+
 			this.window.getState(Fighting.ID).init(gc, game);
 			this.game.enterState(Fighting.ID);
 		}
