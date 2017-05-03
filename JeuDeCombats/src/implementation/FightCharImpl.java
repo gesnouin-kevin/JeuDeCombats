@@ -2,13 +2,13 @@ package implementation;
 
 import personnages.InformationsCharacter;
 import service.Command;
-import service.EngineService;
 import service.FightCharService;
 import service.RectangleHitboxService;
-import service.TechData;
+
 
 public class FightCharImpl extends CharacterImpl implements FightCharService{
 
+	
 	private boolean blocking;
 	private boolean hitstunned;
 	private boolean teching;
@@ -16,7 +16,6 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 	private int technique;
 	private int durationStunned;
 	private RectangleHitboxService coupBox;
-	private EngineService engine;
 	
 	@Override
 	public void init(int l, int s, boolean f, int numeroPlayer) {
@@ -205,23 +204,19 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 	
 	@Override
 	public boolean isBlocking() { return this.blocking; }
-
 	@Override
 	public boolean isHitstunned() { return this.hitstunned; }
-
 	@Override
 	public boolean isTeching() { return this.teching; }
-	
 	@Override
 	public RectangleHitboxService getCoupBox() { return this.coupBox; }
-
 	@Override
 	public void setCoupBox(RectangleHitboxService rectangleHitbox){ this.coupBox=rectangleHitbox; }
-		
 	@Override
 	public int getDurationStunned() { return this.durationStunned; }
-
 	@Override
 	public void setDurationStunned(int bs) { this.durationStunned=bs; }
+	@Override
+	public int getFrameTech() { return 0; }
 
 }

@@ -1,7 +1,5 @@
 package service;
 
-import personnages.InformationsCharacter;
-
 public interface FightCharService extends CharacterService {
 
 	/** A COMPLETER **/
@@ -14,6 +12,7 @@ public interface FightCharService extends CharacterService {
 	public boolean isTeching();
 	public RectangleHitboxService getCoupBox();
 	public int getDurationStunned();
+	public int getFrameTech();
 	
 	/** Constructor */
 	
@@ -97,7 +96,7 @@ public interface FightCharService extends CharacterService {
     
     
     /**
-     * post: getDuration()>0 => getDuration()==getDuration()@Pre -1
+     * post: getDurationStunned()>0 => getDurationStunned()==getDurationStunned()@Pre -1
      */
     public void updateDurationStunned();
 }

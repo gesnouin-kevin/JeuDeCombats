@@ -1,10 +1,11 @@
 package contract;
 
+import error.PostConditionError;
+import error.PreConditionError;
 import service.CharacterService;
 import service.Command;
 import service.FightCharService;
 import service.RectangleHitboxService;
-import service.TechData;
 
 public class FightCharContract extends CharacterContract implements FightCharService{
 
@@ -78,17 +79,55 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 
 	@Override
 	public void nextFrameTech() {
+		
+		int getTechFrame_atPre = getFrameTech();
+		
+		checkInvariant();
+		
 		getDelegate().nextFrameTech();
+		
+		checkInvariant();
+		
+		//post: getFrameTech()<2 => getFrameTech()==getFrameTech()@Pre++
+		if(getFrameTech()<2)
+			if(getFrameTech()==getTechFrame_atPre++)
+				throw new PostConditionError("");
+		//post: getFrameTech()>=2 => getFrameTech()==0 && getTeching()==true
 	}
 
 	@Override
 	public void setDurationStunned(int bs) {
+		
+		//pre: bs>0
+		if(!(bs>0))
+			throw new PreConditionError("Error PreCondition: bs>0");
+		
+		checkInvariant();
+		
 		getDelegate().setDurationStunned(bs);
+		
+		checkInvariant();
+		
+		//post: getDurationStunned()==bs
+		if(!(getDurationStunned()==bs))
+			throw new PreConditionError("Error PostCondition: getDurationStunned()==bs");
 	}
 
 	@Override
 	public void updateDurationStunned() {
+		
+		int getDurationStunned_atPre=getDurationStunned();
+		
+		checkInvariant();
+		
 		getDelegate().updateDurationStunned();		
+	
+		checkInvariant();
+		
+		//post: getDurationStunned()>0 => getDurationStunned()==getDurationStunned()@Pre -1
+		if(getDurationStunned()>0)
+			if(!(getDurationStunned()==getDurationStunned_atPre -1))
+				throw new PostConditionError("Error PostCondition: getDurationStunned()==getDurationStunned_atPre -1");
 	}
 
 	@Override
@@ -99,6 +138,11 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 	@Override
 	public int getDurationStunned() {
 		return getDelegate().getDurationStunned();
+	}
+
+	@Override
+	public int getFrameTech() {
+		return getDelegate().getFrameTech();
 	}
 	
 	

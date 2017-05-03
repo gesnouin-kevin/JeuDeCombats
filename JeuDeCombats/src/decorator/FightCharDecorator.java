@@ -4,7 +4,6 @@ import service.CharacterService;
 import service.Command;
 import service.FightCharService;
 import service.RectangleHitboxService;
-import service.TechData;
 
 public class FightCharDecorator extends CharacterDecorator implements FightCharService {
 
@@ -95,6 +94,11 @@ public class FightCharDecorator extends CharacterDecorator implements FightCharS
 	@Override
 	public int getDurationStunned() {
 		return getDelegate().getDurationStunned();
+	}
+
+	@Override
+	public int getFrameTech() {
+		return getDelegate().getFrameTech();
 	}
 
 	
