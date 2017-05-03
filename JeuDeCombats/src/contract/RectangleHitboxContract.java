@@ -132,11 +132,11 @@ public class RectangleHitboxContract extends HitboxContract implements Rectangle
 
 		checkInvariant();
 
-		getDelegate().setPosX(posY);
+		getDelegate().setPosY(posY);
 
 		checkInvariant();
 
-		// pos: getPosX()==posX
+		// pos: getPosY()==posY
 		if(!(getPosY()==posY))
 			throw new PostConditionError("Error PostCondition: getPosY()==posY");
 	}

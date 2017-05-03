@@ -60,35 +60,30 @@ public class HitboxContract extends HitboxDecorator{
 
 	@Override
 	public int getPositionX() {
-		// TODO Auto-generated method stub
 		return super.getPositionX();
 	}
 
 
 	@Override
 	public int getPositionY() {
-		// TODO Auto-generated method stub
 		return super.getPositionY();
 	}
 
 
 	@Override
 	public boolean isBelongsTo(int x, int y) {
-		// TODO Auto-generated method stub
 		return super.isBelongsTo(x, y);
 	}
 
 
 	@Override
 	public boolean isEqualsTo(HitboxService hs) {
-		// TODO Auto-generated method stub
 		return super.isEqualsTo(hs);
 	}
 
 
 	@Override
 	public boolean isCollidesWith(HitboxService hs) {
-		// TODO Auto-generated method stub
 		return super.isCollidesWith(hs);
 	}
 
@@ -99,7 +94,6 @@ public class HitboxContract extends HitboxDecorator{
 			throw new PreConditionError("Error PreCondition: posX>=0");
 
 		checkInvariant();
-		System.out.println("Hitbox Contract pos x donnee:"+posX);
 		super.setPosX(posX);
 
 		checkInvariant();
