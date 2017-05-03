@@ -23,6 +23,7 @@ public class Fighting extends BasicGameState {
 	public static int GROUND = 50;
 
 	private int time = 0;
+	private boolean quit = false;
 	private long lastMs;
 
 	private Window window;
@@ -277,6 +278,18 @@ public class Fighting extends BasicGameState {
 			}
 			lastMs = System.currentTimeMillis();
 
+		}
+		
+		if(this.window.getGame().getEngine().isGameOver())
+		{
+			if(!this.quit){
+				time = 0;
+				this.quit = true;
+			}
+			
+			if(time/1000>10){
+				gc.exit();
+			}
 		}
 	}
 

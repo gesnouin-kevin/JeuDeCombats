@@ -8,7 +8,6 @@ public enum Command {
 	RIGHT_PRESSED,
 	RIGHT_RELEASED,
 	
-	
 	UP,
 	
 	DOWN_PRESSED,
