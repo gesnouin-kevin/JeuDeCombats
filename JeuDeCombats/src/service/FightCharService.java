@@ -1,9 +1,6 @@
 package service;
 
 public interface FightCharService extends CharacterService {
-
-	/** A COMPLETER **/
-	
 	
 	/** Observators */
 
@@ -26,9 +23,8 @@ public interface FightCharService extends CharacterService {
 	 */
 	public void init(int l, int s, boolean f, int numeroPlayer);
 	
-	/** Operators */
-    
-    /** A MODIF
+	/** Operators **/
+	/**
 	 * pre: not isDead()
 	 * post: step(KICK) == kick()
 	 * post: step(PUNCH) == punch()
@@ -46,8 +42,10 @@ public interface FightCharService extends CharacterService {
      * post: getCoupBox().getWidth()==getCoupBox@Pre.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()))
      * post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()))
      * 
-     * post: isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
-     * post: not isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
+     * post: isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()
+     * +InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
+     * post: not isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()
+     * +InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
      * 
      * post: \exist i in {0,1}  
      * 			getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()) ||

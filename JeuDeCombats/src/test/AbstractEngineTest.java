@@ -40,24 +40,18 @@ public abstract class AbstractEngineTest {
 
 	@Test
 	public void testInitTrans(){
-
 		engine = new EngineImpl();
 		PlayerImpl p1 = new PlayerImpl();
 		PlayerImpl p2 = new PlayerImpl();
-
 		engine.init(800, 400, 200, p1, p2);
 		engine.getPlayer(0).init(engine, 0);
 		engine.getPlayer(1).init(engine, 1);
-
 		engine.getPlayer(0).getFightCharacter().init(100, 200, true, 0);
 		engine.getPlayer(1).getFightCharacter().init(100, 200, false, 1);
-
 		engine.getPlayer(0).getFightCharacter().setPositionX(100);
 		engine.getPlayer(1).getFightCharacter().setPositionX(300);
-
 		engine.getPlayer(0).getFightCharacter().setRectangleHitboxService(new RectangleHitboxContract(new RectangleHitboxImpl()));
 		engine.getPlayer(1).getFightCharacter().setRectangleHitboxService(new RectangleHitboxContract(new RectangleHitboxImpl()));
-
 		engine.getPlayer(0).getFightCharacter().getRectangleHitbox().init(100, 0, 100, 200);
 		engine.getPlayer(1).getFightCharacter().getRectangleHitbox().init(300, 0, 100, 200);
 
