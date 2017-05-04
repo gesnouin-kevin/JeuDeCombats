@@ -22,10 +22,6 @@ public class CharacterImpl implements CharacterService {
 	private boolean running;
 	private boolean crouching;
 	private boolean jumping;
-	
-	public CharacterImpl() {
-		this.dead  = true;
-	}
 
 	@Override
 	public void init(EngineService es) {
@@ -54,7 +50,7 @@ public class CharacterImpl implements CharacterService {
 
 		this.positionX=this.positionX-speed;
 		this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()-speed, this.rectangleHitbox.getPositionY());
-		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCharBox()) && !this.jumping){
+		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getRectangleHitbox()) && !this.jumping){
 			this.positionX=this.positionX+speed;
 			this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()+speed, this.rectangleHitbox.getPositionY());
 		}
@@ -74,7 +70,7 @@ public class CharacterImpl implements CharacterService {
 
 		this.positionX=this.positionX+speed;
 		this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()+speed, this.rectangleHitbox.getPositionY());
-		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCharBox()) && !this.jumping){
+		if(this.rectangleHitbox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getRectangleHitbox()) && !this.jumping){
 			this.positionX=this.positionX-speed;
 			this.rectangleHitbox.moveTo(this.rectangleHitbox.getPositionX()-speed, this.rectangleHitbox.getPositionY());
 		}
@@ -196,6 +192,8 @@ public class CharacterImpl implements CharacterService {
 		}	
 	}
 
+	public CharacterImpl() {this.dead  = true;}
+
 	@Override
 	public int getPositionX() {return this.positionX;}
 	@Override
@@ -203,13 +201,11 @@ public class CharacterImpl implements CharacterService {
 	@Override
 	public EngineService getEngine() {return this.engine;}
 	@Override
-	public RectangleHitboxService getCharBox() {return this.rectangleHitbox;}
-	@Override
 	public int getLife() {return this.life;}
 	@Override
 	public int getSpeed() {return this.speed;}
 	@Override
-	public RectangleHitboxService getRectangleHitboxService() {return this.rectangleHitbox;}
+	public RectangleHitboxService getRectangleHitbox() {return this.rectangleHitbox;}
 	@Override
 	public int getNumeroCharacter() {return numeroCharacter;}
 	@Override

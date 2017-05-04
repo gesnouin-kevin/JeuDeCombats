@@ -39,10 +39,10 @@ public class EngineImpl implements EngineService{
 		this.player[0].getFightCharacter().setRectangleHitboxService(new RectangleHitboxContract(new RectangleHitboxImpl()));
 		this.player[1].getFightCharacter().setRectangleHitboxService(new RectangleHitboxContract(new RectangleHitboxImpl()));
 		
-		this.player[0].getFightCharacter().getCharBox().setPosX(w/2 - s/2);
-		this.player[1].getFightCharacter().getCharBox().setPosX(w/2 + s/2);
-		this.player[0].getFightCharacter().getCharBox().setPosY(0);
-		this.player[1].getFightCharacter().getCharBox().setPosY(0);
+		this.player[0].getFightCharacter().getRectangleHitbox().setPosX(w/2 - s/2);
+		this.player[1].getFightCharacter().getRectangleHitbox().setPosX(w/2 + s/2);
+		this.player[0].getFightCharacter().getRectangleHitbox().setPosY(0);
+		this.player[1].getFightCharacter().getRectangleHitbox().setPosY(0);
 	
 	}
 

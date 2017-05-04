@@ -7,7 +7,7 @@ public interface CharacterService {
 	public int getPositionX();
 	public int getPositionY();
 	public EngineService getEngine();
-	public RectangleHitboxService getCharBox();
+	public RectangleHitboxService getRectangleHitbox();
 	public int getLife();
 	public int getSpeed();
 	public boolean isFaceRight();
@@ -122,14 +122,6 @@ public interface CharacterService {
 	 * post: getNumeroPlayer == numeroPlayer
 	 */
 	public void setNumeroPlayer(int numeroPlayer);
-
-
-	/**
-	 * post: getRectangleHitboxService()==rectangleHitbox
-	 * 
-	 */
-	public RectangleHitboxService getRectangleHitboxService();
-
 
 	/**
 	 * pre: numeroCharacter>=0 && numeroCharacter<=15

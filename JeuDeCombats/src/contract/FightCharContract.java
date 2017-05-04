@@ -31,8 +31,6 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 		if (!(s > 0))
 			throw new PreConditionError("Error PreCondition : s>0");
 
-		checkInvariant();
-
 		getDelegate().init(l, s, f, numeroPlayer);
 
 		checkInvariant();
@@ -85,7 +83,7 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 
 	@Override
 	public void kick() {
-		RectangleHitboxService getCharBox_atPre = getCharBox();
+		RectangleHitboxService getCharBox_atPre = getRectangleHitbox();
 		RectangleHitboxService getCoupBox_atPre = getCoupBox();
 
 		checkInvariant();
@@ -96,12 +94,12 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 
 		//post: getCharBox().getHeight()==getCharBox()@Pre.setHeight(InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()))
 		getCharBox_atPre.setHeight(InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()));
-		if(!(getCharBox().getHeight()==getCharBox_atPre.getHeight()))
+		if(!(getRectangleHitbox().getHeight()==getCharBox_atPre.getHeight()))
 			throw new PostConditionError("Error PostCondition: getCharBox().getHeight()==getCharBox_atPre.getHeight()");
 
 		// post: getCharBox().getWidth()==getCharBox()@Pre.setWidth(InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()))
 		getCharBox_atPre.setWidth(InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()));
-		if(!(getCharBox().getWidth()==getCharBox_atPre.getWidth()))
+		if(!(getRectangleHitbox().getWidth()==getCharBox_atPre.getWidth()))
 			throw new PostConditionError("Error PostCondition: getCharBox().getWidth()==getCharBox_atPre.getWidth()");
 
 		// post: getCoupBox().getHeight()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoFoot(getNumeroCharacter()))
@@ -141,7 +139,7 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 							=> getEngine().getPlayer(i).getFightCharacter().getDurationStunned()==3
 		 */
 		for(int i=0; i<1;i++){
-			if(getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()) ||
+			if(getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getRectangleHitbox()) ||
 					getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCoupBox())){
 				if(!getEngine().getPlayer(i).getFightCharacter().isBlocking()){
 					if(!(getEngine().getPlayer(i).getFightCharacter().getDurationStunned()==3))
@@ -153,7 +151,7 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 
 	@Override
 	public void punch() {
-		RectangleHitboxService getCharBox_atPre = getCharBox();
+		RectangleHitboxService getCharBox_atPre = getRectangleHitbox();
 		RectangleHitboxService getCoupBox_atPre = getCoupBox();
 
 		checkInvariant();
@@ -164,12 +162,12 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 
 		//post: getCharBox().getHeight()==getCharBox()@Pre.setHeight(InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()))
 		getCharBox_atPre.setHeight(InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()));
-		if(!(getCharBox().getHeight()==getCharBox_atPre.getHeight()))
+		if(!(getRectangleHitbox().getHeight()==getCharBox_atPre.getHeight()))
 			throw new PostConditionError("Error PostCondition: getCharBox().getHeight()==getCharBox_atPre.getHeight()");
 
 		// post: getCharBox().getWidth()==getCharBox()@Pre.setWidth(InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()))
 		getCharBox_atPre.setWidth(InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()));
-		if(!(getCharBox().getWidth()==getCharBox_atPre.getWidth()))
+		if(!(getRectangleHitbox().getWidth()==getCharBox_atPre.getWidth()))
 			throw new PostConditionError("Error PostCondition: getCharBox().getWidth()==getCharBox_atPre.getWidth()");
 
 		// post: getCoupBox().getHeight()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoFoot(getNumeroCharacter()))
@@ -209,11 +207,11 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 							=> getEngine().getPlayer(i).getFightCharacter().getDurationStunned()==2
 		 */
 		for(int i=0; i<1;i++){
-			if(getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()) ||
+			if(getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getRectangleHitbox()) ||
 					getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCoupBox())){
 				if(!getEngine().getPlayer(i).getFightCharacter().isBlocking()){
 					if(!(getEngine().getPlayer(i).getFightCharacter().getDurationStunned()==2))
-						throw new PostConditionError("Error PostCondition: getEngine().getPlayer(i).getFightCharacter().getDurationStunned()==2");
+						throw new PostConditionError("Error PostCondition: getEngine().getPlayer("+i+").getFightCharacter().getDurationStunned()==2");
 				}
 			}
 		}
@@ -222,7 +220,7 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 	@Override
 	public void block() {
 
-		RectangleHitboxService getCharBox_atPre = getCharBox();
+		RectangleHitboxService getCharBox_atPre = getRectangleHitbox();
 
 		checkInvariant();
 
@@ -232,12 +230,12 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 
 		// post: getCharBox().getHeight()==getCharBox()@Pre.setHeight(InformationsCharacter.getHeightSpritePersoBlocking(getNumeroCharacter()))
 		getCharBox_atPre.setHeight(InformationsCharacter.getHeightSpritePersoBlocking(getNumeroCharacter()));
-		if(!(getCharBox().getHeight()==getCharBox_atPre.getHeight()))
+		if(!(getRectangleHitbox().getHeight()==getCharBox_atPre.getHeight()))
 			throw new PostConditionError("Error PostCondition: getCharBox().getHeight()==getCharBox_atPre.getHeight()");
 
 		// post: getCharBox().getWidth()==getCharBox()@Pre.setWidth(InformationsCharacter.getWidthSpritePersoBlocking(getNumeroCharacter()))
 		getCharBox_atPre.setWidth(InformationsCharacter.getWidthSpritePersoBlocking(getNumeroCharacter()));
-		if(!(getCharBox().getWidth()==getCharBox_atPre.getHeight()))
+		if(!(getRectangleHitbox().getWidth()==getCharBox_atPre.getHeight()))
 			throw new PostConditionError("Error PostCondition: getCharBox().getWidth()==getCharBox_atPre.getHeight()");
 	}
 

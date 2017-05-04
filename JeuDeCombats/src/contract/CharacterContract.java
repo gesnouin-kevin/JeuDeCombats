@@ -44,8 +44,6 @@ public class CharacterContract extends CharacterDecorator {
 		if (!(s > 0))
 			throw new PreConditionError("Error PreCondition : s>0");
 
-		checkInvariant();
-
 		super.init(l, s, f, numeroPlayer);
 
 		checkInvariant();
@@ -92,7 +90,7 @@ public class CharacterContract extends CharacterDecorator {
 		//		 				=> getPositionX() == getPositionX()@Pre }
 		int compt=0;
 		for (int i = 0; i < 2; i++) {
-			if(getEngine().getPlayer(i).getFightCharacter()!= this && getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
+			if(getEngine().getPlayer(i).getFightCharacter()!= this && getRectangleHitbox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getRectangleHitbox()))
 				if(!(getPositionX()==getPositionX_atPre))
 					compt++;
 		}
@@ -105,7 +103,7 @@ public class CharacterContract extends CharacterDecorator {
 		if(getPositionX_atPre<=getSpeed_atPre)
 			for (int i = 0; i < 2; i++) {
 				if(getEngine().getPlayer(i).getFightCharacter()!=this)
-					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
+					if(getRectangleHitbox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getRectangleHitbox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == getPositionX_atPre - getSpeed()))
 						throw new PostConditionError("Error PostCondition: getPositionX() == getPositionX()@Pre - getSpeed()");
@@ -119,7 +117,7 @@ public class CharacterContract extends CharacterDecorator {
 		if(getPositionX_atPre>getSpeed_atPre){
 			for (int i = 0; i < 2; i++) {
 				if(getEngine().getPlayer(i).getFightCharacter()!=this)
-					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
+					if(getRectangleHitbox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getRectangleHitbox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == 0))
 						throw new PostConditionError("Error PostCondition: getPositionX() == 0");
@@ -154,7 +152,7 @@ public class CharacterContract extends CharacterDecorator {
 		//		 				=> getPositionX() == getPositionX()@Pre }
 		int compt=0;
 		for (int i = 0; i < 2; i++) {
-			if(getEngine().getPlayer(i).getFightCharacter()!= this && getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
+			if(getEngine().getPlayer(i).getFightCharacter()!= this && getRectangleHitbox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getRectangleHitbox()))
 				if(!(getPositionX()==getPositionX_atPre))
 					compt++;
 		}
@@ -167,7 +165,7 @@ public class CharacterContract extends CharacterDecorator {
 		if(getPositionX_atPre<=getSpeed_atPre)
 			for (int i = 0; i < 2; i++) {
 				if(getEngine().getPlayer(i).getFightCharacter()!=this)
-					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
+					if(getRectangleHitbox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getRectangleHitbox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == getPositionX_atPre + getSpeed()))
 						throw new PostConditionError("Error PostCondition: getPositionX() == getPositionX()@Pre - getSpeed()");
@@ -181,7 +179,7 @@ public class CharacterContract extends CharacterDecorator {
 		if(getPositionX_atPre>getSpeed_atPre){
 			for (int i = 0; i < 2; i++) {
 				if(getEngine().getPlayer(i).getFightCharacter()!=this)
-					if(getCharBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()))
+					if(getRectangleHitbox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getRectangleHitbox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
 					else if(!(getPositionX() == 0))
 						throw new PostConditionError("Error PostCondition: getPositionX() == 0");
@@ -333,22 +331,9 @@ public class CharacterContract extends CharacterDecorator {
 
 		checkInvariant();
 
-		if(!(getRectangleHitboxService()==rectangleHitbox))
+		if(!(getRectangleHitbox()==rectangleHitbox))
 			throw new PostConditionError("Error PostCondition: getRectangleHitboxService()==rectangleHitbox");
 	}
-
-
-	@Override
-	public RectangleHitboxService getRectangleHitboxService() {
-		return super.getRectangleHitboxService();
-	}
-
-
-	@Override
-	public int getNumeroCharacter() {
-		return super.getNumeroCharacter();
-	}
-
 
 	@Override
 	public void setNumeroCharacter(int numeroCharacter) {
@@ -440,11 +425,11 @@ public class CharacterContract extends CharacterDecorator {
 		checkInvariant();
 
 		// post: getRectangleHitbox().getHeight == InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter())
-		if(this.getRectangleHitboxService().getHeight()!= InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()))
+		if(this.getRectangleHitbox().getHeight()!= InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()))
 			throw new PostConditionError("Error PostCondition:getRectangleHitbox().getHeight != InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter())");
 
 		// post: getRectangleHitbox().getWidth == InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter)
-		if(this.getRectangleHitboxService().getWidth()!= InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()))
+		if(this.getRectangleHitbox().getWidth()!= InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()))
 			throw new PostConditionError("Error PostCondition:getRectangleHitbox().getWidth != InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter())");
 	}
 
@@ -476,11 +461,11 @@ public class CharacterContract extends CharacterDecorator {
 		checkInvariant();
 
 		// post: getRectangleHitbox().getHeight == InformationsCharacter.getHeightSpritePersoCrouch(getNumeroCharacter())
-		if(this.getRectangleHitboxService().getHeight()!= InformationsCharacter.getHeightSpritePersoCrouch(getNumeroCharacter()))
+		if(this.getRectangleHitbox().getHeight()!= InformationsCharacter.getHeightSpritePersoCrouch(getNumeroCharacter()))
 			throw new PostConditionError("Error PostCondition:getRectangleHitbox().getHeight != InformationsCharacter.getHeightSpritePersoCrouch(getNumeroCharacter())");
 
 		// post: getRectangleHitbox().getWidth == InformationsCharacter.getWidthSpritePersoCrouch(getNumeroCharacter)
-		if(this.getRectangleHitboxService().getWidth()!= InformationsCharacter.getWidthSpritePersoCrouch(getNumeroCharacter()))
+		if(this.getRectangleHitbox().getWidth()!= InformationsCharacter.getWidthSpritePersoCrouch(getNumeroCharacter()))
 			throw new PostConditionError("Error PostCondition:getRectangleHitbox().getWidth != InformationsCharacter.getWidthSpritePersoCrouch(getNumeroCharacter())");
 	}
 
@@ -505,9 +490,11 @@ public class CharacterContract extends CharacterDecorator {
 	@Override
 	public EngineService getEngine(){return super.getEngine();}
 	@Override
-	public RectangleHitboxService getCharBox(){return super.getCharBox();}
-	@Override
 	public int getSpeed(){return super.getSpeed();}
+	@Override
+	public RectangleHitboxService getRectangleHitbox() {return super.getRectangleHitbox();}
+	@Override
+	public int getNumeroCharacter() {return super.getNumeroCharacter();}
 	@Override
 	public boolean isFaceRight(){return super.isFaceRight();}
 	@Override

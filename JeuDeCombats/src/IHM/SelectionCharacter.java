@@ -274,11 +274,11 @@ public class SelectionCharacter extends BasicGameState {
 					InformationsCharacter.getSpeed(cursor2), false, 1);
 
 
-			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getCharBox().setWidthHeight(
+			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitbox().setWidthHeight(
 					InformationsCharacter.getWidthSpritePersoIdle(cursor1),
 					InformationsCharacter.getHeightSpritePersoIdle(cursor1));
 
-			this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getCharBox().setWidthHeight(
+			this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitbox().setWidthHeight(
 					InformationsCharacter.getWidthSpritePersoIdle(cursor2),
 					InformationsCharacter.getHeightSpritePersoIdle(cursor2));
 
@@ -287,7 +287,7 @@ public class SelectionCharacter extends BasicGameState {
 			int widthp1 = InformationsCharacter.getWidthSpritePersoIdle(cursor1);
 
 			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().setPositionX(posXp1-widthp1);
-			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getCharBox().setPosX(posXp1-widthp1);
+			this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitbox().setPosX(posXp1-widthp1);
 
 			this.window.getState(Fighting.ID).init(gc, game);
 			this.game.enterState(Fighting.ID);

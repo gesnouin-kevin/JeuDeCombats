@@ -34,11 +34,6 @@ public abstract class CharacterDecorator implements CharacterService {
 	}
 
 	@Override
-	public RectangleHitboxService getCharBox() {
-		return this.delegateCharacter.getCharBox();
-	}
-
-	@Override
 	public int getLife() {
 		return this.delegateCharacter.getLife();
 	}
@@ -118,8 +113,8 @@ public abstract class CharacterDecorator implements CharacterService {
 		this.delegateCharacter.setRectangleHitboxService(rectangleHitbox);}
 
 	@Override
-	public RectangleHitboxService getRectangleHitboxService() {
-		return this.delegateCharacter.getRectangleHitboxService();
+	public RectangleHitboxService getRectangleHitbox() {
+		return this.delegateCharacter.getRectangleHitbox();
 	}
 
 	@Override

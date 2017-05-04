@@ -76,8 +76,8 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		else
 			otherPlayer =0;
 
-		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.getNumeroCharacter()));
-		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter()));
+		this.getRectangleHitbox().setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.getNumeroCharacter()));
+		this.getRectangleHitbox().setWidth(InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter()));
 
 		this.coupBox.setHeight(InformationsCharacter.getHeightSpritePersoFoot(this.getNumeroCharacter()));
 		this.coupBox.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
@@ -88,7 +88,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		else
 			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
 		
-		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCharBox()) ||
+		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getRectangleHitbox()) ||
 				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
 		{
 			if(!this.getEngine().getPlayer(otherPlayer).getFightCharacter().isBlocking()){
@@ -108,8 +108,8 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		else
 			otherPlayer =0;
 
-		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.getNumeroCharacter()));
-		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter()));
+		this.getRectangleHitbox().setHeight(InformationsCharacter.getHeightSpritePersoIdle(this.getNumeroCharacter()));
+		this.getRectangleHitbox().setWidth(InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter()));
 
 		this.coupBox.setHeight(InformationsCharacter.getHeightSpritePersoArm(this.getNumeroCharacter()));
 		this.coupBox.setWidth(InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
@@ -120,7 +120,7 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 		else
 			this.coupBox.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
 		
-		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCharBox()) ||
+		if(this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getRectangleHitbox()) ||
 				this.coupBox.isCollidesWith(this.getEngine().getPlayer(otherPlayer).getFightCharacter().getCoupBox()))
 		{
 			if(!this.getEngine().getPlayer(otherPlayer).getFightCharacter().isBlocking()){
@@ -148,8 +148,8 @@ public class FightCharImpl extends CharacterImpl implements FightCharService{
 	
 	@Override
 	public void block() {
-		this.getCharBox().setHeight(InformationsCharacter.getHeightSpritePersoBlocking(this.getNumeroCharacter()));
-		this.getCharBox().setWidth(InformationsCharacter.getWidthSpritePersoBlocking(this.getNumeroCharacter()));
+		this.getRectangleHitbox().setHeight(InformationsCharacter.getHeightSpritePersoBlocking(this.getNumeroCharacter()));
+		this.getRectangleHitbox().setWidth(InformationsCharacter.getWidthSpritePersoBlocking(this.getNumeroCharacter()));
 	}
 
 	@Override

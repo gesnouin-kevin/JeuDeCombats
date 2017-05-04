@@ -132,15 +132,15 @@ public class Fighting extends BasicGameState {
 		int posXp2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getPositionX();
 		int posYp2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getPositionY();
 		
-		int posXp1hitbox = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitboxService().getPositionX();
-		int posYp1hitbox = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitboxService().getPositionY();
-		int widthHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitboxService().getWidth();
-		int heightHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitboxService().getHeight();
+		int posXp1hitbox = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitbox().getPositionX();
+		int posYp1hitbox = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitbox().getPositionY();
+		int widthHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitbox().getWidth();
+		int heightHitboxP1 = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getRectangleHitbox().getHeight();
 
-		int posXp2hitbox = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitboxService().getPositionX();
-		int posYp2hitbox = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitboxService().getPositionY();
-		int widthHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitboxService().getWidth();	
-		int heightHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitboxService().getHeight();
+		int posXp2hitbox = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitbox().getPositionX();
+		int posYp2hitbox = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitbox().getPositionY();
+		int widthHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitbox().getWidth();	
+		int heightHitboxP2 = this.window.getGame().getEngine().getPlayer(1).getFightCharacter().getRectangleHitbox().getHeight();
 
 
 		int posXp1Coupbox = this.window.getGame().getEngine().getPlayer(0).getFightCharacter().getCoupBox().getPositionX();
