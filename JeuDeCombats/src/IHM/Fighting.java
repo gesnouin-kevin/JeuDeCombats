@@ -171,7 +171,7 @@ public class Fighting extends BasicGameState {
 			g.setColor(new Color(255,0,0,60));
 			g.fillRect(posXp2hitbox, gc.getHeight()-posYp2hitbox-GROUND-heightHitboxP2, widthHitboxP2, heightHitboxP2);
 			g.setColor(new Color(255,0,0,200));
-			g.fillRect(posXp2Coupbox, gc.getHeight()-posYp2Coupbox-GROUND-heightCoupboxP1, widthCoupboxP2, heightCoupboxP2);
+			g.fillRect(posXp2Coupbox, gc.getHeight()-posYp2Coupbox-GROUND-heightCoupboxP2, widthCoupboxP2, heightCoupboxP2);
 		}
 
 		// draw player1
