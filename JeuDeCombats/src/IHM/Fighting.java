@@ -293,7 +293,7 @@ public class Fighting extends BasicGameState {
 				this.quit = true;
 			}
 			
-			if(time/1000>10){
+			if(time/1000>5){
 				gc.exit();
 			}
 		}
