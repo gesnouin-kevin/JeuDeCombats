@@ -329,7 +329,7 @@ public class Fighting extends BasicGameState {
 
 			}
 
-
+			
 			if(this.inputPlayer2[i]==1)
 			{
 				if(i==0) this.window.getGame().getEngine().setCommandPlayer2(Command.UP);
