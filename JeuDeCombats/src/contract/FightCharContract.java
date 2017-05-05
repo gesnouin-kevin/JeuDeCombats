@@ -113,7 +113,7 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 			throw new PostConditionError("Error PostCondition: getCoupBox().getWidth()==getCoupBox_atPre.getWidth()");
 
 		// post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()))
-		getCoupBox_atPre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()));
+		getCoupBox_atPre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getHeightSpritePersoFoot(this.getNumeroCharacter()));
 		if(!(getCoupBox().getPosY()==getCoupBox_atPre.getPosY()))
 			throw new PostConditionError("Error PostCondition: getCoupBox().getPosY()==getCoupBox_atPre.getPosY()");
 
@@ -170,31 +170,31 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 		if(!(getRectangleHitbox().getWidth()==getCharBox_atPre.getWidth()))
 			throw new PostConditionError("Error PostCondition: getCharBox().getWidth()==getCharBox_atPre.getWidth()");
 
-		// post: getCoupBox().getHeight()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoFoot(getNumeroCharacter()))
-		getCoupBox_atPre.setHeight(InformationsCharacter.getHeightSpritePersoFoot(getNumeroCharacter()));
+		// post: getCoupBox().getHeight()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoArm(getNumeroCharacter()))
+		getCoupBox_atPre.setHeight(InformationsCharacter.getHeightSpritePersoArm(getNumeroCharacter()));
 		if(!(getCoupBox().getHeight()==getCoupBox_atPre.getHeight()))
 			throw new PostConditionError("Error PostCondition: (getCoupBox().getHeight()==getCoupBox_atPre.getHeight()");
 
-		// post: getCoupBox().getWidth()==getCoupBox@Pre.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()))
-		getCoupBox_atPre.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()));
+		// post: getCoupBox().getWidth()==getCoupBox@Pre.setWidth(InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()))
+		getCoupBox_atPre.setWidth(InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()));
 		if(!(getCoupBox().getWidth()==getCoupBox_atPre.getWidth()))
 			throw new PostConditionError("Error PostCondition: getCoupBox().getWidth()==getCoupBox_atPre.getWidth()");
 
-		// post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()))
-		getCoupBox_atPre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()));
+		// post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoArm(this.getNumeroCharacter())InformationsCharacter.getHeightSpritePersoArm(0))
+		getCoupBox_atPre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getHeightSpritePersoArm(0));
 		if(!(getCoupBox().getPosY()==getCoupBox_atPre.getPosY()))
 			throw new PostConditionError("Error PostCondition: getCoupBox().getPosY()==getCoupBox_atPre.getPosY()");
 
-		// post: isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
+		// post: isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(getNumeroCharacter()))
 		if(isFaceRight()){
-			getCoupBox_atPre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()));
+			getCoupBox_atPre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(getNumeroCharacter()));
 			if(!(getCoupBox().getPosX()==getCoupBox_atPre.getPosX()))
 				throw new PostConditionError("Error PostCondition: getCoupBox().getPosX()==getCoupBox_atPre.getPosX()");
 		}
 
-		// post: not isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
+		// post: not isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(getNumeroCharacter()))
 		if(!isFaceRight()){
-			getCoupBox_atPre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()));
+			getCoupBox_atPre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(getNumeroCharacter()));
 			if(!(getCoupBox().getPosX()==getCoupBox_atPre.getPosX()))
 				throw new PostConditionError("Error PostCondition: getCoupBox().getPosX()==getCoupBox_atPre.getPosX()");
 		}
@@ -235,7 +235,7 @@ public class FightCharContract extends CharacterContract implements FightCharSer
 
 		// post: getCharBox().getWidth()==getCharBox()@Pre.setWidth(InformationsCharacter.getWidthSpritePersoBlocking(getNumeroCharacter()))
 		getCharBox_atPre.setWidth(InformationsCharacter.getWidthSpritePersoBlocking(getNumeroCharacter()));
-		if(!(getRectangleHitbox().getWidth()==getCharBox_atPre.getHeight()))
+		if(!(getRectangleHitbox().getWidth()==getCharBox_atPre.getWidth()))
 			throw new PostConditionError("Error PostCondition: getCharBox().getWidth()==getCharBox_atPre.getHeight()");
 	}
 

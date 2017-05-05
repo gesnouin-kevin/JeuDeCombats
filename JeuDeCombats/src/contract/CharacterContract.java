@@ -144,7 +144,7 @@ public class CharacterContract extends CharacterDecorator {
 
 		checkInvariant();
 
-		super.moveLeft();
+		super.moveRight();
 
 		checkInvariant();
 
@@ -167,8 +167,9 @@ public class CharacterContract extends CharacterDecorator {
 				if(getEngine().getPlayer(i).getFightCharacter()!=this)
 					if(getRectangleHitbox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getRectangleHitbox()))
 						throw new PostConditionError("Error PostCondition: !getCharBox().isCollidesWith(getEngine().getChar(i).getCharBox()");
-					else if(!(getPositionX() == getPositionX_atPre + getSpeed()))
+					else if(!(getPositionX() == getPositionX_atPre + getSpeed())){
 						throw new PostConditionError("Error PostCondition: getPositionX() == getPositionX()@Pre - getSpeed()");
+					}
 			}
 
 
@@ -187,9 +188,10 @@ public class CharacterContract extends CharacterDecorator {
 
 		}
 
-		// post: faceRight() == not isFaceRight()@Pre && getLife() == getLife()@Pre
-		if (!(isFaceRight() == !(isFaceRight_atPre) && getLife() == getLife_atPre))
+		// post: faceRight() == isFaceRight()@Pre && getLife() == getLife()@Pre
+		if (!(isFaceRight() == (isFaceRight_atPre) && getLife() == getLife_atPre)){
 			throw new PostConditionError("Error PostCondition: isFaceRight() && getLife() ");
+		}
 
 		// post: getPositionY() == getPositionY()@Pre
 		if (!(getPositionY() == getPositionY_atPre))
@@ -379,8 +381,8 @@ public class CharacterContract extends CharacterDecorator {
 
 		checkInvariant();
 
-		// post: faceRight() == not isFaceRight()@Pre && getLife() == getLife()@Pre
-		if (!(isFaceRight() == !(isFaceRight_atPre) && getLife() == getLife_atPre))
+		// post: faceRight() == isFaceRight()@Pre && getLife() == getLife()@Pre
+		if (!(isFaceRight() == (isFaceRight_atPre) && getLife() == getLife_atPre))
 			throw new PostConditionError("Error PostCondition: isFaceRight() && getLife() ");
 
 		// post: getPositionY() == getPositionY()@Pre
@@ -408,8 +410,8 @@ public class CharacterContract extends CharacterDecorator {
 
 		checkInvariant();
 
-		// post: faceRight() == not isFaceRight()@Pre && getLife() == getLife()@Pre
-		if (!(isFaceRight() == !(isFaceRight_atPre) && getLife() == getLife_atPre))
+		// post: faceRight() == isFaceRight()@Pre && getLife() == getLife()@Pre
+		if (!(isFaceRight() == (isFaceRight_atPre) && getLife() == getLife_atPre))
 			throw new PostConditionError("Error PostCondition: isFaceRight() && getLife() ");
 
 		// post: getPositionY() == getPositionY()@Pre

@@ -40,7 +40,7 @@ public interface FightCharService extends CharacterService {
      * 
      * post: getCoupBox().getHeight()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoFoot(getNumeroCharacter())) 
      * post: getCoupBox().getWidth()==getCoupBox@Pre.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()))
-     * post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()))
+     * post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getHeightSpritePersoFoot(this.getNumeroCharacter()))
      * 
      * post: isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()
      * +InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
@@ -63,12 +63,12 @@ public interface FightCharService extends CharacterService {
      * post: getCharBox().getHeight()==getCharBox()@Pre.setHeight(InformationsCharacter.getHeightSpritePersoIdle(getNumeroCharacter()))
      * post: getCharBox().getWidth()==getCharBox()@Pre.setWidth(InformationsCharacter.getWidthSpritePersoIdle(getNumeroCharacter()))
      * 
-     * post: getCoupBox().getHeight()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoFoot(getNumeroCharacter())) 
-     * post: getCoupBox().getWidth()==getCoupBox@Pre.setWidth(InformationsCharacter.getWidthSpritePersoFoot(this.getNumeroCharacter()))
-     * post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoFoot(this.getNumeroCharacter()))
+     * post: getCoupBox().getHeight()==getCoupBox@Pre.setHeight(InformationsCharacter.getHeightSpritePersoArm(getNumeroCharacter())) 
+     * post: getCoupBox().getWidth()==getCoupBox@Pre.setWidth(InformationsCharacter.getWidthSpritePersoArm(this.getNumeroCharacter()))
+     * post: getCoupBox().getPosY()==getCoupBox@Pre.setPosY(this.getPositionY()+InformationsCharacter.getPosYSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getHeightSpritePersoArm(this.getNumeroCharacter()))
      * 
-     * post: isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoKick(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
-     * post: not isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoFoot(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoFoot(getNumeroCharacter()))
+     * post: isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoPunch(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(getNumeroCharacter()))
+     * post: not isFaceRight() => getCoupBox().getPosX()==getCoupBox@Pre.setPosX(this.getPositionX()+InformationsCharacter.getWidthSpritePersoIdle(this.getNumeroCharacter())-InformationsCharacter.getPosXSpritePersoArm(this.getNumeroCharacter())-InformationsCharacter.getWidthSpritePersoArm(getNumeroCharacter()))
      * 
      * post: \exist i in {0,1}  
      * 			getCoupBox().isCollidesWith(getEngine().getPlayer(i).getFightCharacter().getCharBox()) ||
