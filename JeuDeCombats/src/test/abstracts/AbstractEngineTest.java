@@ -1,4 +1,4 @@
-package test;
+package test.abstracts;
 
 import static org.junit.Assert.*;
 
@@ -6,12 +6,10 @@ import org.junit.*;
 
 import contract.RectangleHitboxContract;
 import implementation.EngineImpl;
-import implementation.FightCharImpl;
 import implementation.PlayerImpl;
 import implementation.RectangleHitboxImpl;
 import service.Command;
 import service.EngineService;
-import service.PlayerService;
 
 public abstract class AbstractEngineTest {
 

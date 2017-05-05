@@ -1,6 +1,7 @@
 package test;
 
 import implementation.EngineImpl;
+import test.abstracts.AbstractEngineTest;
 
 public class EngineTest extends AbstractEngineTest{
 
