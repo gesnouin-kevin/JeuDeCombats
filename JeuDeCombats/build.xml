@@ -5,27 +5,27 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="JeuDeCombats">
     <property environment="env"/>
-    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
     <path id="JUnit 4.libraryclasspath">
-        <pathelement location="../../.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
-        <pathelement location="../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar"/>
+        <pathelement location="../../../.p2/pool/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
     </path>
     <path id="JeuDeCombats.classpath">
         <pathelement location="bin"/>
         <pathelement location="lib/jinput.jar"/>
         <pathelement location="lib/lwjgl.jar"/>
         <pathelement location="lib/slick.jar"/>
-        <path refid="JUnit 4.libraryclasspath"/>
         <pathelement location="lib/jogg-0.0.7.jar"/>
         <pathelement location="lib/jorbis-0.0.15.jar"/>
+        <path refid="JUnit 4.libraryclasspath"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
+                <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
         </copy>
@@ -57,72 +57,15 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="CharacterTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="test.CharacterTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="JeuDeCombats.classpath"/>
-        </junit>
-    </target>
-    <target name="EngineTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="test.EngineTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="JeuDeCombats.classpath"/>
-        </junit>
-    </target>
-    <target name="FightCharTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="test.FightCharTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="JeuDeCombats.classpath"/>
-        </junit>
-    </target>
-    <target name="HitboxTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="test.HitboxTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="JeuDeCombats.classpath"/>
-        </junit>
-    </target>
     <target name="Main">
         <java classname="main.Main" failonerror="true" fork="yes">
             <jvmarg line="-Djava.library.path=lib/natives"/>
             <classpath refid="JeuDeCombats.classpath"/>
         </java>
     </target>
-    <target name="PlayerTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="test.PlayerTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
+    <target name="MainBug">
+        <java classname="main.MainBug" failonerror="true" fork="yes">
             <classpath refid="JeuDeCombats.classpath"/>
-        </junit>
-    </target>
-    <target name="RectangleHitboxTest">
-        <mkdir dir="${junit.output.dir}"/>
-        <junit fork="yes" printsummary="withOutAndErr">
-            <formatter type="xml"/>
-            <test name="test.RectangleHitboxTest" todir="${junit.output.dir}"/>
-            <jvmarg line="-ea"/>
-            <classpath refid="JeuDeCombats.classpath"/>
-        </junit>
-    </target>
-    <target name="junitreport">
-        <junitreport todir="${junit.output.dir}">
-            <fileset dir="${junit.output.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="${junit.output.dir}"/>
-        </junitreport>
+        </java>
     </target>
 </project>

@@ -51,9 +51,6 @@ public class SelectionCharacter extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame window, Graphics g) throws SlickException {
 
 		this.selectionCharacter.draw(0, 0, gc.getWidth(), gc.getHeight());
-		// more character coming soon
-		g.setColor(new Color(0,0,0,200));
-		g.fillRect(346, 210, 675, 255);
 
 		float scaleX =  (gc.getWidth()/256f);
 		float scaleY = (gc.getHeight()/193f);
@@ -157,7 +154,7 @@ public class SelectionCharacter extends BasicGameState {
 				if(this.cursorPlayer2 == 0)
 					this.cursorPlayer2 = 4;
 			}
-/*
+
 			if(key== Input.KEY_DOWN){ 
 				if(this.cursorPlayer2+6<=17)
 					this.cursorPlayer2 +=6;
@@ -181,7 +178,7 @@ public class SelectionCharacter extends BasicGameState {
 				else if(this.cursorPlayer2 == 5)
 					this.cursorPlayer2 = 17;
 			}
-*/
+
 			if(key==Input.KEY_ENTER){
 				this.character2Select = true;
 				int cursor2;
@@ -214,7 +211,7 @@ public class SelectionCharacter extends BasicGameState {
 				if(this.cursorPlayer1 == 0)
 					this.cursorPlayer1 = 4;
 			}
-/*
+
 			if(key == Input.KEY_S){ 
 				if(this.cursorPlayer1+6<=17)
 					this.cursorPlayer1 +=6;
@@ -238,7 +235,7 @@ public class SelectionCharacter extends BasicGameState {
 				else if(this.cursorPlayer1 == 5)
 					this.cursorPlayer1 = 17;
 			}
-*/
+
 			if(key == Input.KEY_E){
 				this.character1Select = true;
 				int cursor1;
