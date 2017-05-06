@@ -99,12 +99,6 @@
             <classpath refid="JeuDeCombats.classpath"/>
         </java>
     </target>
-    <target name="MainBug">
-        <java classname="main.MainBug" failonerror="true" fork="yes">
-            <jvmarg line="-Djava.library.path=lib/natives"/>
-            <classpath refid="JeuDeCombats.classpath"/>
-         </java>
-    </target>
     <target name="PlayerTest">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
