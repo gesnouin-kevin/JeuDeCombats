@@ -21,6 +21,7 @@
         <path refid="JUnit 4.libraryclasspath"/>
         <pathelement location="lib/jogg-0.0.7.jar"/>
         <pathelement location="lib/jorbis-0.0.15.jar"/>
+    	<pathelement location="lib/junit.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -43,6 +44,12 @@
             <classpath refid="JeuDeCombats.classpath"/>
         </javac>
     </target>
+    <target name="dist" depends="init,clean"
+            description="Generer la distribution" >
+            <!-- tout mettre dans l'archive -->
+              	    <jar basedir="./" jarfile="../StreetFighter_MALAMAS_GESNOUIN.jar">
+              	      </jar>
+              	  </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
     <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
         <copy todir="${ant.library.dir}">
